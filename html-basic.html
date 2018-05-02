@@ -60,8 +60,11 @@
 
 <hr>
 <h3>Google搜索</h3>
-<input type="text" placeholder="请输入想要搜索的内容">
-<input type="button" value="在新窗口打开搜索结果">
+<form action="https://www.google.com.hk/search" target='_blank'>
+  <input type="text" name="q" placeholder="请输入想要搜索的内容">
+  <input type="submit" value="在新窗口打开搜索结果">
+</form>
+
 
 <hr>
 
@@ -131,24 +134,24 @@
   </thead>
   <tbody>
     <tr>
-      <td>001</td>
+      <td><b>001</b></td>
       <td>苹果</td>
       <td rowspan=2>5</td>
       <td>8</td>
     </tr>
     <tr>
-      <td>001</td>
+      <td><b>001</b></td>
       <td>橘子</td>
       <td>8</td>
     </tr>
     <tr>
-      <td>001</td>
+      <td><b>001</b></td>
       <td>香蕉</td>
       <td>5</td>
       <td>8</td>
     </tr>
     <tr>
-      <td>001</td>
+      <td><b>001</b></td>
       <td>山竹</td>
       <td>5</td>
       <td>8</td>
@@ -161,6 +164,7 @@
 <map name="planetmap">
   <area shape="rect" coords="58,111,212,217" href ="#" alt="abc" />
   <area shape="circle" coords="144,271,83" href ="#" alt="abc" />
+  <area shape="poly" coords="63,88,192,89,227,254,165,395,14,268" href ="#" alt="abc" />
 </map>
 <hr>
 <a href="">点击我会在下面的frame里打开小米商场，但为什么打不开呢？ </a>
