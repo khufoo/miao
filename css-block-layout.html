@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>block-layout-practise</title>
+</head>
+<body>
+    
+<style>
+.nav {
+    background: black;
+}
+.nav p{
+    color:white;
+    width: 600px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.body .header {
+    width: 600px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.body .box {
+    width: 600px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.body .box div{
+    background:pink;
+    width: 180px;
+    height: 40px;
+    box-sizing:border-box;
+    border:3px solid #000;
+    line-height: 40px;
+    margin-bottom:15px;
+}
+.body .box div:nth-of-type(3n-1){
+    /* color:green; */
+    margin-left:210px;
+    margin-top: -55px;
+}
+.body .box div:nth-of-type(3n){
+    /* color:red; */
+    margin-left:420px;
+    margin-top: -55px;
+}
+.body .box div:hover{
+    background:red;
+}
+
+.lis ul{
+    width: 600px;
+    margin-left: auto;
+    margin-right:auto;
+    padding:0;
+    list-style:none;
+    overflow:hidden;
+}
+/* .lis ul li:not(:last-child){
+    border-bottom:1px black;
+    border-bottom-style: dotted;
+} */
+.lis ul li{
+    border-bottom:1px dotted;
+    margin-top:-2px;
+    margin-bottom:-1px;
+}
+
+
+
+footer {
+        background:rgb(238, 130, 238);
+}
+footer > p{
+    width:300px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+}
+
+</style>
+
+
+<nav class="nav"><p>hello world 请调整浏览器窗口大小查看效果</p></nav>
+<main class="body">
+    <p class='header'>
+        页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px
+    </p>
+
+    <div class='box'>
+        <div>宽180高40(包含边框)</div>
+        <div>产品</div>
+        <div>产品</div>
+        <div>水平间隙30px</div>
+        <div>产品</div>
+        <div>产品</div>
+        <div>垂直间隙15px</div>
+        <div>产品</div>
+        <div>产品</div>
+        <div>边框宽度3px</div>
+        <div>产品</div>
+        <div>产品</div>
+    </div>
+
+    <div class="lis">
+        <ul>
+            <li>link</li>
+            <li>link</li>
+            <li>link</li>
+            <li>link</li>
+            <li>link</li>
+        </ul>
+    </div>
+
+
+
+
+
+
+</main>
+<footer>
+    <p>©版权所有 <br> 本页所有布局均使用块元素</p>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
