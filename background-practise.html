@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+  <style>
+
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+/*nav-------------------------------------------------------------------------*/
+    nav{
+      height: 30px;
+      width: 100%;
+      background-color: #ccc;
+      position:fixed;
+      top:0;
+      box-shadow: 0 3px 8px #0005
+    }
+
+    nav ul{
+      font-size:20px;
+      width: 100%;
+      list-style: none;
+      margin-left:auto;
+      margin-right: auto;
+      text-align: center;
+      line-height: 30px;
+    }
+    nav ul li {
+      display: inline-block;
+      width: 30%;
+      margin-left:auto;
+      margin-right: auto;
+    }
+    nav ul li:not(:last-child){
+      border-right: 1px solid;
+    }
+    nav ul li a{
+      margin-left:auto;
+      margin-right: auto;
+      text-decoration:none;
+      color:#999;
+      transition:color 1s;
+    }
+    nav ul li a:hover{
+      color:#333;
+      text-decoration:none;
+    }
+
+
+
+
+/*glassy-------------------------------------------------------------------------*/
+
+
+
+
+    .glassy {
+      background-image:url('https://meyerweb.com/eric/css/edge/complexspiral/glassy-bg.jpg');
+      background-repeat:no-repeat;
+      background-attachment:fixed;
+      display: none;
+    }
+
+    .glassy .main {
+      margin:80px;
+      border:3px solid rgb(153, 102, 51);
+      background-color:#fff;
+      background-image:url(https://meyerweb.com/eric/css/edge/complexspiral/glassy-ripple.jpg);
+      background-repeat: no-repeat;
+      background-attachment:fixed;
+      box-sizing:border-box;
+    }
+    .glassy .nall{
+      height: 20px; 
+    }
+
+    .glassy h1{
+      background-color:rgb(204, 204, 204);
+      height: 70px;
+      margin:28px 8px 0 8px;
+      border:1px solid #aaa;
+      background-image: url(https://meyerweb.com/eric/css/edge/complexspiral/glassy-gray.jpg);
+      background-repeat:no-repeat;
+      background-attachment:fixed;
+      color: rgb(0, 34, 68);
+      line-height: 70px;
+      text-indent:30px;
+      letter-spacing:17px;
+      word-spacing:2px;
+    }
+    .glassy p{
+      margin:20px 27px;
+      font-size:15px;
+    }
+
+    .glassy .main h2{
+      background-color:rgb(203, 177, 150);
+      height: 53px;
+      border:1px solid rgb(153, 102, 51);
+      background-image: url(https://meyerweb.com/eric/css/edge/complexspiral/glassy-tan.jpg);
+      background-repeat:no-repeat;
+      background-attachment:fixed;
+      color:#fff;
+      line-height:53px;
+      text-indent:10px;
+    }
+    .glassy h4{
+      text-indent:10px;
+    }
+    .glassy ul{
+      font-size:14px;
+      margin-left:20px;
+    }
+
+/*mi-------------------------------------------------------------------------*/
+
+  .mi {
+    width: 49px;
+    height: 49px;
+    background-color:rgb(255, 103, 0);
+    background-image:url(https://s01.mifile.cn/i/mi-logo.png), url(https://s01.mifile.cn/i/mi-home.png);
+    background-repeat:no-repeat;
+    background-size:49px 49px;
+    background-position: 0 0 , -49px;
+    transition:background-position .5s;
+    margin:auto;
+    margin-top:50vh;
+    display:none;
+  }
+
+  .mi:hover{
+    background-position:49px, 50%;
+  }
+
+
+/*imac-------------------------------------------------------------------------*/
+
+  .imac div{
+      width: 100%;
+      height: 100vh;
+      background: no-repeat;
+      background-color:#000;
+      background-position:50% 50%;
+      background-attachment:fixed;
+  }
+  .imac div:nth-of-type(2n-1){
+    background-color:rgb(26, 26, 26);
+  }
+.imac div:nth-of-type(2n){
+    background-color:rgb(16, 16, 16);
+  }
+
+
+  .imac .a{
+    background-image:url(https://www.apple.com/v/imac-pro/b/images/overview/processor_large.jpg);
+
+  }
+
+  .imac .b{
+    background-image:url(https://www.apple.com/v/imac-pro/b/images/overview/processor_break_large.jpg);
+  }
+
+  .imac .c{
+    background-image:url(https://www.apple.com/v/imac-pro/b/images/overview/graphics_large.jpg);
+  }
+
+  .imac .d{
+    background-image:url(https://www.apple.com/v/imac-pro/b/images/overview/graphics_app1_large.jpg);
+  }
+
+  .imac .e{
+    background-image:url(https://www.apple.com/v/imac-pro/b/images/overview/storage_large.jpg);
+  }
+
+  .imac .f{
+    background-image:url(https://www.apple.com/v/imac-pro/b/images/overview/storage_break_large.jpg);
+  }
+
+  .imac .g{
+    background-image:url(https://www.apple.com/v/imac-pro/b/images/overview/connectivity_large.jpg);
+  }
+
+  .imac .h{
+    background-image:url(https://www.apple.com/v/imac-pro/b/images/overview/connectivity_combined_break_large.jpg);
+  }
+
+  .imac .i{
+    background-image:url(https://www.apple.com/v/imac-pro/b/images/overview/display_large.jpg);
+  }
+
+  .imac .j{
+    background-image:url(https://www.apple.com/v/imac-pro/b/images/overview/display_break_large.jpg);
+  }
+
+
+  </style>
+
+
+
+<!-- nav------------------------------------------------------------------------------ -->
+<nav id="nav">
+  <ul>
+    <li><a href="">glassy</a></li>
+    <li><a href="">mi</a></li>
+    <li><a href="">imac</a></li>
+  </ul>
+</nav>
+
+<!-- glassy------------------------------------------------------------------------------ -->
+
+<div class="glassy" id="glassy">
+  <div class="nall"> </div>
+  <main class="main">
+    
+
+    <h1 class="title">complexspiral distorted</h1>
+    <p>The page you are viewing right now exists to show off what can be accomplished with pure <a href="http://www.w3.org/TR/REC-CSS1">CSS1</a>, and that's all. This variant on <a href="http://www.meyerweb.com/eric/css/edge/complexspiral/demo.html">complexspiral</a> doesn't even use any CSS2 to accomplish its magic. Remember: as you look this demo over, there is no Javascript here, nor are any PNGs being used, nor do I employ any proprietary extensions to CSS or any other language. It's all done using straight W3C-recommended markup and styling, all validated, plus a total of four (4) images. 
+      <br><br>
+    Unfortunately, not every browser supports all of CSS1, and only those browsers which fully and completely support CSS1 will get this right. Despite some claims to the contrary, IE6/Win's rendering of this page is not correct, as it (as well as some other browsers) doesn't correctly support background-attachment: fixed for any element other than the body. That makes it impossible to pull off the intended effect. Other browsers may or may not get the effect right.</p>
+
+
+    <h2>Hands-on: Things to Examine</h2>
+    <p>Before you start, make sure you're viewing this page in one of the browsers mentioned above. Otherwise the descriptions to follow won't match what you see.
+      <br><br>
+      The first, easiest thing to do is scroll the page vertically. Make sure you scroll all the way to the very end of the page and back. Notice how the various areas with colored backgrounds also appear to distort the background image as if through mottled glass. Try changing the text size and notice how the compositing effect remains consistent. Then make your browser window really narrow and scroll horizontally. Again, everything should remain seamless and consistent.
+      <br><br>
+    The demonstrated effect, that of having various elements backed with translucent rippled glass of varying hues, is only possible using fixed-attachment backgrounds in CSS. (Okay, maybe it could be done in Flash; I don't know.) I don't think it's even possible with IE's proprietary filters, but even if this effect is possible with filters, I could easily enough devise one that isn't.</p>
+
+
+
+    <h2>I missed the original complexspiral demo-- how does this work?!?</h2>
+    <p>Glad you asked. The effect demonstrated here is achieved by using fixed background images, nothing more. For example, the main-content area (the blue part here) uses the following styles for the default spiral-shell background:</p>
+    <pre><code> div#content {background: white url(glassy-ripple.jpg) 0 0 no-repeat fixed;}</code></pre>
+    <p>The above is equivalent to these styles:</p>
+    <pre><code> div#content { 
+      background-color: white;
+      background-image: url(glassy-ripple.jpg);
+      background-position: 0 0;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }</code></pre>
+    <p>The effect of these longer rules is exactly the same; they're just split out into individual background properties for more detailed consideration by you, gentle reader.
+      <br><br>
+      First, check out the rippled-shell image found here: <a href="https://meyerweb.com/eric/css/edge/complexspiral/glassy-ripple.jpg">url(glassy-ripple.jpg)</a>. Then come back to this page and I'll continue with the explanation. All done? Great.
+      <br><br>
+      According to CSS, any background image that is "fixed" using background-attachment: fixed; is fixed with respect to the viewport-- not the element with which the image is associated. So I set the rippled-shell background image to be aligned with the top left corner of the browser window (the viewport) with the values given for background-position. However, the image will only be visible wherever is intersects with the element to which it's been assigned. Therefore, even though the top left corner of the rippled-shell image is aligned with the top left corner of the viewport, we can only see it wherever it intersects with a div that has an id with a value of content (which, again, happens to be the one containing this text).
+      <br><br>
+      So I set a fixed background for the BODY, the content DIV, and H1 and H2 elements scattered through the document. In any given case of an element's display, we see whatever part of the associated background image intersects with the element. The rest of the background image remains hidden.
+      <br><br>
+    And that's how it works.</p>
+
+
+
+    <h2>I'm not seeing the compositing!</h2>
+    <p>Then I'm willing to bet that you're using Internet Explorer for Windows (any version), or possibly Opera (version 6 or earlier). Neither of these browsers fully support background-attachment: fixed for elements other than body. In the case of both, images are fixed with respect to the elements that contain them, not the browser window, which is not what CSS1 defines background-attachment: fixed to mean, although browsers are allowed to ignore fixed if they stick to CSS1 (CSS2 requires its implementation for conformance). And yes, this page uses a strict DOCTYPE, so IE6 is in "<a href="http://msdn.microsoft.com/library/en-us/dnie60/html/cssenhancements.asp">strict mode</a>." I guess when <a href="http://www.microsoft.com/windows/ie/evaluation/features/default.asp#section5">Microsoft claims 100% CSS1 compliance</a>, they're referring to the CSS1 core (a reduced subset of CSS1) instead of the entirety of the <a href="http://www.w3.org/TR/REC-CSS1">CSS1 specification</a>. It tends to make me wonder how limited or flawed their "full support" is for other key open specifications, like HTML and DOM.</p>
+
+    <h2>Image credits</h2>
+    <ul>
+      <li>Nautilus shell: scanned by and copyright Eric A. Meyer</li>
+    </ul>
+    <h4>Jump to</h4>
+    <ul>
+      <li><a href="https://meyerweb.com/eric/css/edge/complexspiral/demo.html">complex spiral (original)</a></li>
+      <li><a href="https://meyerweb.com/eric/css/edge/complexspiral/demo.html">complex spiral (devolved)</a></li>
+      <li><a href="https://meyerweb.com/eric/css/edge/complexspiral/demo.html">css/edge home</a></li>
+    </ul>
+  </main>
+
+</div>
+
+
+
+
+<!-- mi---------------------------------------------------------------------------- -->
+<div class="mi" id="mi"></div>
+
+
+<!-- imac------------------------------------------------------------------------------------ -->
+
+<div class="imac" id="imac">
+  <div class='a'></div>
+  <div class='b'></div>
+  <div class='c'></div>
+  <div class='d'></div>
+  <div class='e'></div>
+  <div class='f'></div>
+  <div class='g'></div>
+  <div class='h'></div>
+  <div class='i'></div>
+  <div class='j'></div>
+</div>
+
+
+
+
+
+
+
+<script>
+  var id = function(a){
+    return document.getElementById(a);
+  };
+  var imac = id('imac');
+  var glassy = id('glassy')
+  var mi = id('mi')
+  var lis = id('nav').children[0].children;
+  lis[0].onmouseover = function(){
+    glassy.style.display = 'block';
+    imac.style.display = 'none';
+    mi.style.display = 'none';
+  }
+  lis[1].onmouseover = function(){
+    glassy.style.display = 'none';
+    imac.style.display = 'none';
+    mi.style.display = 'block';
+  }
+  lis[2].onmouseover = function(){
+    glassy.style.display = 'none';
+    imac.style.display = 'block';
+    mi.style.display = 'none';
+  }
+
+
+
+</script>
+
+</body>
+</html>
