@@ -8,10 +8,122 @@
  
 
 <style>
-  input[type='checkbox']{
+/*nav-------------------------------------------------------------*/
+*{
+    margin: 0;
+    padding: 0;
+  }
+
+.nav{
+  height: 4rem;
+  background-color: rgb(34, 40, 44)
+}
+
+.nav>ul{
+  list-style: none;
+  color:#ccc;
+  line-height:4rem;
+}
+.nav>ul>li{
+  display: inline-block;
+  vertical-align:middle;
+  margin-left: 30px;
+}
+.down::after{
+  content:'';
+  display: inline-block;
+  border-top:5px solid;
+  border-left:5px solid #0000;
+  border-right:5px solid #0000;
+  border-bottom:3px solid #0000;
+  margin-left: 5px
+}
+.right::after{
+  content:' ';
+  display: inline-block;
+  border-top:5px solid #0000;
+  border-left:5px solid;
+  border-right:5px solid #0000;
+  border-bottom:5px solid #0000;
+  margin-left:10px;
+}
+
+.js:hover{
+  color:#fff;
+}
+.js:hover > ul{
+  display:block;
+}
+
+
+
+.js > ul{
+  display: none;
+  position: absolute;
+  background-color: rgb(68, 68, 68);
+  list-style:none;
+  width: 200px;
+  top:4em;
+  left: 180px;
+  text-indent:15px;
+  color:#ccc;
+}
+.js > ul > li:hover{
+  background:rgb(255, 153, 0);
+  color:#fff;
+}
+
+.vue:hover {
+  color:#fff;
+}
+.vue:hover > ul {
+  display: block;
+}
+
+.vue > ul {
+  display: none;
+  position: absolute;
+  width: 200px;
+  left: 200px;
+  background-color: rgb(68, 68, 68);
+  list-style: none;
+  margin-top:-4em;
+  color:#ccc;
+}
+
+.vue > ul > li:hover{
+  background:rgb(255, 153, 0);
+}
+
+
+.func > ul{
+  display: none;
+  position: absolute;
+  left: 200px;
+  width: 200px;
+  color:#ccc;
+  background-color: rgb(68, 68, 68);
+  list-style: none;
+  margin-top:-4em;
+}
+.func > ul > li:hover{
+  background-color: rgb(255, 153, 0);
+
+}
+.func:hover{
+  color:#fff;
+}
+.func:hover > ul {
+  display: block;
+}
+.func > ul > li:hover{
+  color:#fff;
+}
+ /*ios---------------------------------------------------------- */
+  #ios{
     display:none;
   }
-  input[type='checkbox'] + label {
+  #ios + label {
     display:inline-block;
     width: 100px;
     height: 60px;
@@ -25,9 +137,10 @@
     line-height: 54px;
     text-align:center;
     font-size: 0;
-
+    margin-left: calc(50% - 100px);
+    margin-top:20px;
   }
-  input[type='checkbox'] + label::before{
+  #ios + label::before{
     content: '';
     display:inline-block;
     width: 94px;
@@ -39,7 +152,7 @@
 
   }
 
-  input[type='checkbox'] + label::after {
+  #ios + label::after {
     content:'';
     display:inline-block;
     width: 54px;
@@ -53,32 +166,98 @@
   }
 
 
-  input[type='checkbox']:checked + label::after {
+  #ios:checked + label::after {
     left:40px;
   }
-  input[type='checkbox']:checked + label{
+  #ios:checked + label{
     background-color: #4dd865;
   }
 
-  input[type='checkbox']:checked + label::before{
+  #ios:checked + label::before{
     width: 0;
     height: 0;
   }
-  input[type='checkbox']:active + label::before{
+  #ios:active + label::before{
     width: 0;
     height: 0;
   }
-  input[type='checkbox']:active + label::after {
+  #ios:active + label::after {
     width: 64px;
   }
-  input[type='checkbox']:checked:active + label::after {
+  #ios:checked:active + label::after {
     width: 64px;
     left: 30px;
   }
+/*twitter----------------------------------------------------------*/
+
+  #twitter{
+    display:none;
+  }
+  #twitter + label{
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    background:url(https://abs.twimg.com/a/1526339738/img/animations/web_heart_animation_edge.png) no-repeat;
+    margin-left: calc(50% - 100px);
+  }
+  #twitter:checked + label{
+    background-position:-2800px;
+    transition:background-position 1s steps(28);
+  }
+
+
+
+
+
+
 
 </style>
 
-<input type="checkbox" id="box"><label for="box"></label>
+<!-- nav------------------------------------------------------------- -->
+<nav class="nav">
+  <ul>
+    <li>首页</li>
+    <li>html+css</li>
+    <li class="js down">JavaScript
+      <ul>
+        <li>ES2015(ES6)</li>
+        <li class="vue right">Vue.js
+            <ul>
+              <li>jQuery</li>
+              <li class="func right">实用函数方法
+                  <ul>
+                    <li>jQuery</li>
+                    <li>实用函数方法</li>
+                    <li>Node.js</li>
+                  </ul>
+              </li>
+              <li>Node.js</li>
+            </ul>
+        </li>
+        <li>React</li>
+        <li>jQuery</li>
+        <li>使用函数方法</li>
+        <li>Node.js</li>
+      </ul>
+    </li>
+
+    <li>前端工具</li>
+    <li>前端资源</li>
+    <li>标签</li>
+  </ul>
+</nav>
+
+
+<!-- ios---------------------------------------------------------- -->
+<div class="a">
+  
+<input type="checkbox" id="ios"><label for="ios"></label><br>
+
+<!-- twitter---------------------------------------------------------- -->
+<input type="checkbox" id='twitter'>
+<label for="twitter"></label>
+
+</div>
 
 
 
