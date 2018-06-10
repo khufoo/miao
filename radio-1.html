@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="radio.css">
+</head>
+<body>
+  
+<style>
+
+body{
+  background-color: #eef2fb;
+  background-image:url(https://gyqgyq.github.io/sliding%20image%20panels/bg.jpg);
+  text-align:center;
+  padding:0;
+  margin:0;
+}
+
+
+
+
+/*_________demo___________________________________________________________________*/
+header{
+  font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+  font-size: 25px;
+  color: rgba(26,89,120,0.9);
+}
+header h2 em{
+  color: #7cbcd6;
+  font-style: normal;
+}
+
+/*_________demo________________________________________________________________*/
+[name='demo']{
+  display:none;
+}
+[name='demo'] + label{
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  background-color: #7cbcd690;
+  float: left;
+  line-height: 60px;
+  display: inline-block;
+  color:#fff;
+  font-size:12px;
+  font-style:initial;
+  margin-right: 10px;
+  text-shadow:1px 1px 2px #0003;
+  cursor:pointer;
+  transition:background-color var(--ss);
+}
+[name='demo'] + label:hover{
+  background-color: #4fa2c4;
+}
+[name='demo']:checked + label {
+  background-color: #fff;
+  color:#7cbcd6;
+}
+[id='demo-1'] + label{
+    margin-left:calc(50% - 140px);
+}
+
+[id='demo-1']:checked ~ .main-1{
+    display:block;
+}
+[id='demo-1']:checked ~ .main:not(.main-1){
+  display: none;
+}
+
+
+[id='demo-2']:checked ~ .main-2{
+    display:block;
+}
+[id='demo-2']:checked ~ .main:not(.main-2){
+  display: none;
+}
+
+[id='demo-3']:checked ~ .main-3{
+    display:block;
+}
+[id='demo-3']:checked ~ .main:not(.main-3){
+  display: none;
+}
+
+[id='demo-4']:checked ~ .main-4{
+    display:block;
+}
+[id='demo-4']:checked ~ .main:not(.main-4){
+  display: none;
+}
+
+
+
+
+
+.foo{
+  height: 100px;
+}
+/*__________main_____________________________________________________*/
+.main-1 {
+  width: 601px;
+  height: 401px;
+  margin: 20px auto;
+  /*background-color: #f003;*/
+  border:20px solid #fff;
+  position: relative;
+  box-shadow: 2px 2px 3px #0001;
+}
+/*__________label__________________________________________________________*/
+.main-1 > input {
+  display: none;
+}
+.main-1 > label {
+  display: block;
+  width: 25%;
+  height: 34px;
+  /*background-color: #00f2;*/
+  float: left;
+  margin-top:330px;
+  vertical-align: middle;
+  position: relative;
+  z-index: 11px;
+  text-align: center;
+  font-size: 25px;
+  color:#fff;
+  cursor: pointer;
+}
+.main-1 > label::before{
+  content:'';
+  position: absolute;
+  z-index: -1;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom:0;
+  margin:auto;
+  width: 34px;
+  height: 34px;
+  background-color: rgb(119, 178, 200);
+  border-radius:999px;
+  box-shadow: 0 0 0 5px #fff3;
+}
+.main-1 > label::after{
+  content:'';
+  position: absolute;
+  z-index: -1;
+  width: 1px;
+  height: 401px;
+  background: linear-gradient(#fff0,#fffa);
+  right: 0;
+  bottom:-37px;
+}
+.main-1 > input:checked + label::before{
+  background-color:#fff;
+  box-shadow: 0 0 0 5px rgba(119, 178, 200,.7);
+}
+.main-1 > input:checked + label{
+  color:rgb(119, 178, 200);
+}
+
+
+
+
+/*+++++++++++++++++++++图片控制++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+:root{
+--ss:.7s;
+}
+
+.main-1 > input[id="img-1"]:checked ~ .box--1 > div > div {
+  left:0;
+  z-index: 1;
+  transition: left var(--ss);
+}
+.main-1 > input[id="img-1"]:checked ~ .box:not(.box--1){
+  z-index: -3;
+}
+.main-1 > input[id="img-1"]:checked ~ .box:not(.box--1) > div > div{
+  animation:D1-move var(--ss);
+}
+@keyframes D1-move {
+  0%{
+    left:0;
+  }
+  100%{
+    left:150px;
+  }
+}
+
+.main-1 > input[id="img-1"]:checked ~ .text1{
+  opacity:1;
+}
+.main-1 > input[id="img-1"]:checked ~ .text:not(.text1){
+  opacity:0;
+}
+
+
+
+.main-1 > input[id="img-2"]:checked ~ .box--2 > div > div{
+  left:0;
+  z-index: 1;
+  transition: left var(--ss);
+}
+.main-1 > input[id="img-2"]:checked ~ .box:not(.box--2){
+  z-index: -3;
+}
+.main-1 > input[id="img-2"]:checked ~ .box:not(.box--2) > div > div{
+  animation:D1-move var(--ss);
+}
+
+.main-1 > input[id="img-2"]:checked ~ .text2{
+  opacity:1;
+}
+.main-1 > input[id="img-2"]:checked ~ .text:not(.text2){
+  opacity:0;
+}
+
+
+
+
+.main-1 > input[id="img-3"]:checked ~ .box--3 > div > div {
+  left:0;
+  z-index: 1;
+  transition: left var(--ss);
+}
+.main-1 > input[id="img-3"]:checked ~ .box:not(.box--3){
+  z-index: -3;
+}
+.main-1 > input[id="img-3"]:checked ~ .box:not(.box--3) > div > div{
+  animation:D1-move var(--ss);
+}
+
+.main-1 > input[id="img-3"]:checked ~ .text3{
+  opacity:1;
+}
+.main-1 > input[id="img-3"]:checked ~ .text:not(.text3){
+  opacity:0;
+}
+
+
+
+
+.main-1 > input[id="img-4"]:checked ~ .box--4 > div > div {
+  left:0;
+  z-index: 1;
+  transition: left var(--ss);
+}
+.main-1 > input[id="img-4"]:checked ~ .box:not(.box--4){
+  z-index: -3;
+}
+.main-1 > input[id="img-4"]:checked ~ .box:not(.box--4) > div > div{
+  animation:D1-move var(--ss);
+}
+
+.main-1 > input[id="img-4"]:checked ~ .text4{
+  opacity:1;
+}
+.main-1 > input[id="img-4"]:checked ~ .text:not(.text4){
+  opacity:0;
+}
+
+
+/*--------------图片控制---------------------------------------------*/
+
+
+/*____________box___________________________________________________________*/
+
+.main-1 > .box{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -2;
+}
+.main-1 > .box > div{
+  width: 25%;
+  height: 100%;
+  float: left;
+  position: relative;
+  overflow: hidden;
+  /*background-color: #f004;*/
+}
+.main-1 > .box > div > div{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  top:0;
+  left: -150px;
+  transition: left 0s var(--ss);
+  z-index: 1;
+}
+.main-1 > .box--1 > div > div{
+  background-image: url(https://tympanus.net/Tutorials/CSS3SlidingImagePanels/images/1.jpg);
+}
+.main-1 > .box--2 > div > div{
+  background-image: url(https://tympanus.net/Tutorials/CSS3SlidingImagePanels/images/2.jpg);
+}
+.main-1 > .box--3 > div > div{
+  background-image: url(https://tympanus.net/Tutorials/CSS3SlidingImagePanels/images/3.jpg);
+}
+.main-1 > .box--4 > div > div{
+  background-image: url(https://tympanus.net/Tutorials/CSS3SlidingImagePanels/images/4.jpg);
+}
+.main-1 > .box > div > .box1-1{
+  background-position: 0 0;
+}
+.main-1 > .box > div > .box2-1{
+  background-position: -150px 0;
+}
+.main-1 > .box > div > .box3-1{
+  background-position: -300px 0;
+}
+.main-1 > .box > div > .box4-1{
+  background-position: -450px 0;
+}
+
+
+
+
+
+/*________text______________________________________________________________________*/
+.main-1 .text{
+  font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+  position: absolute;
+  top:200px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  color:#fff;
+  text-align: center;
+  transition: opacity var(--ss);
+}
+.main-1 .text > div {
+  position: absolute;
+  left: 0;
+  right:0;
+  bottom:-30px;
+  margin:auto;
+  font-size: 50px;
+  font-weight: 600;
+  margin-bottom: -20px;
+  text-transform: uppercase;
+  transition:opacity var(--ss);
+  vertical-align: middle;
+  transform:scale(1);
+}
+.main-1 .text > p {
+  position: absolute;
+  width: 100%;
+  bottom:-110px;
+  line-height: 40px;
+  font-size: 16px;
+  background-color: rgba(119, 178, 200,.9);
+  font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+  z-index: 13;
+  transition: opacity var(--ss);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*+++++++++demo2++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*+++++++++demo2++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*+++++++++demo2++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*+++++++++demo2++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/*__________main_____________________________________________________*/
+.main-2 {
+  width: 601px;
+  height: 401px;
+  margin: 20px auto;
+  /*background-color: #f003;*/
+  border:20px solid #fff;
+  position: relative;
+  box-shadow: 2px 2px 3px #0001;
+}
+/*__________label__________________________________________________________*/
+.main-2 > input {
+  display: none;
+}
+.main-2 > label {
+  display: block;
+  width: 25%;
+  height: 34px;
+  /*background-color: #00f2;*/
+  float: left;
+  margin-top:330px;
+  vertical-align: middle;
+  position: relative;
+  z-index: 11px;
+  text-align: center;
+  font-size: 25px;
+  color:#fff;
+  cursor: pointer;
+}
+.main-2 > label::before{
+  content:'';
+  position: absolute;
+  z-index: -1;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom:0;
+  margin:auto;
+  width: 34px;
+  height: 34px;
+  background-color: rgb(119, 178, 200);
+  border-radius:999px;
+  box-shadow: 0 0 0 5px #fff3;
+}
+.main-2 > label::after{
+  content:'';
+  position: absolute;
+  z-index: -1;
+  width: 1px;
+  height: 401px;
+  background: linear-gradient(#fff0,#fffa);
+  right: 0;
+  bottom:-37px;
+}
+.main-2 > input:checked + label::before{
+  background-color:#fff;
+  box-shadow: 0 0 0 5px rgba(119, 178, 200,.7);
+}
+.main-2 > input:checked + label{
+  color:rgb(119, 178, 200);
+}
+
+
+
+
+/*+++++++++++++++++++++图片控制++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+@keyframes D2-move {
+  0%{
+    left:0;
+  }
+  100%{
+    left:-150px;
+  }
+}
+
+
+.main-2 > input[id="img2-1"]:checked ~ .box--1 > div > div {
+  left:0;
+  z-index: 1;
+  transition: left var(--ss);
+}
+.main-2 > input[id="img2-1"]:checked ~ .box:not(.box--1){
+  z-index: -3;
+}
+
+
+.main-2 > input[id="img2-1"]:checked ~ .box:not(.box--1) > div:nth-child(2n - 1) > div{
+  animation:D1-move var(--ss);
+}
+.main-2 > input[id="img2-1"]:checked ~ .box:not(.box--1) > div:nth-child(2n) > div{
+  animation:D2-move var(--ss);
+}
+
+
+.main-2 > input[id="img2-1"]:checked ~ .text1 > div{
+  opacity:1;
+  transform:scale(1);
+}
+.main-2 > input[id="img2-1"]:checked ~ .text:not(.text1) > div{
+  opacity:0;
+  transform:scale(.5);
+}
+.main-2 > input[id="img2-1"]:checked ~ .text1 > p{
+  opacity:1;
+}
+.main-2 > input[id="img2-1"]:checked ~ .text:not(.text1) > p{
+  opacity:0;
+}
+
+/*-------2----------------*/
+.main-2 > input[id="img2-2"]:checked ~ .box--2 > div > div{
+  left:0;
+  z-index: 1;
+  transition: left var(--ss);
+}
+.main-2 > input[id="img2-2"]:checked ~ .box:not(.box--2){
+  z-index: -3;
+}
+
+
+.main-2 > input[id="img2-2"]:checked ~ .box:not(.box--2) > div:nth-child(2n - 1) > div{
+  animation:D1-move var(--ss);
+}
+.main-2 > input[id="img2-2"]:checked ~ .box:not(.box--2) > div:nth-child(2n) > div{
+  animation:D2-move var(--ss);
+}
+
+
+
+.main-2 > input[id="img2-2"]:checked ~ .text2 > div{
+  opacity:1;
+  transform:scale(1);
+}
+.main-2 > input[id="img2-2"]:checked ~ .text:not(.text2) > div{
+  opacity:0;
+  transform:scale(.5);
+}
+.main-2 > input[id="img2-2"]:checked ~ .text2 > p{
+  opacity:1;
+}
+.main-2 > input[id="img2-2"]:checked ~ .text:not(.text2) > p{
+  opacity:0;
+}
+
+/*---------3-------------------*/
+
+.main-2 > input[id="img2-3"]:checked ~ .box--3 > div > div {
+  left:0;
+  z-index: 1;
+  transition: left var(--ss);
+}
+.main-2 > input[id="img2-3"]:checked ~ .box:not(.box--3){
+  z-index: -3;
+}
+
+
+
+.main-2 > input[id="img2-3"]:checked ~ .box:not(.box--3) > div:nth-child(2n - 1) > div{
+  animation:D1-move var(--ss);
+}
+.main-2 > input[id="img2-3"]:checked ~ .box:not(.box--3) > div:nth-child(2n) > div{
+  animation:D2-move var(--ss);
+}
+
+
+.main-2 > input[id="img2-3"]:checked ~ .text3 > div{
+  opacity:1;
+  transform:scale(1);
+}
+.main-2 > input[id="img2-3"]:checked ~ .text:not(.text3) > div{
+  opacity:0;
+  transform:scale(.5);
+}
+.main-2 > input[id="img2-3"]:checked ~ .text3 > p{
+  opacity:1;
+}
+.main-2 > input[id="img2-3"]:checked ~ .text:not(.text3) > p{
+  opacity:0;
+}
+
+
+/*---------4-------------------*/
+
+.main-2 > input[id="img2-4"]:checked ~ .box--4 > div > div {
+  left:0;
+  z-index: 1;
+  transition: left var(--ss);
+}
+.main-2 > input[id="img2-4"]:checked ~ .box:not(.box--4){
+  z-index: -3;
+}
+
+
+
+.main-2 > input[id="img2-4"]:checked ~ .box:not(.box--4) > div:nth-child(2n - 1) > div{
+  animation:D1-move var(--ss);
+}
+.main-2 > input[id="img2-4"]:checked ~ .box:not(.box--4) > div:nth-child(2n) > div{
+  animation:D2-move var(--ss);
+}
+
+
+.main-2 > input[id="img2-4"]:checked ~ .text4 > div{
+  opacity:1;
+  transform:scale(1);
+}
+.main-2 > input[id="img2-4"]:checked ~ .text:not(.text4) > div{
+  opacity:0;
+  transform:scale(.5);
+}
+.main-2 > input[id="img2-4"]:checked ~ .text4 > p{
+  opacity:1;
+}
+.main-2 > input[id="img2-4"]:checked ~ .text:not(.text4) > p{
+  opacity:0;
+}
+
+
+/*--------------图片控制---------------------------------------------*/
+
+
+/*____________box___________________________________________________________*/
+
+.main-2 > .box{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -2;
+}
+.main-2 > .box > div{
+  width: 25%;
+  height: 100%;
+  float: left;
+  position: relative;
+  overflow: hidden;
+  /*background-color: #f004;*/
+}
+.main-2 > .box > div:nth-child(2n - 1) > div{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  top:0;
+  left: -150px;
+  transition: left 0s var(--ss);
+  z-index: 1;
+}
+.main-2 > .box > div:nth-child(2n) > div{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  top:0;
+  left: 150px;
+  transition: left 0s var(--ss);
+  z-index: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.main-2 > .box--1 > div > div{
+  background-image: url(https://tympanus.net/Tutorials/CSS3SlidingImagePanels/images/1.jpg);
+}
+.main-2 > .box--2 > div > div{
+  background-image: url(https://tympanus.net/Tutorials/CSS3SlidingImagePanels/images/2.jpg);
+}
+.main-2 > .box--3 > div > div{
+  background-image: url(https://tympanus.net/Tutorials/CSS3SlidingImagePanels/images/3.jpg);
+}
+.main-2 > .box--4 > div > div{
+  background-image: url(https://tympanus.net/Tutorials/CSS3SlidingImagePanels/images/4.jpg);
+}
+.main-2 > .box > div > .box1-1{
+  background-position: 0 0;
+}
+.main-2 > .box > div > .box2-1{
+  background-position: -150px 0;
+}
+.main-2 > .box > div > .box3-1{
+  background-position: -300px 0;
+}
+.main-2 > .box > div > .box4-1{
+  background-position: -450px 0;
+}
+
+
+
+
+
+/*________text______________________________________________________________________*/
+.main-2 .text{
+  font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+  position: absolute;
+  top:200px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  color:#fff;
+  text-align: center;
+  font-size: 0;
+}
+.main-2 .text > div {
+  position: absolute;
+  left: 0;
+  right:0;
+  bottom:-30px;
+  margin:auto;
+  font-size: 50px;
+  font-weight: 600;
+  margin-bottom: -20px;
+  text-transform: uppercase;
+  transition:transform var(--ss) , opacity var(--ss);
+  vertical-align: middle;
+  transform:scale(1);
+}
+.main-2 .text > p {
+  position: absolute;
+  width: 100%;
+  bottom:-110px;
+  line-height: 40px;
+  font-size: 16px;
+  background-color: rgba(119, 178, 200,.9);
+  font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+  z-index: 13;
+  transition: opacity var(--ss);
+}
+
+
+
+
+
+
+
+
+
+
+
+/*+++++++++demo3++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*+++++++++demo3++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*+++++++++demo3++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*+++++++++demo3++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/*__________main_____________________________________________________*/
+.main-3 {
+  width: 601px;
+  height: 401px;
+  margin: 20px auto;
+  /*background-color: #f003;*/
+  border:20px solid #fff;
+  position: relative;
+  box-shadow: 2px 2px 3px #0001;
+}
+/*__________label__________________________________________________________*/
+.main-3 > input {
+  display: none;
+}
+.main-3 > label {
+  display: block;
+  width: 25%;
+  height: 34px;
+  /*background-color: #00f2;*/
+  float: left;
+  margin-top:330px;
+  vertical-align: middle;
+  position: relative;
+  z-index: 11px;
+  text-align: center;
+  font-size: 25px;
+  color:#fff;
+  cursor: pointer;
+}
+.main-3 > label::before{
+  content:'';
+  position: absolute;
+  z-index: -1;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom:0;
+  margin:auto;
+  width: 34px;
+  height: 34px;
+  background-color: rgb(119, 178, 200);
+  border-radius:999px;
+  box-shadow: 0 0 0 5px #fff3;
+}
+.main-3 > label::after{
+  content:'';
+  position: absolute;
+  z-index: -1;
+  width: 1px;
+  height: 401px;
+  background: linear-gradient(#fff0,#fffa);
+  right: 0;
+  bottom:-37px;
+}
+.main-3 > input:checked + label::before{
+  background-color:#fff;
+  box-shadow: 0 0 0 5px rgba(119, 178, 200,.7);
+}
+.main-3 > input:checked + label{
+  color:rgb(119, 178, 200);
+}
+
+
+
+
+/*+++++++++++++++++++++图片控制++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+@keyframes D3-1-move {
+  0%{
+    top:0;
+  }
+  100%{
+    top:400px;
+  }
+}
+@keyframes D3-2-move {
+  0%{
+    top:0;
+  }
+  100%{
+    top:-400px;
+  }
+}
+/*-------1----------------*/
+.main-3 > input[id="img3-1"]:checked ~ .box--1 > div > div {
+  top:0;
+  z-index: 1;
+  transition: top var(--ss);
+}
+.main-3 > input[id="img3-1"]:checked ~ .box:not(.box--1){
+  z-index: -3;
+}
+
+
+.main-3 > input[id="img3-1"]:checked ~ .box:not(.box--1) > div:nth-child(2n - 1) > div{
+  animation:D3-2-move var(--ss);
+}
+.main-3 > input[id="img3-1"]:checked ~ .box:not(.box--1) > div:nth-child(2n) > div{
+  animation:D3-1-move var(--ss);
+}
+
+
+.main-3 > input[id="img3-1"]:checked ~ .text1 > div{
+  opacity:1;
+  bottom:-30px;
+}
+.main-3 > input[id="img3-1"]:checked ~ .text:not(.text1) > div{
+  opacity:0;
+  bottom:90px;
+}
+.main-3 > input[id="img3-1"]:checked ~ .text1 > p{
+  opacity:1;
+}
+.main-3 > input[id="img3-1"]:checked ~ .text:not(.text1) > p{
+  opacity:0;
+}
+
+/*-------2----------------*/
+.main-3 > input[id="img3-2"]:checked ~ .box--2 > div > div{
+  top:0;
+  z-index: 1;
+  transition: top var(--ss);
+}
+.main-3 > input[id="img3-2"]:checked ~ .box:not(.box--2){
+  z-index: -3;
+}
+
+
+.main-3 > input[id="img3-2"]:checked ~ .box:not(.box--2) > div:nth-child(2n - 1) > div{
+  animation:D3-2-move var(--ss);
+}
+.main-3 > input[id="img3-2"]:checked ~ .box:not(.box--2) > div:nth-child(2n) > div{
+  animation:D3-1-move var(--ss);
+}
+
+
+
+.main-3 > input[id="img3-2"]:checked ~ .text2 > div{
+  opacity:1;
+  bottom:-30px;
+}
+.main-3 > input[id="img3-2"]:checked ~ .text:not(.text2) > div{
+  opacity:0;
+  bottom:90px;
+}
+.main-3 > input[id="img3-2"]:checked ~ .text2 > p{
+  opacity:1;
+}
+.main-3 > input[id="img3-2"]:checked ~ .text:not(.text2) > p{
+  opacity:0;
+}
+
+/*---------3-------------------*/
+
+.main-3 > input[id="img3-3"]:checked ~ .box--3 > div > div {
+  top:0;
+  z-index: 1;
+  transition: top var(--ss);
+}
+.main-3 > input[id="img3-3"]:checked ~ .box:not(.box--3){
+  z-index: -3;
+}
+
+
+
+.main-3 > input[id="img3-3"]:checked ~ .box:not(.box--3) > div:nth-child(2n - 1) > div{
+  animation:D3-2-move var(--ss);
+}
+.main-3 > input[id="img3-3"]:checked ~ .box:not(.box--3) > div:nth-child(2n) > div{
+  animation:D3-1-move var(--ss);
+}
+
+
+.main-3 > input[id="img3-3"]:checked ~ .text3 > div{
+  opacity:1;
+  bottom:-30px;
+}
+.main-3 > input[id="img3-3"]:checked ~ .text:not(.text3) > div{
+  opacity:0;
+  bottom:90px;
+}
+.main-3 > input[id="img3-3"]:checked ~ .text3 > p{
+  opacity:1;
+}
+.main-3 > input[id="img3-3"]:checked ~ .text:not(.text3) > p{
+  opacity:0;
+}
+
+
+/*---------4-------------------*/
+
+.main-3 > input[id="img3-4"]:checked ~ .box--4 > div > div {
+  top:0;
+  z-index: 1;
+  transition: top var(--ss);
+}
+.main-3 > input[id="img3-4"]:checked ~ .box:not(.box--4){
+  z-index: -3;
+}
+
+
+
+.main-3 > input[id="img3-4"]:checked ~ .box:not(.box--4) > div:nth-child(2n - 1) > div{
+  animation:D3-2-move var(--ss);
+}
+.main-3 > input[id="img3-4"]:checked ~ .box:not(.box--4) > div:nth-child(2n) > div{
+  animation:D3-1-move var(--ss);
+}
+
+
+.main-3 > input[id="img3-4"]:checked ~ .text4 > div{
+  opacity:1;
+  bottom:-30px;
+}
+.main-3 > input[id="img3-4"]:checked ~ .text:not(.text4) > div{
+  opacity:0;
+  bottom:90px;
+}
+.main-3 > input[id="img3-4"]:checked ~ .text4 > p{
+  opacity:1;
+}
+.main-3 > input[id="img3-4"]:checked ~ .text:not(.text4) > p{
+  opacity:0;
+}
+
+
+/*--------------图片控制---------------------------------------------*/
+
+
+/*____________box___________________________________________________________*/
+
+.main-3 > .box{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -2;
+}
+.main-3 > .box > div{
+  width: 25%;
+  height: 100%;
+  float: left;
+  position: relative;
+  overflow: hidden;
+  /*background-color: #f004;*/
+}
+.main-3 > .box > div:nth-child(2n - 1) > div{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  top:400px;
+  left: 0;
+  transition: top 0s var(--ss);
+  z-index: 1;
+}
+.main-3 > .box > div:nth-child(2n) > div{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  top:-400px;
+  left: 0;
+  transition: top 0s var(--ss);
+  z-index: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.main-3 > .box--1 > div > div{
+  background-image: url(https://tympanus.net/Tutorials/CSS3SlidingImagePanels/images/1.jpg);
+}
+.main-3 > .box--2 > div > div{
+  background-image: url(https://tympanus.net/Tutorials/CSS3SlidingImagePanels/images/2.jpg);
+}
+.main-3 > .box--3 > div > div{
+  background-image: url(https://tympanus.net/Tutorials/CSS3SlidingImagePanels/images/3.jpg);
+}
+.main-3 > .box--4 > div > div{
+  background-image: url(https://tympanus.net/Tutorials/CSS3SlidingImagePanels/images/4.jpg);
+}
+.main-3 > .box > div > .box1-1{
+  background-position: 0 0;
+}
+.main-3 > .box > div > .box2-1{
+  background-position: -150px 0;
+}
+.main-3 > .box > div > .box3-1{
+  background-position: -300px 0;
+}
+.main-3 > .box > div > .box4-1{
+  background-position: -450px 0;
+}
+
+
+
+
+
+/*________text______________________________________________________________________*/
+.main-3 .text{
+  font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+  position: absolute;
+  top:200px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  color:#fff;
+  text-align: center;
+  font-size: 0;
+}
+.main-3 .text > div {
+  position: absolute;
+  left: 0;
+  right:0;
+  bottom:-30px;
+  margin:auto;
+  font-size: 50px;
+  font-weight: 600;
+  margin-bottom: -20px;
+  text-transform: uppercase;
+  transition:bottom var(--ss) , opacity var(--ss);
+  vertical-align: middle;
+}
+.main-3 .text > p {
+  position: absolute;
+  width: 100%;
+  bottom:-110px;
+  line-height: 40px;
+  font-size: 16px;
+  background-color: rgba(119, 178, 200,.9);
+  font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+  z-index: 13;
+  transition: opacity var(--ss);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*+++++++++demo4++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*+++++++++demo4++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*+++++++++demo4++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*+++++++++demo4++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/*__________main_____________________________________________________*/
+.main-4 {
+  width: 601px;
+  height: 401px;
+  margin: 20px auto;
+  /*background-color: #f003;*/
+  border:20px solid #fff;
+  position: relative;
+  box-shadow: 2px 2px 3px #0001;
+}
+/*__________label__________________________________________________________*/
+.main-4 > input {
+  display: none;
+}
+.main-4 > label {
+  display: block;
+  width: 25%;
+  height: 34px;
+  /*background-color: #00f2;*/
+  float: left;
+  margin-top:330px;
+  vertical-align: middle;
+  position: relative;
+  z-index: 11px;
+  text-align: center;
+  font-size: 25px;
+  color:#fff;
+  cursor: pointer;
+}
+.main-4 > label::before{
+  content:'';
+  position: absolute;
+  z-index: -1;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom:0;
+  margin:auto;
+  width: 34px;
+  height: 34px;
+  background-color: rgb(119, 178, 200);
+  border-radius:999px;
+  box-shadow: 0 0 0 5px #fff3;
+}
+.main-4 > label::after{
+  content:'';
+  position: absolute;
+  z-index: -1;
+  width: 1px;
+  height: 401px;
+  background: linear-gradient(#fff0,#fffa);
+  right: 0;
+  bottom:-37px;
+}
+.main-4 > input:checked + label::before{
+  background-color:#fff;
+  box-shadow: 0 0 0 5px rgba(119, 178, 200,.7);
+}
+.main-4 > input:checked + label{
+  color:rgb(119, 178, 200);
+}
+
+
+
+
+/*+++++++++++++++++++++图片控制++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+.main-4 > input[id="img4-1"]:checked ~ .box--1 > div > div {
+  transform:scale(1);
+  opacity:1;
+  z-index: 1;
+}
+.main-4 > input[id="img4-1"]:checked ~ .box:not(.box--1) > div > div{
+  transform:scale(2);
+  opacity:0;
+}
+
+
+.main-4 > input[id="img4-1"]:checked ~ .text1 > div{
+  opacity:1;
+  text-shadow: 0 0 0px #fff;
+}
+.main-4 > input[id="img4-1"]:checked ~ .text:not(.text1) > div{
+  opacity:0;
+  text-shadow: 0 0 51px #fff;
+}
+.main-4 > input[id="img4-1"]:checked ~ .text1 > p{
+  opacity:1;
+}
+.main-4 > input[id="img4-1"]:checked ~ .text:not(.text1) > p{
+  opacity:0;
+}
+
+/*-------2----------------*/
+.main-4 > input[id="img4-2"]:checked ~ .box--2 > div > div {
+  transform:scale(1);
+  opacity:1;
+  z-index: 1;
+}
+.main-4 > input[id="img4-2"]:checked ~ .box:not(.box--2) > div > div{
+  transform:scale(2);
+  opacity:0;
+}
+
+
+
+.main-4 > input[id="img4-2"]:checked ~ .text2 > div{
+  opacity:1;
+    text-shadow: 0 0 0px #fff;
+      transform:scale(1);
+}
+.main-4 > input[id="img4-2"]:checked ~ .text:not(.text2) > div{
+  opacity:0;
+  text-shadow: 0 0 51px #fff0;
+
+}
+.main-4 > input[id="img4-2"]:checked ~ .text2 > p{
+  opacity:1;
+}
+.main-4 > input[id="img4-2"]:checked ~ .text:not(.text2) > p{
+  opacity:0;
+}
+
+/*---------3-------------------*/
+
+.main-4 > input[id="img4-3"]:checked ~ .box--3 > div > div {
+  transform:scale(1);
+  opacity:1;
+  z-index: 1;
+}
+.main-4 > input[id="img4-3"]:checked ~ .box:not(.box--3) > div > div{
+  transform:scale(2);
+  opacity:0;
+}
+
+
+
+.main-4 > input[id="img4-3"]:checked ~ .text3 > div{
+  opacity:1;
+    text-shadow: 0 0 0px #fff;
+}
+.main-4 > input[id="img4-3"]:checked ~ .text:not(.text3) > div{
+  opacity:0;
+    text-shadow: 0 0 51px #fff0;
+
+}
+.main-4 > input[id="img4-3"]:checked ~ .text3 > p{
+  opacity:1;
+}
+.main-4 > input[id="img4-3"]:checked ~ .text:not(.text3) > p{
+  opacity:0;
+}
+
+
+/*---------4-------------------*/
+
+.main-4 > input[id="img4-4"]:checked ~ .box--4 > div > div {
+  transform:scale(1);
+  opacity:1;
+  z-index: 1;
+}
+.main-4 > input[id="img4-4"]:checked ~ .box:not(.box--4) > div > div{
+  transform:scale(2);
+  opacity:0;
+}
+
+
+
+.main-4 > input[id="img4-4"]:checked ~ .text4 > div{
+  opacity:1;
+    text-shadow: 0 0 0px #fff;
+}
+.main-4 > input[id="img4-4"]:checked ~ .text:not(.text4) > div{
+  opacity:0;
+    text-shadow: 0 0 51px #fff;
+}
+.main-4 > input[id="img4-4"]:checked ~ .text4 > p{
+  opacity:1;
+}
+.main-4 > input[id="img4-4"]:checked ~ .text:not(.text4) > p{
+  opacity:0;
+}
+
+
+/*--------------图片控制---------------------------------------------*/
+
+
+/*____________box___________________________________________________________*/
+
+.main-4 > .box{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: -2;
+}
+.main-4 > .box > div{
+  width: 25%;
+  height: 100%;
+  float: left;
+  position: relative;
+  overflow: hidden;
+  /*background-color: #f004;*/
+}
+.main-4 > .box > div > div{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  top:0;
+  left: 0;
+  bottom:0;
+  right:0;
+  margin:auto;
+  transform:scale(1.2);
+  transition: transform var(--ss),opacity var(--ss);
+  z-index: 1;
+  opacity:0;
+  zoom:1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.main-4 > .box--1 > div > div{
+  background-image: url(https://tympanus.net/Tutorials/CSS3SlidingImagePanels/images/1.jpg);
+}
+.main-4 > .box--2 > div > div{
+  background-image: url(https://tympanus.net/Tutorials/CSS3SlidingImagePanels/images/2.jpg);
+}
+.main-4 > .box--3 > div > div{
+  background-image: url(https://tympanus.net/Tutorials/CSS3SlidingImagePanels/images/3.jpg);
+}
+.main-4 > .box--4 > div > div{
+  background-image: url(https://tympanus.net/Tutorials/CSS3SlidingImagePanels/images/4.jpg);
+}
+.main-4 > .box > div > .box1-1{
+  background-position: 0 0;
+}
+.main-4 > .box > div > .box2-1{
+  background-position: -150px 0;
+}
+.main-4 > .box > div > .box3-1{
+  background-position: -300px 0;
+}
+.main-4 > .box > div > .box4-1{
+  background-position: -450px 0;
+}
+
+
+
+
+
+/*________text______________________________________________________________________*/
+.main-4 .text{
+  font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+  position: absolute;
+  top:200px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  color:#fff;
+  text-align: center;
+  font-size: 0;
+}
+.main-4 .text > div {
+  position: absolute;
+  left: 0;
+  right:0;
+  bottom:-30px;
+  margin:auto;
+  font-size: 50px;
+  font-weight: 600;
+  margin-bottom: -20px;
+  color: transparent;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px #f00;
+  transition: text-shadow var(--ss) , opacity var(--ss);
+  vertical-align: middle;
+}
+.main-4 .text > p {
+  position: absolute;
+  width: 100%;
+  bottom:-110px;
+  line-height: 40px;
+  font-size: 16px;
+  background-color: rgba(119, 178, 200,.9);
+  font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+  z-index: 13;
+  transition: opacity var(--ss);
+}
+
+</style>
+
+<header>
+  <h2>SLIDING IMAGE PANELS <em>WITH CSS3</em></h2>
+</header>
+
+
+<input type="radio" id="demo-1" name="demo" checked='checked'> 
+<label for="demo-1">Demo 1</label>
+
+<input type="radio" id="demo-2" name="demo"> 
+<label for="demo-2">Demo 2</label>
+
+<input type="radio" id="demo-3" name="demo"> 
+<label for="demo-3">Demo 3</label>
+
+<input type="radio" id="demo-4" name="demo"> 
+<label for="demo-4">Demo 4</label>
+
+<div class="foo"></div>
+
+<main class='main main-1'>
+    <input type="radio" id="img-1" name="img" checked="checked">
+    <label class="demo" for="img-1">1</label>
+
+    <input type="radio" id="img-2" name="img">
+    <label class="demo" for="img-2">2</label>
+
+    <input type="radio" id="img-3" name="img">
+    <label class="demo" for="img-3">3</label>
+
+    <input type="radio" id="img-4" name="img">
+    <label class="demo" for="img-4">4</label>
+
+    <div class="box box--1">
+      <div class="box1">
+        <div class="box1-1"></div>
+      </div>
+      <div class="box2">
+        <div class="box2-1"></div>
+      </div>
+      <div class="box3">
+        <div class="box3-1"></div>
+      </div>
+      <div class="box4">
+        <div class="box4-1"></div>
+      </div>
+    </div>
+
+    <div class="box box--2">
+      <div class="box1">
+        <div class="box1-1"></div>
+      </div>
+      <div class="box2">
+        <div class="box2-1"></div>
+      </div>
+      <div class="box3">
+        <div class="box3-1"></div>
+      </div>
+      <div class="box4">
+        <div class="box4-1"></div>
+      </div>
+    </div>
+
+    <div class="box box--3">
+      <div class="box1">
+        <div class="box1-1"></div>
+      </div>
+      <div class="box2">
+        <div class="box2-1"></div>
+      </div>
+      <div class="box3">
+        <div class="box3-1"></div>
+      </div>
+      <div class="box4">
+        <div class="box4-1"></div>
+      </div>
+    </div>
+
+    <div class="box box--4">
+      <div class="box1">
+        <div class="box1-1"></div>
+      </div>
+      <div class="box2">
+        <div class="box2-1"></div>
+      </div>
+      <div class="box3">
+        <div class="box3-1"></div>
+      </div>
+      <div class="box4">
+        <div class="box4-1"></div>
+      </div>
+    </div>
+
+    <div class="text text1">
+      <div>Serendipity</div>
+      <p>what you've been dreaming of</p>
+    </div>
+    <div class="text text2">
+      <div>Adventure</div>
+      <p>Where the fun begins</p>
+    </div>
+    <div class="text text3">
+      <div>Nature</div>
+      <p>Unforgettable eperiences</p>
+    </div>
+    <div class="text text4">
+      <div>Serenity</div>
+      <p>When silence touches nature</p>
+    </div>
+
+</main>
+
+
+
+
+
+<main class='main main-2'>
+
+    <input type="radio" id="img2-1" name="img-2" checked="checked">
+    <label class="demo" for="img2-1">1</label>
+
+    <input type="radio" id="img2-2" name="img-2">
+    <label class="demo" for="img2-2">2</label>
+
+    <input type="radio" id="img2-3" name="img-2">
+    <label class="demo" for="img2-3">3</label>
+
+    <input type="radio" id="img2-4" name="img-2">
+    <label class="demo" for="img2-4">4</label>
+
+    <div class="box box--1">
+      <div class="box1">
+        <div class="box1-1"></div>
+      </div>
+      <div class="box2">
+        <div class="box2-1"></div>
+      </div>
+      <div class="box3">
+        <div class="box3-1"></div>
+      </div>
+      <div class="box4">
+        <div class="box4-1"></div>
+      </div>
+    </div>
+
+    <div class="box box--2">
+      <div class="box1">
+        <div class="box1-1"></div>
+      </div>
+      <div class="box2">
+        <div class="box2-1"></div>
+      </div>
+      <div class="box3">
+        <div class="box3-1"></div>
+      </div>
+      <div class="box4">
+        <div class="box4-1"></div>
+      </div>
+    </div>
+
+    <div class="box box--3">
+      <div class="box1">
+        <div class="box1-1"></div>
+      </div>
+      <div class="box2">
+        <div class="box2-1"></div>
+      </div>
+      <div class="box3">
+        <div class="box3-1"></div>
+      </div>
+      <div class="box4">
+        <div class="box4-1"></div>
+      </div>
+    </div>
+
+    <div class="box box--4">
+      <div class="box1">
+        <div class="box1-1"></div>
+      </div>
+      <div class="box2">
+        <div class="box2-1"></div>
+      </div>
+      <div class="box3">
+        <div class="box3-1"></div>
+      </div>
+      <div class="box4">
+        <div class="box4-1"></div>
+      </div>
+    </div>
+
+    <div class="text text1">
+      <div>Serendipity</div>
+      <p>what you've been dreaming of</p>
+    </div>
+    <div class="text text2">
+      <div>Adventure</div>
+      <p>Where the fun begins</p>
+    </div>
+    <div class="text text3">
+      <div>Nature</div>
+      <p>Unforgettable eperiences</p>
+    </div>
+    <div class="text text4">
+      <div>Serenity</div>
+      <p>When silence touches nature</p>
+    </div>
+
+</main>
+
+
+
+
+
+
+<main class='main main-3'>
+
+    <input type="radio" id="img3-1" name="img-3" checked="checked">
+    <label class="demo" for="img3-1">1</label>
+
+    <input type="radio" id="img3-2" name="img-3">
+    <label class="demo" for="img3-2">2</label>
+
+    <input type="radio" id="img3-3" name="img-3">
+    <label class="demo" for="img3-3">3</label>
+
+    <input type="radio" id="img3-4" name="img-3">
+    <label class="demo" for="img3-4">4</label>
+
+    <div class="box box--1">
+      <div class="box1">
+        <div class="box1-1"></div>
+      </div>
+      <div class="box2">
+        <div class="box2-1"></div>
+      </div>
+      <div class="box3">
+        <div class="box3-1"></div>
+      </div>
+      <div class="box4">
+        <div class="box4-1"></div>
+      </div>
+    </div>
+
+    <div class="box box--2">
+      <div class="box1">
+        <div class="box1-1"></div>
+      </div>
+      <div class="box2">
+        <div class="box2-1"></div>
+      </div>
+      <div class="box3">
+        <div class="box3-1"></div>
+      </div>
+      <div class="box4">
+        <div class="box4-1"></div>
+      </div>
+    </div>
+
+    <div class="box box--3">
+      <div class="box1">
+        <div class="box1-1"></div>
+      </div>
+      <div class="box2">
+        <div class="box2-1"></div>
+      </div>
+      <div class="box3">
+        <div class="box3-1"></div>
+      </div>
+      <div class="box4">
+        <div class="box4-1"></div>
+      </div>
+    </div>
+
+    <div class="box box--4">
+      <div class="box1">
+        <div class="box1-1"></div>
+      </div>
+      <div class="box2">
+        <div class="box2-1"></div>
+      </div>
+      <div class="box3">
+        <div class="box3-1"></div>
+      </div>
+      <div class="box4">
+        <div class="box4-1"></div>
+      </div>
+    </div>
+
+    <div class="text text1">
+      <div>Serendipity</div>
+      <p>what you've been dreaming of</p>
+    </div>
+    <div class="text text2">
+      <div>Adventure</div>
+      <p>Where the fun begins</p>
+    </div>
+    <div class="text text3">
+      <div>Nature</div>
+      <p>Unforgettable eperiences</p>
+    </div>
+    <div class="text text4">
+      <div>Serenity</div>
+      <p>When silence touches nature</p>
+    </div>
+
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+<main class='main main-4'>
+
+    <input type="radio" id="img4-1" name="img-4" checked="checked">
+    <label class="demo" for="img4-1">1</label>
+
+    <input type="radio" id="img4-2" name="img-4">
+    <label class="demo" for="img4-2">2</label>
+
+    <input type="radio" id="img4-3" name="img-4">
+    <label class="demo" for="img4-3">3</label>
+
+    <input type="radio" id="img4-4" name="img-4">
+    <label class="demo" for="img4-4">4</label>
+
+    <div class="box box--1">
+      <div class="box1">
+        <div class="box1-1"></div>
+      </div>
+      <div class="box2">
+        <div class="box2-1"></div>
+      </div>
+      <div class="box3">
+        <div class="box3-1"></div>
+      </div>
+      <div class="box4">
+        <div class="box4-1"></div>
+      </div>
+    </div>
+
+    <div class="box box--2">
+      <div class="box1">
+        <div class="box1-1"></div>
+      </div>
+      <div class="box2">
+        <div class="box2-1"></div>
+      </div>
+      <div class="box3">
+        <div class="box3-1"></div>
+      </div>
+      <div class="box4">
+        <div class="box4-1"></div>
+      </div>
+    </div>
+
+    <div class="box box--3">
+      <div class="box1">
+        <div class="box1-1"></div>
+      </div>
+      <div class="box2">
+        <div class="box2-1"></div>
+      </div>
+      <div class="box3">
+        <div class="box3-1"></div>
+      </div>
+      <div class="box4">
+        <div class="box4-1"></div>
+      </div>
+    </div>
+
+    <div class="box box--4">
+      <div class="box1">
+        <div class="box1-1"></div>
+      </div>
+      <div class="box2">
+        <div class="box2-1"></div>
+      </div>
+      <div class="box3">
+        <div class="box3-1"></div>
+      </div>
+      <div class="box4">
+        <div class="box4-1"></div>
+      </div>
+    </div>
+
+    <div class="text text1">
+      <div>Serendipity</div>
+      <p>what you've been dreaming of</p>
+    </div>
+    <div class="text text2">
+      <div>Adventure</div>
+      <p>Where the fun begins</p>
+    </div>
+    <div class="text text3">
+      <div>Nature</div>
+      <p>Unforgettable eperiences</p>
+    </div>
+    <div class="text text4">
+      <div>Serenity</div>
+      <p>When silence touches nature</p>
+    </div>
+
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
