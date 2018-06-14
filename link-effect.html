@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <title>link Effects</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
+</head>
+<body>
+  
+<style>
+  
+
+
+body{
+  margin:0;
+  padding:0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+
+
+header{
+  padding:2em;
+  margin:auto;
+  text-align:center;
+  background-color: #f8f8f8;
+}
+
+
+header h1{
+  font-size:2.5em;
+  font-weight: 200;
+  color:#999;
+}
+
+header h1 p{
+  font-size:0.6em;
+  font-weight: 200;
+  color:#ccc;
+}
+
+header > p{
+  font-size:1em;
+  font-weight: 200;
+  color:#666;
+}
+
+section a{
+  text-decoration:none;
+  color:#fff;
+}
+
+
+nav a:hover,
+nav a:focus {
+  outline: none;
+}
+
+
+
+section {
+  padding:10em 3em;
+}
+
+section nav{
+  text-align:center;
+
+}
+
+section nav a{
+  font-size:1.4em;
+  text-transform:uppercase;
+  margin:.8em 1.5em;
+  display:inline-block;
+  font-weight:400;
+}
+
+
+/*effects-1*/
+.color-1{
+  background-color: #435a6b;
+}
+
+.effect-1 a::before,
+.effect-1 a::after{
+  display: inline-block;
+  color:transparent;
+  transition: .5s;
+  transform: translateX(0px);
+}
+.effect-1 a::before{
+  content:'[';
+}
+.effect-1 a::after{
+  content:']';
+}
+
+.effect-1 a:hover::before{
+  transform: translateX(-12px);
+  color:#fff;
+}
+.effect-1 a:hover::after{
+  transform: translateX(12px);
+  color:#fff;
+}
+
+
+
+
+
+/*effects-2*/
+.color-2{
+  background-color: #0e83cd;
+}
+
+.effect-2 a{
+line-height: 40px;
+perspective: 800px;
+}
+.effect-2 a span{
+  display: inline-block;
+  position: relative;
+  padding: 0 14px;
+  background: #2195de;
+  height: 40px;
+  line-height: 40px;
+  transform-style: preserve-3d;
+  transition: transform 0.3s;
+  transform-origin: 50% 0px;
+}
+
+.effect-2 span::before{
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform:rotateX(-90deg);
+  background-color: #1073b2;
+  transform-origin: top;
+  position: absolute;
+  transition: background-color 0.3s;
+  top:100%;
+  left: 0;
+}
+
+.effect-2 a:nth-child(1) span::before{
+    content:'Ratatouille';
+}
+
+.effect-2 a:nth-child(2) span::before{
+    content:'Lassitude';
+}
+
+.effect-2 a:nth-child(3) span::before{
+    content:'Murmurous';
+}
+
+.effect-2 a:nth-child(4) span::before{
+    content:'Palimpsest';
+}
+
+.effect-2 a:nth-child(5) span::before{
+    content:'Assemblage';
+}
+
+
+.effect-2 a:hover span{
+  transform:rotateX(90deg);
+}
+.effect-2 a:hover span::before{
+  background-color: #2195de;
+}
+
+
+
+
+
+
+
+/*effects-3*/
+.color-3{
+  background: #f19f0f;
+}
+
+.effect-3 a{
+  position: relative;
+}
+
+.effect-3 a::after{
+  content:' ';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top:0;
+  border-bottom:4px solid #0003;
+  transform:translateY(13px);
+  opacity:0;
+  transition:transform .3s, opacity .3s;
+}
+.effect-3 a:hover::after{
+  transform:translateY(3px);
+  opacity:1;
+}
+
+
+
+
+/*effects-4*/
+.color-4{
+  background: #3fa46a;
+}
+
+.effect-4 a{
+  position: relative;
+}
+
+.effect-4 a::after{
+  content:' ';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top:0;
+  border-bottom:5px solid #fff;
+  transform:translateY(3px);
+  opacity:0;
+  transition:transform .3s, opacity .3s;
+}
+.effect-4 a:hover::after{
+  transform:translateY(10px);
+  opacity:1;
+}
+
+
+
+
+
+
+/*effects-5*/
+.color-5{
+  background: #cd4436;
+}
+
+.effect-5 a{
+  overflow:hidden;
+}
+.effect-5 span{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  transform:translateY(0px);
+  transition:transform .3s;
+}
+.effect-5 span::after{
+  content:attr(ef-content);
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top:100%;
+  font-weight:800;
+}
+.effect-5 a:hover > span{
+  transform:translateY(-100%);
+}
+
+
+
+
+/*effects-6*/
+.color-6{
+  background: #0e83cd;
+}
+
+.effect-6 a{
+  position: relative;
+}
+
+.effect-6 a::after{
+  content:' ';
+  display: block;
+  position: absolute;
+/*  margin-left: -10px;*/
+  /*width: 120%;*/
+  height: 0%;
+  top:0;
+  left:-10px;
+  right:-10px;
+  margin:auto;
+  border-left:2px solid #fff;
+  border-bottom:2px solid #fff;
+  transition:height .3s;
+  transform:translateY(-7px);
+}
+.effect-6 a:hover::after{
+  height: 150%;
+
+}
+
+
+
+
+
+
+
+
+/*effects-7*/
+.color-7{
+  background: #ecf0f1;
+}
+
+.effect-7 a{
+  color: #566473;
+  font-weight:600;
+  position: relative;
+}
+
+.effect-7 a::before,
+.effect-7 a::after{
+  content:' ';
+  display: block;
+  position: absolute;
+  height: 0;
+  left:-0px;
+  right:-0px;
+  bottom:0;
+  border-bottom:2px solid #566473;
+  transition:height .3s;
+}
+.effect-7 a::before{
+  opacity: 0;
+  transition:transform .3s, left .3s, right .3s,opacity .3s;
+}
+.effect-7 a::after{
+  transform:translateY(7px);
+  transition: left .3s, right .3s;
+}
+.effect-7 a:hover::before{
+  transform:translateY(-34px);
+  left:-10px;
+  right:-10px;
+  opacity:1;
+}
+.effect-7 a:hover::after{
+  left:-10px;
+  right:-10px;
+}
+
+
+
+
+
+
+
+
+
+
+/*effects-8*/
+.color-8{
+  background: #ecf0f1;
+}
+
+.effect-8 a{
+  position: relative;
+}
+
+.effect-8 a::before,
+.effect-8 a::after{
+  content:' ';
+  display: block;
+  position: absolute;
+  top:-10px;
+  right:-15px;
+  bottom:-10px;
+  left:-15px;
+  transition:transform .3s,opacity .3s;
+}
+.effect-8 a::before{
+  opacity: 1;
+  border: 3px solid #354856;
+  transform:translateX(0px) translateY(0px);
+}
+.effect-8 a::after{
+  opacity:0;
+  border: 3px solid #fff;
+  transform:translateX(8px) translateY(-8px);
+}
+.effect-8 a:hover::before{
+  transform:translateX(-8px) translateY(8px);
+  opacity:0;
+}
+.effect-8 a:hover::after{
+  opacity:1;
+  transform:translateX(0px) translateY(0px);
+}
+
+
+
+
+
+
+
+
+
+/*effects-9*/
+.color-9{
+  background: #9e487f;
+}
+
+.effect-9 a{
+  /*overflow:hidden;*/
+  position: relative;
+  text-align: center;
+  padding:10px 0 15px 0;
+}
+.effect-9 a::before{
+  content:attr(ef-content);
+  display: block;
+  position: absolute;
+  left:-10px;
+  right:-10px;
+  top:-10%;
+  bottom:-31px;
+  font-weight:200;
+  color:#0008;
+  font-size: 1rem;
+  text-transform:capitalize;
+  font-family: 'Great Vibes', cursive;
+  padding-top:50px;
+  box-sizing: border-box;
+  transform:translateY(-20px);
+  opacity:0;
+  transition:opacity .3s, transform .3s;
+}
+.effect-9 a::after{
+  content:'';
+  display: block;
+  position: absolute;
+  left:-10px;
+  right:-10px;
+  top:-10%;
+  bottom:-20px;
+  font-weight:200;
+  color:#0008;
+  font-size: 1rem;
+  text-transform:capitalize;
+  font-family: 'Great Vibes', cursive;
+  border-top:1px solid #fff5;
+  padding-top:50px;
+  border-bottom:1px solid #fff0;
+  box-sizing: border-box;
+  transition:border .3s, bottom .3s;
+}
+.effect-9 a:hover::before{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.effect-9 a:hover::after{
+  border-top:5px solid #fff;
+  border-bottom:1px solid #fff;
+  bottom:-31px;
+}
+
+
+
+
+
+
+
+
+
+
+/*effects-10*/
+.color-10{
+  background: #16a085;
+}
+
+.effect-10 a{
+  overflow:hidden;
+  position: relative;
+}
+.effect-10 span{
+  display: inline-block;
+  transform:translateX(0px);
+  transition:transform .3s;
+  background-color: #0003;
+  font-weight:200;
+  padding:10px 15px;
+}
+.effect-10 span::after{
+  content:attr(ef-content);
+  display: block;
+  position: absolute;
+  padding: 10px 15px;
+  top:0;
+  right:100%;
+  font-weight:200;
+  background-color: #fff;
+  color:#16a085;
+}
+.effect-10 a:hover > span{
+  transform:translateX(100%);
+}
+
+
+
+
+
+
+
+/*effects-11*/
+.color-11{
+  background: #0e83cd;
+}
+
+.effect-11 a{
+  position: relative;
+  text-align: center;
+  padding:10px 0 15px 0;
+  border-top:2px solid;
+  color:#0972b4;
+}
+.effect-11 a::before{
+  content: attr(ef-content);
+  position: absolute;
+  color:#fff;
+  max-width: 0%;;
+  overflow:hidden;
+  transition:.3s;
+  border-bottom:2px solid;
+  padding:10px 0 15px 0;
+  top:0;
+}
+.effect-11 a:hover::before{
+  max-width: 100%;
+}
+
+
+
+
+
+
+
+
+
+/*effects-12*/
+.color-12{
+  background: #cd4436;
+}
+
+.effect-12 a{
+  position: relative;
+  text-align: center;
+  color:#fff;
+}
+.effect-12 a::after,
+.effect-12 a::before{
+  content: ' ';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top:0;
+  bottom:0;
+  margin:auto;
+  border-radius:50%;
+  opacity: 0;
+}
+.effect-12 a::before{
+  width: 100px;
+  height: 100px;
+  transform:scale(.9);
+  border:2px solid #0003;
+  transition:transform .1s,opacity .1s ;
+}
+.effect-12 a::after{
+  width: 75px;
+  height: 75px;
+  border:8px solid #0003;
+  transform:scale(.8);
+  transition:transform .3s,opacity .3s ;
+}
+.effect-12 a:hover::after,
+.effect-12 a:hover::before{
+  transform:scale(1);
+  opacity: 1;
+  transition:transform .3s,opacity .3s;
+}
+.effect-12 a:hover::before{
+  transition:transform .3s .2s,opacity .3s .2s;
+}
+.effect-12 a:hover::after{
+  transition:transform .3s,opacity .3s;
+}
+
+
+
+
+
+
+
+
+
+
+/*effects-13*/
+.effect-13 a{
+  position: relative;
+  text-align: center;
+  color:#fff;
+  padding: 8px;
+}
+.effect-13 a::after,
+.effect-13 a::before{
+  content: ' ';
+  position: absolute;
+  top:0;
+  bottom:0;
+  height: 100%;
+  width: 2px;
+  background-color: #fff;
+  transition:transform .3s,opacity .3s, top .3s, left .3s;
+  opacity: .2;
+}
+.effect-13 a::before{
+left: -10px ;
+}
+.effect-13 a::after{
+right:-10px;
+}
+.effect-13 a:hover::after,
+.effect-13 a:hover::before{
+  transform:scale(1);
+  opacity: 1;
+  left: 50% ;
+  transform:rotate(-90deg);
+}
+.effect-13 a:hover::before{
+  top:-50%;
+}
+.effect-13 a:hover::after{
+  top:50%;
+}
+
+
+
+
+
+
+
+
+
+/*effects-14*/
+.color-14{
+  background: #2ac56c;
+}
+
+.effect-14 a{
+  font-weight: 800;
+}
+.effect-14 span{
+  position: relative;
+  color:#0003;
+}
+.effect-14 span::before{
+  content:attr(ef-content);
+  color:#fff;
+  position: absolute;
+  z-index: 1;
+  transform:scale(1) ;
+  transition:.3s;
+  opacity: 1;
+}
+
+.effect-14 span:hover::before{
+  transform:scale(.9);
+  opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+/*effects-15*/
+.color-15{
+  background: #aab7b7;
+}
+
+.effect-15 a{
+  font-weight: 800;
+  color: #6f8686;
+  transform-style: preserve-3d;
+  perspective:300;
+}
+
+.effect-15 a::before{
+  content:attr(ef-content);
+  color:#fff;
+  position: absolute;
+  z-index: 1;
+  transform:scale(1.1) rotateY(5deg) rotateZ(5deg) rotateX(10deg) translateX(15px) translateY(-8px);
+  transform-origin:right top;
+  transition:.3s;
+  opacity: 0;
+}
+
+.effect-15 a:hover::before{
+  transform:scale(1) rotateY(0deg) rotateZ(0deg) rotateX(0deg) translateX(0px);
+  opacity: 1;
+}
+
+
+
+
+
+/*effects-16*/
+.color-16{
+  background: #0e83cd;
+}
+
+.effect-16 a{
+  font-weight: 400;
+  color: #10649b;
+  padding-bottom:8px;
+  position: relative;
+}
+
+.effect-16 a::before{
+  content:attr(ef-content);
+  color:#fff;
+  position: absolute;
+  z-index: 1;
+  padding-bottom:10px;
+  transition:.3s;
+  opacity: 1;
+}
+.effect-16 a::after{
+  content:'';
+  color:#fff;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  bottom:0;
+  left: 0;
+  opacity: 0;
+  transition:.3s;
+}
+.effect-16 a:hover::before{
+  opacity: 0;
+  transform:translateY(-2px);
+}
+.effect-16 a:hover::after{
+  opacity: 1;
+  transform:translateY(-2px);
+}
+
+
+
+
+
+
+/*effects-17*/
+.color-17{
+  background: #f19f0f;
+}
+
+.effect-17 a{
+  font-weight: 800;
+  color: #b4770d;
+  padding:8px;
+  position: relative;
+  z-index: 2;
+  transition:color .3s;
+}
+.effect-17 a::before,
+.effect-17 a::after{
+ content:'';
+ color:#fff;
+ position: absolute;
+ width: 100%;
+ height: 2px;
+ background-color: #b4770d; 
+ left: 0;
+ opacity: 1;
+ transition:transform .3s;
+ z-index: -1;
+}
+.effect-17 a::before{
+  top:0;
+}
+.effect-17 a::after{
+  bottom:0;
+}
+.effect-17 a:hover{
+  color:#fff;
+}
+.effect-17 a:hover::before{
+  transform:rotate(45deg);
+  top:50%;
+}
+.effect-17 a:hover::after{
+  transform:rotate(-45deg);
+  top:50%;
+}
+
+
+
+
+
+
+/*effects-18*/
+.color-18{
+    background: #cd4436;
+}
+.effect-18 a{
+  position: relative;
+  perspective:800px;
+  width: 200px;
+  margin:15px;
+}
+.effect-18 span{
+  font-weight: 300;
+  transform-style:preserve-3d;
+  width: 100%;
+  color: #fff;
+  padding:8px 0;
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+  background: #e35041;
+  transition:transform .4s, background .4s;
+  transform-origin: 50% 50% -100px;
+}
+.effect-18 span::before{
+  content:attr(ef-content);
+  background: #b53a2d;
+  padding:8px 0;
+  width: 100%;
+  position: absolute;
+  top:0;
+  left:100%;
+  transform:rotateY(90deg);
+  transform-origin:left;
+  transition: background .4s;
+}
+.effect-18 span:hover {
+  transform: rotateY(-90deg) rotateX(0deg);
+  background: #b53a2d;
+}
+.effect-18 span:hover::before{
+  background: #e35041;
+}
+
+
+
+
+
+
+
+/*effects-19*/
+.effect-19 a{
+  position: relative;
+  perspective:800px;
+}
+.effect-19 span{
+  font-weight: 300;
+  transform-style:preserve-3d;
+  color: #fff;
+  padding:8px;
+  position: relative;
+  display: inline-block;
+  background: #587285;
+  box-shadow: inset 0 3px #2f4351;
+  /*transform: rotateY(-45deg);*/
+}
+.effect-19 span::before{
+  content:attr(ef-content);
+  background: #fff;
+  color:#587285;
+  padding: 8px;
+  position: absolute;
+  top:0;
+  left:0;
+  transform:rotateX(270deg);
+  transform-origin:top;
+  opacity:0;
+  transition: transform .6s, opacity .6s steps(1, end);
+}
+
+.effect-19 span:hover::before{
+  transform:rotateX(0deg);
+  transition: transform .6s, opacity .6s steps(1, start);
+  opacity:1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*effects-20*/
+.color-20{
+  background: #3fa46a;
+}
+
+.effect-20 a{
+  font-weight: 800;
+  color: #237546;
+  padding:8px;
+  position: relative;
+  z-index: 2;
+  transition:color .3s;
+}
+.effect-20 a::before,
+.effect-20 a::after{
+ content:'';
+ color:#fff;
+ position: absolute;
+ width: 100%;
+ height: 2px;
+ background-color: #fff; 
+ left: 0;
+ opacity: 0;
+
+ transition: .3s;
+ z-index: -1;
+}
+.effect-20 a::before{
+  top:0;
+  transform: translateY(-10px);
+}
+.effect-20 a::after{
+  bottom:0;
+  transform: translateY(10px);
+}
+.effect-20 a:hover{
+  color:#fff;
+}
+.effect-20 a:hover::before{
+  transform: translateY(0px);
+   opacity: 1;
+}
+.effect-20 a:hover::after{
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+/*effects-21*/
+.color-21{
+  background: #f19f0f;
+}
+
+.effect-21 a{
+  font-weight: 300;
+  color: #fff;
+  padding:8px;
+  position: relative;
+  z-index: 2;
+  transition:color .4s;
+}
+.effect-21 a::before{
+  content: '';
+  position:absolute;
+  width: 5px;
+  height: 5px;
+  background-color: #fff;
+  border-radius: 50%;
+  left: 0;
+  right: 0;
+  margin:auto;
+  top:95%;
+  filter: drop-shadow(0px 0px 0px #fff) drop-shadow(0px 0px 0px #fff); 
+  transition:filter .4s, opacity .4s;
+  opacity: 0;
+}
+
+.effect-21 a:hover{
+  color: #ba7700;
+}
+.effect-21 a:hover::before{
+  filter: drop-shadow(10px 0px 0px #fff) drop-shadow(-10px 0px 0px #fff); 
+  opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+
+
+
+
+<header>
+  <h1>Creative Link Effects
+  <p>Subtle and modern effects for links or menu items</p>
+  </h1>
+  <p>Please note that not every browser supports transitions on pseudo elements.</p>
+</header>
+<!-- effects-1 -->
+<section class="color-1">
+  <nav class='effect-1'>
+    <a href="">Wafture</a>
+    <a href="">SUMPTUOUS</a>
+    <a href="">SCINTILLA</a>
+    <a href="">PROPINQUITY</a>
+    <a href="">HARBINGER</a>
+  </nav>
+</section>
+<!-- effects-2 -->
+<section class="color-2">
+  <nav class='effect-2'>
+    <a href=""><span>Ratatouille</span></a>
+    <a href=""><span>Lassitude</span></a>
+    <a href=""><span>Murmurous</span></a>
+    <a href=""><span>Palimpsest</span></a>
+    <a href=""><span>Assemblage</span></a>
+  </nav>
+</section>
+
+
+<!-- effects-3 -->
+<section class="color-3">
+  <nav class='effect-3'>
+    <a href="">Palimpsest</a>
+    <a href="">Ineffable</a>
+    <a href="">Lilt</a>
+    <a href="">Mellifluous</a>
+    <a href="">Serendipity</a>
+  </nav>
+</section>
+
+
+
+<!-- effects-4 -->
+<section class="color-4">
+  <nav class='effect-4'>
+    <a href="">Woebegone</a>
+    <a href="">Lassitude</a>
+    <a href="">Murmurous</a>
+    <a href="">Palimpsest</a>
+    <a href="">Assemblage</a>
+  </nav>
+</section>
+
+
+<!-- effects-5 -->
+<section class="color-5">
+  <nav class='effect-5'>
+    <a href=""><span ef-content="Seraglio">Seraglio</span></a>
+    <a href=""><span ef-content="Sumptuous">Sumptuous</span></a>
+    <a href=""><span ef-content="Scintilla">Scintilla</span></a>
+    <a href=""><span ef-content="Palimpsest">Palimpsest</span></a>
+    <a href=""><span ef-content="Assemblage">Assemblage</span></a>
+  </nav>
+</section>
+
+<!-- effects-6 -->
+<section class="color-6">
+  <nav class='effect-6'>
+    <a href="">Umbrella</a>
+    <a href="">Ineffable</a>
+    <a href="">Lilt</a>
+    <a href="">Mellifluous</a>
+    <a href="">Serendipity</a>
+  </nav>
+</section>
+
+
+
+
+<!-- effects-7 -->
+<section class="color-7">
+  <nav class='effect-7'>
+    <a href="">Umbrella</a>
+    <a href="">Ineffable</a>
+    <a href="">Lilt</a>
+    <a href="">Mellifluous</a>
+    <a href="">Serendipity</a>
+  </nav>
+</section>
+
+
+
+
+
+<!-- effects-8 -->
+<section class="color-1">
+  <nav class='effect-8'>
+    <a href="">Imbue</a>
+    <a href="">Sumptuous</a>
+    <a href="">Scintilla</a>
+    <a href="">Propinquity</a>
+    <a href="">Harbinger</a>
+  </nav>
+</section>
+
+
+
+
+
+
+
+
+<!-- effects-9 -->
+<section class="color-9">
+  <nav class='effect-9'>
+    <a href="" ef-content="Sumptuous Heart">Gossamer</a>
+    <a href="" ef-content="Sumptuous">Sumptuous</a>
+    <a href="" ef-content="Scintilla">Scintilla</a>
+    <a href="" ef-content="Palimpsest">Palimpsest</a>
+    <a href="" ef-content="Assemblage">Assemblage</a>
+  </nav>
+</section>
+
+
+
+
+
+
+
+
+
+<!-- effects-10 -->
+<section class="color-10">
+  <nav class='effect-10'>
+    <a href=""><span ef-content="Seraglio">Seraglio</span></a>
+    <a href=""><span ef-content="Sumptuous">Sumptuous</span></a>
+    <a href=""><span ef-content="Scintilla">Scintilla</span></a>
+    <a href=""><span ef-content="Palimpsest">Palimpsest</span></a>
+    <a href=""><span ef-content="Assemblage">Assemblage</span></a>
+  </nav>
+</section>
+
+
+
+
+
+
+
+
+<!-- effects-11 -->
+<section class="color-11">
+  <nav class='effect-11'>
+    <a href="" ef-content="Desultory">Desultory</a>
+    <a href="" ef-content="Sumptuous">Sumptuous</a>
+    <a href="" ef-content="Scintilla">Scintilla</a>
+    <a href="" ef-content="Propinquity">Propinquity</a>
+    <a href="" ef-content="Harbinger">Harbinger</a>
+  </nav>
+</section>
+
+
+
+
+
+
+
+<!-- effects-12 -->
+<section class="color-12">
+  <nav class='effect-12'>
+    <a href="">Chatoyant</a>
+    <a href="">Ineffable</a>
+    <a href="">Efficiency</a>
+    <a href="">Mellifluous</a>
+    <a href="">Serendipity</a>
+  </nav>
+</section>
+
+
+
+<!-- effects-13 -->
+<section class="color-1">
+  <nav class='effect-13'>
+    <a href="">Ailurophile</a>
+    <a href="">Sumptuous</a>
+    <a href="">Scintilla</a>
+    <a href="">Propinquity</a>
+    <a href="">Harbinger</a>
+  </nav>
+</section>
+
+
+
+
+
+<!-- effects-14 -->
+<section class="color-14">
+  <nav class='effect-14'>
+    <a href=""><span ef-content="Desultory">Desultory</span></a>
+    <a href=""><span ef-content="Sumptuous">Sumptuous</span></a>
+    <a href=""><span ef-content="Scintilla">Scintilla</span></a>
+    <a href=""><span ef-content="Propinquity">Propinquity</span></a>
+    <a href=""><span ef-content="Harbinger">Harbinger</span></a>
+  </nav>
+</section>
+
+
+
+
+<!-- effects-15 -->
+<section class="color-15">
+  <nav class='effect-15'>
+    <a href="" ef-content="Desultory">Desultory</a>
+    <a href="" ef-content="Sumptuous">Sumptuous</a>
+    <a href="" ef-content="Scintilla">Scintilla</a>
+    <a href="" ef-content="Propinquity">Propinquity</a>
+    <a href="" ef-content="Harbinger">Harbinger</a>
+  </nav>
+</section>
+
+
+
+<!-- effects-16 -->
+<section class="color-16">
+  <nav class='effect-16'>
+    <a href="" ef-content="Languor">Languor</a>
+    <a href="" ef-content="Murmurous">Murmurous</a>
+    <a href="" ef-content="Lassitude">Lassitude</a>
+    <a href="" ef-content="Chatoyant">Chatoyant</a>
+    <a href="" ef-content="Palimpsest">Palimpsest</a>
+  </nav>
+</section>
+
+
+
+
+
+
+<!-- effects-17 -->
+<section class="color-17">
+  <nav class='effect-17'>
+    <a href="" ef-content="Desultory">Desultory</a>
+    <a href="" ef-content="Sumptuous">Sumptuous</a>
+    <a href="" ef-content="Scintilla">Scintilla</a>
+    <a href="" ef-content="Propinquity">Propinquity</a>
+    <a href="" ef-content="Harbinger">Harbinger</a>
+  </nav>
+</section>
+
+
+
+
+
+<!-- effects-18 -->
+<section class="color-18">
+  <nav class='effect-18'>
+    <a href=""><span ef-content="Ratatouille">Ratatouille</span></a>
+    <a href=""><span ef-content="Lassitude">Lassitude</span></a>
+    <a href=""><span ef-content="Murmurous">Murmurous</span></a>
+    <a href=""><span ef-content="Palimpsest">Palimpsest</span></a>
+    <a href=""><span ef-content="Assemblage">Assemblage</span></a>
+  </nav>
+</section>
+
+
+
+<!-- effects-19 -->
+<section class="color-1">
+  <nav class='effect-19'>
+    <a href=""><span ef-content="Beleaguer">Beleaguer</span></a>
+    <a href=""><span ef-content="Scintilla">Scintilla</span></a>
+    <a href=""><span ef-content="Chatoyant">Chatoyant</span></a>
+    <a href=""><span ef-content="Palimpsest">Palimpsest</span></a>
+    <a href=""><span ef-content="Languor">Languor</span></a>
+  </nav>
+</section>
+
+
+<!-- effects-20 -->
+<section class="color-20">
+  <nav class='effect-20'>
+    <a href="" ef-content="Desultory">Desultory</a>
+    <a href="" ef-content="Sumptuous">Sumptuous</a>
+    <a href="" ef-content="Scintilla">Scintilla</a>
+    <a href="" ef-content="Propinquity">Propinquity</a>
+    <a href="" ef-content="Harbinger">Harbinger</a>
+  </nav>
+</section>
+
+<!-- effects-21 -->
+<section class="color-21">
+  <nav class='effect-21'>
+    <a href="" ef-content="Desultory">Desultory</a>
+    <a href="" ef-content="Sumptuous">Sumptuous</a>
+    <a href="" ef-content="Scintilla">Scintilla</a>
+    <a href="" ef-content="Propinquity">Propinquity</a>
+    <a href="" ef-content="Harbinger">Harbinger</a>
+  </nav>
+</section>
+
+
+
+
+</body>
+</html>
