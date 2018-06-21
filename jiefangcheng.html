@@ -1,0 +1,98 @@
+<script type="text/javascript">
+  
+var alter = function(a){
+  document.write(a + '<br>')
+}
+
+//一元二次方程
+
+
+alter('一元二次方程:')
+
+var a = prompt('输入一元二次方程a:')
+var b = prompt('输入一元二次方程b:')
+var c = prompt('输入一元二次方程c:')
+var delta = b * b - 4 * a * c
+var x1 = ( -b + Math.sqrt( delta ) ) / ( 2 * a )
+var x2 = ( -b - Math.sqrt( delta ) ) / ( 2 * a )
+var o = -b / (2 * a)
+alter('a=' + a)
+alter('b=' + b)
+alter('c=' + c)
+if (delta == 0) {
+  alter('两个相等的实数根')
+  alter('x的相同根是=' + x1)
+}
+else if(delta > 0){
+  alter('两个不同的实数根')
+  alter('x1=' + x1)
+  alter('x2=' + x2)
+}else if (delta < 0){
+  var x = Math.sqrt( -delta ) / ( 2 * a )
+  alter('两个不同的复数根')
+  alter('x1=' + o + '+' + (x + 'i'))
+  alter('x2=' + o + '- '+ (x + 'i'))
+}
+
+
+
+
+//二元一次方程
+alter('<br>' + '二元一次方程:')
+var a1 = prompt('二元一次方程a1:')
+var b1 = prompt('二元一次方程b1:')
+var c1 = prompt('二元一次方程c1:')
+var a2 = prompt('二元一次方程a2:')
+var b2 = prompt('二元一次方程b2:')
+var c2 = prompt('二元一次方程c2:')
+
+alter('a1=' + a1)
+alter('b1=' + b1)
+alter('c1=' + c1)
+alter('a2=' + a2)
+alter('b2=' + b2)
+alter('c2=' + c2)
+
+if ((b1 * a2 - b2 * a1) == 0 && (c1 * a2 - c2 * a1) == 0) {
+  alter('方程有无数解')
+}else if (((b1 * a2 - b2 * a1) == 0 && (c1 * a2 - c2 * a1) !== 0) || ((b1 * a2 - b2 * a1) !== 0 && (c1 * a2 - c2 * a1) == 0)){
+  alter('无解')
+}else {
+  var x = (b1 * c2 - b2 * c1) / (b1 * a2 - b2 * a1);
+  var y = (c1 * a2 - c2 * a1) / (b1 * a2 - b2 * a1);
+  alter('唯一解')
+  alter('x=' + x)
+  alter('y=' + y)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
