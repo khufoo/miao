@@ -336,6 +336,303 @@
 
 
 
+<!-- +++++++++104+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+
+<!-- 01:判断数正负------------------------------------------------------------ -->
+<script id="ch0104/01" type="text/javascript">
+  var n = +prompt('n')
+  if (n > 0){
+    console.log('positive')
+  }else if (n == 0) {
+    console.log('zero')
+  }else {
+    console.log('negative')
+  }
+</script>
+
+
+
+<!-- 02:输出绝对值 ------------------------------------------------------------ -->
+<script id="ch0104/02" type="text/javascript">
+  var n = +prompt('n')
+  if (n >= 0){
+    console.log(n)
+  }else {
+    console.log(-n)
+  }
+</script>
+
+
+
+<!-- 03:奇偶数判断 ------------------------------------------------------------ -->
+<script id="ch0104/03" type="text/javascript">
+  var n = +prompt('n')
+  if (n % 2 == 0){
+    console.log('odd')
+  }else {
+    console.log('even')
+  }
+</script>
+
+
+
+<!-- 04:奇偶ASCII值判断 ------------------------------------------------------------ -->
+<script id="ch0104/04" type="text/javascript">
+  var n = prompt('n')
+  if (n.charCodeAt() % 2 === 0){
+    console.log('NO')
+  }else {
+    console.log('YES')
+  }
+</script>
+
+
+
+
+<!--05:整数大小比较 ------------------------------------------------------------ -->
+<script id="ch0104/05" type="text/javascript">
+  var x = prompt('x')
+  var y = prompt('y')
+  if (x > y){
+    console.log('>')
+  }else if (x = y) {
+    console.log('=')
+  }else {
+    console.log('<')
+  }
+</script>
+
+
+
+
+
+<!--06:判断是否为两位数 ------------------------------------------------------------ -->
+<script id="ch0104/06" type="text/javascript">
+  var x = prompt('x')
+  if (x / 10 > 1){
+    console.log(1)
+  }else {
+    console.log(0)
+  }
+</script>
+
+
+
+
+<!--07:收集瓶盖赢大奖 ------------------------------------------------------------ -->
+<script id="ch0104/07" type="text/javascript">
+  var x = prompt('x')
+  var y = prompt('y')
+  if (x * 0.1 + y * 0.05 >= 1){
+    console.log(1)
+  }else {
+    console.log(0)
+  }
+</script>
+
+
+<!-- 08:判断一个数能否同时被3和5整除 ------------------------------------------------------------ -->
+<script id="ch0104/08" type="text/javascript">
+  var n = prompt('n')
+  if (n % 3 == 0 && n % 5 == 0){
+    console.log('YES')
+  }else {
+    console.log('NO')
+  }
+</script>
+
+
+
+<!-- 09:判断能否被3，5，7整除------------------------------------------------------------ -->
+<script id="ch0104/09" type="text/javascript">
+  var n = prompt('n')
+  if (n % 3 == 0 && n % 5 == 0 && n % 7 == 0){
+    console.log('3 5 7')
+  }else if (n % 3 == 0 && n % 5 == 0 ){
+    console.log('3 5')
+  }else if (n % 3 == 0 && n % 7 == 0 ){
+    console.log('3 7')
+  }else if (n % 5 == 0 && n % 7 == 0 ){
+    console.log('5 7')
+  }else if (n % 3 == 0){
+    console.log('3')
+  }else if (n % 5 == 0){
+    console.log('5')
+  }else if (n % 7 == 0){
+    console.log('7')
+  }
+</script>
+
+
+
+<!-- 10:有一门课不及格的学生------------------------------------------------------------ -->
+<script id="ch0104/10" type="text/javascript">
+  var a = prompt('a')
+  var b = prompt('b')
+  if (a >= 60 && b < 60) {
+    console.log(1)
+  }else if (a < 60 && b >= 60) {
+    console.log(1)
+  }else {
+    console.log(0)
+  }
+</script>
+
+
+
+
+<!-- 11:晶晶赴约会------------------------------------------------------------ -->
+<script id="ch0104/11" type="text/javascript">
+  var d = prompt('d')
+  if (d == 1 || d == 3 || d == 5){
+    console.log('NO')
+  }else {
+    console.log('YES')
+  }
+</script>
+
+
+
+
+
+
+<!-- 12:骑车与走路------------------------------------------------------------ -->
+<script id="ch0104/12" type="text/javascript">
+  var d = prompt('d')
+  if (d / 1.2 < d / 3 + 27 + 23){
+    console.log('Walk')
+  }else if (d / 1.2 === d / 3 + 27 + 23) {
+    console.log('All')
+  }else {
+    console.log('Bike')
+  }
+</script>
+
+
+
+
+
+<!-- 13:分段函数------------------------------------------------------------ -->
+<script id="ch0104/13" type="text/javascript">
+  var x = prompt('n')
+  if (x < 5 ) {
+    console.log(-x + 2.5)
+  }else if (x < 10 && x > 5) {
+    console.log( 2 - 1.5 * ( x - 3 ) * ( x - 3 ) )
+  }else {
+    console.log(x / 2 - 1.5)
+  }
+</script>
+
+
+
+<!-- 14:计算邮资------------------------------------------------------------ -->
+<script id="ch0104/13" type="text/javascript">
+  var n = prompt('n')
+  var y = prompt('y')
+  if (n <= 1000) {
+    if(y === y) {
+      console.log(8 + 5)
+    }else {
+      console.log(8)
+    }
+  }else {
+    if(y === y) {
+      console.log(Math.ceil( ( n - 1000 ) / 500 ) * 4 + 8 + 5 )
+    }else {
+      console.log(Math.ceil( ( n - 1000 ) / 500 ) * 4 + 8 )
+    }
+  }
+</script>
+
+
+
+<!-- 15:最大数输出------------------------------------------------------------ -->
+<script id="ch0104/15" type="text/javascript">
+  var a = +prompt('a')
+  var b = +prompt('b')
+  var c = +prompt('c')
+  if (a <= b) {
+    a = b
+  }
+  if (a < c) {
+    a = c
+  }
+  console.log(a)
+</script>
+
+
+
+
+
+<!-- 16:三角形判断------------------------------------------------------------ -->
+<script id="ch0104/16" type="text/javascript">
+  var a = +prompt('a')
+  var b = +prompt('b')
+  var c = +prompt('c')
+  if ( ((a + b) > c) && ((a + c ) > b) && ((b + c) > a) ) {
+  console.log('yes')
+  }else{
+  console.log('no')
+  }
+
+</script>
+
+
+
+
+<!-- 17:判断闰年------------------------------------------------------------ -->
+<script id="ch0104/17" type="text/javascript">
+  var y = +prompt('y')
+  if ( (y % 4 == 0 && y % 100 !== 0) || (y % 400 == 0) ) {
+  console.log('Y')
+  }else{
+  console.log('N')
+  }
+
+</script>
+
+
+
+
+
+<!-- 18:点和正方形的关系------------------------------------------------------------ -->
+<script id="ch0104/18" type="text/javascript">
+  var x = +prompt('x')
+  var y = +prompt('y')
+  if (x >= -1 && x <= 1) {
+    if (y >= -1 && y <= 1) {
+      console.log('yes')
+    }else{
+      console.log('no')
+    }
+  }else{
+    console.log('no')
+  }
+</script>
+
+
+
+
+
+
+<!-- 19:简单计算器------------------------------------------------------------ -->
+<script id="ch0104/19" type="text/javascript">
+  var a = +prompt('a')
+  var b = +prompt('b')
+  var x = prompt('x')
+  if(x === '+') {
+    console.log(a + b)
+  }else if (x === '-') {
+    console.log(a - b)
+  }else if (x === '*') {
+    console.log(a * b)
+  }else if (x === '/') {
+    console.log(a / b)
+  }
+</script>
 
 
 
@@ -343,21 +640,41 @@
 
 
 
+<!-- 20:求一元二次方程的根------------------------------------------------------------ -->
+<script id="ch0104/20" type="text/javascript">
+  var a = +prompt('a')
+  var b = +prompt('b')
+  var c = +prompt('c')
+  var bb = b * b
+  var a4 = 4 * a * c
+  if (bb == a4) {
+    console.log( "x1=x2=" + ( -b / ( 2 * a ) ).toFixed( 5 ) )
+  }else if (bb > a4) {
+    var x1 = (-b + Math.sqrt(b*b-4*a*c))/(2*a)
+    var x2 = (-b - Math.sqrt(b*b-4*a*c))/(2*a)
+    console.log('x1=' + x1.toFixed(5) + ';' + 'x2=' + x2.toFixed(5))
+  }else if (bb < a4) {
+    var x1 = (-b / (2*a)).toFixed(5) + '+' + (Math.sqrt(4*a*c-b*b) / (2*a)).toFixed(5) + 'i'
+    var x2 = (-b / (2*a)).toFixed(5) + '-' + (Math.sqrt(4*a*c-b*b) / (2*a)).toFixed(5) + 'i'
+    console.log('x1=' + x1 + ';' + 'x2=' + x2 )
+  }else{
+    console.log(4 * a * c)
+  }
+</script>
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
+<!-- 21:苹果和虫子2------------------------------------------------------------ -->
+<script id="ch0104/21" type="text/javascript">
+  var n = +prompt('多少个苹果')
+  var x = +prompt('几个小时吃一个')
+  var y = +prompt('过了几个小时')
+  var a = Math.floor(n - (y / x))
+  console.log(a)
+</script>
 
 
 
