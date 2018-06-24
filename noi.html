@@ -1,0 +1,989 @@
+
+<!-- +++++++++++++++++++103++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<!-- 01:A+B问题------------------------------------------------------------ -->
+<script id="ch0103/01" type="text/javascript">
+  var a = +prompt('a')
+  var b = +prompt('b')
+  console.log(a + b)
+</script>
+
+
+<!-- 02:计算(a+b)*c的值------------------------------------------------------------ -->
+<script id="ch0103/02" type="text/javascript">
+  var a = +prompt('a')
+  var b = +prompt('b')
+  var c = +prompt('c')
+  console.log((a + b) * c)
+</script>
+
+
+
+<!-- 03:计算(a+b)/c的值------------------------------------------------------------ -->
+<script id="ch0103/03" type="text/javascript">
+  var a = +prompt('a')
+  var b = +prompt('b')
+  var c = +prompt('c')
+  console.log(Math.floor((a + b) / c))
+</script>
+
+
+
+
+<!-- 04:带余除法------------------------------------------------------------ -->
+<script id="ch0103/04" type="text/javascript">
+  var a = +prompt('a')
+  var b = +prompt('b')
+  console.log(Math.floor(a / b))
+  console.log(a % b)
+</script>
+
+
+
+<!-- 05:计算分数的浮点数值------------------------------------------------------------ -->
+<script id="ch0103/05" type="text/javascript">
+  var a = +prompt('a')
+  var b = +prompt('b')
+  var m_bus_str = Math.round(a / b) + ''
+  var bus_str = Math.round(a / b * 1000000000) / 1000000000 + ''
+  while(bus_str.length <= m_bus_str.length + 9) {
+    if (m_bus_str.length === bus_str.length) {
+      bus_str += '.'
+    }
+    bus_str += '0'
+  }
+  console.log(bus_str)
+</script>
+
+
+
+
+<!-- 06:甲流疫情死亡率------------------------------------------------------------ -->
+<script id="ch0103/06" type="text/javascript">
+  var b = +prompt('确诊数')
+  var a = +prompt('死亡数')
+  var m_bus_str = Math.round(a / b * 100) + ''
+  var bus_str = Math.round(a / b * 100000) / 1000 + ''
+  while(bus_str.length <= m_bus_str.length + 3) {
+    if (m_bus_str.length === bus_str.length) {
+      bus_str += '.'
+    }
+    bus_str += '0'
+  }
+  console.log(bus_str + '%')
+</script>
+
+
+
+
+<!-- 07:计算多项式的值------------------------------------------------------------ -->
+<script id="ch0103/07" type="text/javascript">
+  var x = +prompt('x')
+  var a = +prompt('死亡数')
+  var b = +prompt('b')
+  var c = +prompt('c')
+  var d = +prompt('d')
+  var m_bus_str = Math.round(a * x * x * x + b * x * x + c * x + d) + ''
+  var bus_str = Math.round((a * x * x * x + b * x * x + c * x + d) * 10000000) / 10000000 + ''
+  while(bus_str.length <= m_bus_str.length + 7) {
+    if (m_bus_str.length === bus_str.length) {
+      bus_str += '.'
+    }
+    bus_str += '0'
+  }
+  console.log(bus_str)
+</script>
+
+
+
+<!-- 08:温度表达转化------------------------------------------------------------ -->
+<script id="ch0103/08" type="text/javascript">
+  var f = +prompt('f:f >= -459.67')
+  var m_bus_str = Math.round(5 * ( f - 32 ) / 9 ) + ''
+  var bus_str = Math.round((5 * ( f - 32 ) / 9 ) * 100000) / 100000 + ''
+  while(bus_str.length <= m_bus_str.length + 5) {
+    if (m_bus_str.length === bus_str.length) {
+      bus_str += '.'
+    }
+    bus_str += '0'
+  }
+  console.log(bus_str)
+</script>
+
+
+
+<!-- 09:与圆相关的计算------------------------------------------------------------ -->
+<script id="ch0103/09" type="text/javascript">
+  var r = +prompt('0 < r <= 10,000')
+  var m_d_str = Math.round(2 * r) + ''
+  var d_str = Math.round((2 * r) * 10000) / 10000 + ''
+  while(d_str.length <= m_d_str.length + 4) {
+    if (m_d_str.length === d_str.length) {
+      d_str += '.'
+    }
+    d_str += '0'
+  }  
+  console.log(d_str)
+
+  var m_zc_str = Math.round(2 * r * 3.14159) + ''
+  var zc_str = Math.round((2 * r * 3.14159) * 10000) / 10000 + ''
+  while(zc_str.length <= m_zc_str.length + 4) {
+    if (m_zc_str.length === zc_str.length) {
+      zc_str += '.'
+    }
+    zc_str += '0'
+  }  
+  console.log(zc_str)
+
+  var m_mj_str = Math.round(r * r * 3.14159) + ''
+  var mj_str = Math.round((r * r * 3.14159) * 10000) / 10000 + ''
+  while(mj_str.length <= m_mj_str.length + 4) {
+    if (m_mj_str.length === mj_str.length) {
+      mj_str += '.'
+    }
+    mj_str += '0'
+  }  
+  console.log(mj_str)
+</script>
+
+
+
+
+<!-- 10:计算并联电阻的阻值------------------------------------------------------------ -->
+<script id="ch0103/10" type="text/javascript">
+  var r1 = +prompt('0 < r <= 10,000')
+  var r2 = +prompt('0 < r <= 10,000')
+  var m_d_str = Math.round(1 / (1 / r1 + 1 / r2)) + ''
+  var d_str = Math.round((1 / (1 / r1 + 1 / r2)) * 100) / 100 + ''
+  while(d_str.length <= m_d_str.length + 2) {
+    if (m_d_str.length === d_str.length) {
+      d_str += '.'
+    }
+    d_str += '0'
+  }  
+  console.log(d_str)
+
+</script>
+
+
+
+<!-- 11:计算浮点数相除的余数------------------------------------------------------------ -->
+<script id="ch0103/11" type="text/javascript">
+  var a = +prompt('0 < r <= 10,000')
+  var b = +prompt('0 < r <= 10,000')
+  var i = 1;
+  while(true) {
+    if (i * b >= a){
+      break
+    }
+    i ++
+  }
+  console.log(a - ( i - 1 ) * b)
+</script>
+
+
+
+<!-- 12:计算球的体积------------------------------------------------------------ -->
+<script id="ch0103/12" type="text/javascript">
+  var r = +prompt('半径')
+  var m_d_str = Math.round(4 / 3 * 3.14 * ( r * r * r )) + ''
+  var d_str = Math.round(4 / 3 * 3.14 * ( r * r * r ) * 100) / 100 + ''
+  while(d_str.length <= m_d_str.length + 2) {
+    if (m_d_str.length === d_str.length) {
+      d_str += '.'
+    }
+    d_str += '0'
+  }  
+  console.log(d_str)
+</script>
+
+
+
+
+
+<!-- 13:反向输出一个三位数------------------------------------------------------------ -->
+<script id="ch0103/13" type="text/javascript">
+  var n = +prompt('输入3位数')
+  var a = Math.floor(n / 100) + ''
+  var b = Math.floor(( n % 100 ) / 10) + ''
+  var c = n % 10 + ''
+  console.log(c + b + a)
+</script>
+
+
+
+
+<!-- 14:大象喝水------------------------------------------------------------ -->
+<script id="ch0103/14" type="text/javascript">
+  var h = +prompt('深度')
+  var r = +prompt('半径')
+  var i = 1
+  while (true) {
+    if (r * r * 3.14159 * h * i > 20000){
+      break
+    }
+    i ++
+  }
+  console.log(i)
+</script>
+
+
+
+
+
+<!-- 15:苹果和虫子------------------------------------------------------------ -->
+<script id="ch0103/15" type="text/javascript">
+  var n = +prompt('多少个苹果')
+  var x = +prompt('几个小时吃一个')
+  var y = +prompt('过了几个小时')
+  var a = Math.floor(n - (y / x))
+  console.log(a)
+</script>
+
+
+
+
+
+<!-- 16:计算线段长度------------------------------------------------------------ -->
+<script id="ch0103/16" type="text/javascript">
+  var ax = +prompt('ax')
+  var ay = +prompt('ay')
+  var bx = +prompt('bx')
+  var by = +prompt('by')
+  var m_d_str = Math.round(Math.sqrt(Math.abs(bx - ax) ** 2 + Math.abs(by - ay) ** 2)) + ''
+  var d_str =  Math.round((Math.sqrt(Math.abs(bx - ax) ** 2 + Math.abs(by - ay) ** 2)) * 1000) / 1000 + ''
+  while(d_str.length <= m_d_str.length + 3) {
+    if (m_d_str.length === d_str.length) {
+      d_str += '.'
+    }
+    d_str += '0'
+  }  
+  console.log(d_str)
+</script>
+
+
+
+
+<!-- 17:计算三角形面积------------------------------------------------------------ -->
+<script id="ch0103/17" type="text/javascript">
+  var x1 = +prompt('x1')
+  var y1 = +prompt('y1')
+  var x2 = +prompt('x2')
+  var y2 = +prompt('y2')
+  var x3 = +prompt('x3')
+  var y3 = +prompt('y3')
+  var a = Math.sqrt(Math.abs(x2 - x1) ** 2 + Math.abs(y2 - y1) ** 2)
+  var b = Math.sqrt(Math.abs(x3 - x1) ** 2 + Math.abs(y3 - y1) ** 2)
+  var c = Math.sqrt(Math.abs(x3 - x2) ** 2 + Math.abs(y3 - y2) ** 2)
+  var s = ( a + b + c ) / 2
+  var area = Math.sqrt(s * (s - a) * (s - b) * (s - c))
+  var m_d_str = Math.round(area) + ''
+  var d_str = Math.round((area) * 100) / 100 + ''
+  while(d_str.length <= m_d_str.length + 2) {
+    if (m_d_str.length === d_str.length) {
+      d_str += '.'
+    }
+    d_str += '0'
+  }  
+  console.log(d_str)
+</script>
+
+
+
+
+<!-- 18:等差数列末项计算------------------------------------------------------------ -->
+<script id="ch0103/18" type="text/javascript">
+  var a1 = +prompt('a1')
+  var a2 = +prompt('a2')
+  var n = +prompt('n')
+  var d = a2 - a1
+  var an = 0
+  for (var i = 1; i <= n; i ++){
+    an = a1 + (n -1)* d
+  }
+  console.log(an)
+</script>
+
+
+
+
+
+<!-- 19:A*B问题------------------------------------------------------------ -->
+<script id="ch0103/19" type="text/javascript">
+  var a = +prompt('a')
+  var b = +prompt('b')
+  console.log(a * b)
+</script>
+
+
+
+<!-- 20:计算2的幂------------------------------------------------------------ -->
+<script id="ch0103/20" type="text/javascript">
+  var n = +prompt('n')
+  var power = 2
+  for (var i = 1; i < n ; i ++) {
+    power *= 2
+  }
+  console.log(power)
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- +++++++++++++++105++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- 01:求平均年龄 ---------------------------------------------------------->
+<script id="ch0105/01" type="text/javascript">
+  var age = 0
+  var sum = 0
+  var amount = +prompt('输入数量')
+
+  for (var i = 1; i <= amount; i ++) {
+    age = +prompt('输入第' + i + '个年龄')
+    sum = age + sum
+  }
+
+  var mean = Math.round( sum / amount * 100 ) / 100
+  var mean_str = mean + ''
+  var mean_in = Math.round( sum / amount)
+  var mean_in_str = mean_in + ''
+  while ( mean_str.length < mean_in_str.length + 3 ){
+    if( mean_str.length === mean_in_str.length ) {
+      mean_str += '.'
+    }
+    mean_str += '0'
+  }
+  console.log(mean_str)
+</script>
+
+
+<!-- 02:财务管理 ------------------------------------------------------------------>
+<script id="ch0105/02" type="text/javascript">
+    var price = 0.00
+    var sum = 0.00
+    for(var i = 1; i <= 12; i ++) {
+      price = +prompt('输入第' + i + '个月的金额')
+      sum += price
+    }
+    var num = Math.round(sum * 100) / 100
+    if (num === Math.round(sum)) {
+      console.log( "$" + num + '.00')
+    }else if (num === Math.round(sum * 10) / 10){
+      console.log( "$" + num + '0')
+    }else {
+      console.log( "$" + num  )
+    }
+</script>
+
+
+
+
+<!-- 03:均值 ------------------------------------------------------------------>
+<script id="ch0105/03" type="text/javascript">
+    var n = +prompt('输入整数n（n小于100) 表示个数')
+    var num = 0.000
+    var x = 0.0000
+    var sum = 0
+
+    for(var i = 1; i <= n; i ++){
+      num = +prompt('包含n个绝对值不超过1000的浮点数')
+      sum += num
+    }
+
+    var mean = sum / n
+    var round_mean = Math.round(mean * 10000) / 10000
+
+    var mean_str = Math.round(mean) + ''
+    var round_mean_str = round_mean + ''
+
+    while(round_mean_str.length < mean_str.length + 5){
+      if ( round_mean_str.length === mean_str.length){
+        round_mean_str = round_mean_str + '.'
+      }
+      round_mean_str = round_mean_str + '0'
+    }
+    console.log( round_mean_str )
+</script>
+
+
+
+<!-- 04:求整数的和与均值 ------------------------------------------------------------------>
+<script id="ch0105/04" type="text/javascript">
+    var n = +prompt('输入第一行是一个整数n，表示有n个整数。')
+    var num = 0
+    var sum = 0
+    for (var i = 1; i <= n; i++) {
+      num = +prompt('输入第' + i + '个整数')
+      sum += num
+    }
+
+    var mean = Math.round(sum / n * 100000) / 100000
+    var mean_round = mean + ''
+    var mean_no4 = Math.round(sum / n)
+    var mean_no4_round = mean_no4 + ''
+    while( mean_round.length < mean_no4_round.length + 6 ){
+      if ( mean_round.length === mean_no4_round.length ) {
+        mean_round += '.'
+      }
+      mean_round += '0'
+    }
+
+    console.log( '和=' + sum + `  平均数=` + mean_round )
+</script>
+
+
+
+<!-- 05:最高的分数------------------------------------------------------------------>
+<script id="ch0105/05" type="text/javascript">
+  var n = +prompt(' 整数n（1 <= n < 100）')
+  var max = 0;
+  var max = +prompt('输入数字')
+  for ( var i = 1; i < n; i ++) {
+      var b = +prompt('输入数字')
+      if (max > b) {
+        max = max
+      }else{
+        max = b
+      }
+  } 
+  console.log(max)
+</script>
+
+
+
+<!-- 06:整数序列的元素最大跨度值------------------------------------------------------------------>
+<script id="ch0105/06" type="text/javascript">
+  var n = +prompt(' 整数n（1 <= n < 100）')
+  var max = +prompt('输入数字')
+  var min = max
+  for ( var i = 1; i < n; i ++) {
+      var b = +prompt('输入数字')
+      if (max > b) {
+        max = max
+      }else{
+        max = b
+      }
+      if (min < b){
+        min = min
+      }else{
+        min = b
+      }
+  } 
+  console.log(max - min)
+</script>
+
+
+
+
+
+<!-- 07:奥运奖牌计数------------------------------------------------------------------>
+<script id="ch0105/07" type="text/javascript">
+  var n = +prompt(' 整数n（1 <= n < 100）')
+  var a_sum = 0
+  var b_sum = 0
+  var c_sum = 0
+  var sum = 0
+  for ( var i = 1; i <= n; i ++) {
+    var a = +prompt('金牌')
+    var b = +prompt('银牌')
+    var c = +prompt('铜牌')
+    a_sum += a
+    b_sum += b
+    c_sum += c
+    sum = sum + a + b + c
+  } 
+  console.log(a_sum + ' ' + b_sum + ' ' + c_sum + ' ' + sum)
+</script>
+
+
+
+
+<!-- 08:多边形内角和------------------------------------------------------------------>
+<script id="ch0105/08" type="text/javascript">
+  var n = +prompt(' 整数n（1 <= n < 100）')
+  var sum = 0
+  for (var i = 1; i < n; i ++){
+    var num = +prompt('输入第' + i + '角度')
+    sum += num
+  }
+  var deg = (n - 2) * 180 - sum
+  console.log(deg)
+</script>
+
+
+
+<!-- 09:奇数求和------------------------------------------------------------------>
+<script id="ch0105/09" type="text/javascript">
+  var m = +prompt(' m:m 不大于 n，且n 不大于300')
+  var n = +prompt(' n:m 不大于 n，且n 不大于300')
+  var m_sum = 0
+  for(var i = m; i <= n; i ++){
+    if (i % 2 !== 0) {
+      m_sum += i
+    }
+  }
+  console.log(m_sum)
+</script>
+
+
+
+
+
+
+
+<!-- 10:满足条件的数累加------------------------------------------------------------------>
+<script id="ch0105/10" type="text/javascript">
+  var m = +prompt(' m:0 < m < n < 1000')
+  var n = +prompt(' n:0 < m < n < 1000')
+  var m_sum = 0
+  for(var i = m; i <= n; i ++){
+    if (i % 17 === 0) {
+      m_sum += i
+    }
+  }
+  console.log(m_sum)
+</script>
+
+
+
+
+
+
+<!-- 11:整数的个数------------------------------------------------------------------>
+<script id="ch0105/11" type="text/javascript">
+  var k = +prompt(' m:0 < m < n < 1000')
+  var m_sum = 0
+  var a = 0
+  var b = 0
+  var c = 0
+  for(var i = 1; i <= k; i ++){
+    var sum = +prompt('小于等于10的数')
+    if (sum === 1) {
+      a ++
+    }else if (sum === 5) {
+      b ++
+    }else if (sum === 10) {
+      c ++
+    }
+  }
+  console.log(a + ' ' + b + ' ' + c)
+</script>
+
+
+
+<!-- 12:与指定数字相同的数的个数------------------------------------------------------------------>
+<script id="ch0105/12" type="text/javascript">
+  var n = +prompt(' 长度')
+  var m = +prompt(' 指定的数字')
+  var m_sum = 0
+  for (var i = 1; i <= n; i ++) {
+    var x = +prompt('整数')
+    if (x === m) {
+      m_sum ++
+    }
+  }
+  console.log(m_sum)
+</script>
+
+
+
+<!-- 13:乘方计算------------------------------------------------------------------>
+<script id="ch0105/13" type="text/javascript">
+  var a = +prompt(' 整数')
+  var m = +prompt(' 正整数')
+  var power = a
+  for (var i = 1 ; i < m ; i ++) {
+    power *= a
+  }
+  console.log(power)
+</script>
+
+
+
+<!-- 14:人口增长问题------------------------------------------------------------------>
+<script id="ch0105/14" type="text/javascript">
+  var x = +prompt(' 基数 1 <= x <= 100')
+  var n = +prompt(' 年数 1 <= x <= 100')
+  for (var i = 1 ; i <= n ; i ++) {
+    x *= 1.001
+  }
+  var num = Math.round(x * 10000) / 10000 + ''
+  var num_no = Math.round(x) + ''
+  while (num.length < num_no.length + 5){
+      if(num.length === num_no.length + 5){
+        num += '.'
+      }
+      num += '0'
+  }
+  console.log(num)
+</script>
+
+
+
+
+
+<!-- 15:银行利息------------------------------------------------------------------>
+<script id="ch0105/15" type="text/javascript">
+  var r = +prompt(' 利息 0到20之间的整数')
+  var m = +prompt(' 本金 100到1,000,000之间的整数')
+  var y = +prompt('年 围0到400')
+  for (var i = 1 ; i <= y ; i ++) {
+    m = m * (1 + r / 100) 
+  }
+  m = Math.trunc(m)
+  console.log(m)
+</script>
+
+
+
+
+
+
+<!-- 16:买房子------------------------------------------------------------------>
+<script id="ch0105/16" type="text/javascript">
+  var k = +prompt(' 年薪 10 <= N <= 50')
+  var n = +prompt(' 增长 100到1,000,000之间的整数')
+  var price = 200
+  var y = 1
+  var money = 0
+  while (true) {
+    money = money + k
+    if (money > price) {
+      console.log(y)
+      break
+    }
+    if (y > 20) {
+      console.log('Impossible')
+      break
+    }
+    price = price * ( 1 + n / 100)
+    y ++
+  }
+</script>
+
+
+
+
+
+
+<!-- 17:菲波那契数列------------------------------------------------------------------>
+<script id="ch0105/17" type="text/javascript">
+  var k = +prompt(' 年薪 10 <= N <= 50')
+  var a = 1
+  var b = 1
+
+  if (k <= 2) {
+    console.log(1)
+  }else {
+    for (var i = 3; i <= k; i ++) {
+      a = a + b
+      b = a - b
+    }
+    console.log(a)
+  }
+
+</script>
+
+
+
+
+
+
+<!-- 18:鸡尾酒疗法------------------------------------------------------------------>
+<script id="ch0105/18" type="text/javascript">
+  var n = +prompt('多少组')
+  var x1 = +prompt('鸡尾酒人数')
+  var x2 = +prompt('鸡尾酒有效数')
+  var x = x2 / x1
+
+for(var i = 1; i < n; i ++) {
+  var y1 = +prompt('鸡尾酒人数')
+  var y2 = +prompt('鸡尾酒有效数')
+  var y = y2 / y1
+  if (y - x > 0.05){
+    console.log('better')
+  }else if (x - y > 0.05) {
+    console.log('worse')
+  }else {
+    console.log('same')
+  }
+}
+
+</script>
+
+
+
+<!-- 19:救援------------------------------------------------------------------>
+<script id="ch0105/19" type="text/javascript">
+  var n = +prompt('多少组')
+  for(var i = 1; i <= n; i ++) {
+    var a = +prompt('x坐标')
+    var b = +prompt('y坐标')
+    var c = Math.sqrt(a * a + b * b)
+    var r = +prompt('人数')
+    console.log(Math.ceil(c * 2 / 50 + 1.5 * r))
+  }
+</script>
+
+
+
+<!-- 20:球弹跳高度的计算------------------------------------------------------------------>
+<script id="ch0105/20" type="text/javascript">
+  var h = +prompt('初始高度')
+  var long = h
+  var height = h 
+  for(var i = 0; i < 15; i ++) {
+    h = h / 2
+    console.log(i + 1 + '------')
+    console.log(long)
+    console.log(h)
+    long = long + 2 * h
+    height = height + h
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
