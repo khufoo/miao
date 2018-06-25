@@ -1073,20 +1073,21 @@ for(var i = 1; i < n; i ++) {
 
 
 
+
 <!-- 20:球弹跳高度的计算------------------------------------------------------------------>
 <script id="ch0105/20" type="text/javascript">
   var h = +prompt('初始高度')
   var long = h
   var height = h 
-  for(var i = 0; i < 15; i ++) {
+  for(var i = 0; i < 10; i ++) {
     h = h / 2
-    console.log(i + 1 + '------')
-    console.log(long)
-    console.log(h)
     long = long + 2 * h
     height = height + h
   }
+  console.log((long - 2 * h).toFixed(4))
+  console.log((h).toFixed(7))
 </script>
+
 
 
 
