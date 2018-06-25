@@ -179,7 +179,7 @@
     }
     i ++
   }
-  console.log(a - ( i - 1 ) * b)
+  console.log((a - ( i - 1 ) * b).toFixed(4))
 </script>
 
 
@@ -370,9 +370,9 @@
 <script id="ch0104/03" type="text/javascript">
   var n = +prompt('n')
   if (n % 2 == 0){
-    console.log('odd')
-  }else {
     console.log('even')
+  }else {
+    console.log('odd')
   }
 </script>
 
@@ -518,11 +518,11 @@
 <script id="ch0104/13" type="text/javascript">
   var x = prompt('n')
   if (x < 5 ) {
-    console.log(-x + 2.5)
+    console.log((-x + 2.5).toFixed(3))
   }else if (x < 10 && x > 5) {
-    console.log( 2 - 1.5 * ( x - 3 ) * ( x - 3 ) )
+    console.log(( 2 - 1.5 * ( x - 3 ) * ( x - 3 ) ).toFixed(3))
   }else {
-    console.log(x / 2 - 1.5)
+    console.log((x / 2 - 1.5).toFixed(3))
   }
 </script>
 
@@ -712,21 +712,14 @@
 
 <!-- 02:财务管理 ------------------------------------------------------------------>
 <script id="ch0105/02" type="text/javascript">
-    var price = 0.00
-    var sum = 0.00
+    var sum = 0
     for(var i = 1; i <= 12; i ++) {
-      price = +prompt('输入第' + i + '个月的金额')
+      var price = +prompt('输入第' + i + '个月的金额')
       sum += price
     }
-    var num = Math.round(sum * 100) / 100
-    if (num === Math.round(sum)) {
-      console.log( "$" + num + '.00')
-    }else if (num === Math.round(sum * 10) / 10){
-      console.log( "$" + num + '0')
-    }else {
-      console.log( "$" + num  )
-    }
+  console.log((sum / 12).toFixed(2))
 </script>
+
 
 
 
@@ -781,7 +774,7 @@
       mean_round += '0'
     }
 
-    console.log( '和=' + sum + `  平均数=` + mean_round )
+    console.log( sum + ` ` + mean_round )
 </script>
 
 
