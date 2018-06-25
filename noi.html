@@ -1079,15 +1079,352 @@ for(var i = 1; i < n; i ++) {
 <script id="ch0105/20" type="text/javascript">
   var h = +prompt('初始高度')
   var long = h
-  var height = h 
   for(var i = 0; i < 10; i ++) {
     h = h / 2
     long = long + 2 * h
-    height = height + h
   }
   console.log((long - 2 * h).toFixed(4))
   console.log((h).toFixed(7))
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script id="sort" sample-input="4 1 7" sample-output="1 4 7" comment="输入三个数，把此三个数按升序输出">
+var a = +prompt('a')
+var b = +prompt('b')
+var c = +prompt('c')
+var n = 0
+if (a < b) {
+  n = b
+  b = a
+  a = n
+}
+if (b < c) {
+  n = c
+  c = b
+  b = n
+}
+if (a < b) {
+  n = b
+  b = a
+  a = n
+}
+console.log('' + c + b + a)
+</script>
+
+
+
+<!-- 水仙花数。水仙花数是指一个N位的十进制数，其各位数的N次方的和等于它自己。
+如：153 =　1的三次方+5的三次方+3的三次方，则153就是一个水仙花数
+或：1634 =　1的四次方+6的四次方+3的四次方+4的四次方
+因为1634是一个四位数。
+找出100到100000以内所有的水仙花数。 -->
+<script id="narcissistic " sample-input="153" sample-output="YES" comment="判断一个数是否为水仙花数">
+
+var a  = +prompt('a')
+var b = a
+var num = 0
+var a_length = ('' + a).length
+for (var i = 1; i <= a_length; i ++) {
+  var x = a % 10
+  a = Math.floor(a / 10)
+  num += x ** a_length
+}
+if (num === b){
+console.log('YES')
+} else {
+  console.log('NO')
+}
+
+</script>
+
+
+
+
+<script id="narcissistics" sample-input="" sample-output="" comment="找出100到10000以内所有的水仙花数">
+
+  var sum = 0;
+  for(var i = 100; i <= 10000; i ++) {
+    var num = 0
+    var a = i
+    var b = i
+    var i_length = ('' + i).length
+    for (var j = 1; j <= i_length; j ++) {
+      var x = a % 10
+      a = Math.floor(a / 10)
+      num += x ** i_length
+    }
+    if (num === b){
+      sum = sum + num + ' '
+    }
+  }
+  console.log(sum)
+
+</script>
+
+
+
+<!-- 判断一个非负整数是否为回文数字，回文是指从左往右与从右往左读是一样的。
+例如：12321是回文数。12344321也是回文数。 -->
+<script id="palindrom" sample-input="12321" sample-output="YES" comment="判断一个非负整数是否为回文数字">
+
+  var a = +prompt('a')
+  var a_length = ('' + a).length
+  var x = 1;
+  if (a_length % 2 === 0) {
+    for (var i = 1 ; i <= a_length / 2 ; i ++) {
+      var na_length = ('' + a).length
+      if (a % 10 === Math.floor(a / (10 ** (na_length - 1))) ) {
+       x *= 1
+     }else{
+       x *= 0
+     }
+     a = a - Math.floor(a / (10 ** (na_length - 1))) * (10 ** (na_length - 1))
+     a = Math.floor( a / 10 )
+   }
+ }else
+ {
+  for (var i = 1 ; i <= (a_length - 1) / 2 ; i ++) {
+    var na_length = ('' + a).length
+    if (a % 10 == Math.floor(a / (10 ** (na_length - 1)))) {
+      x *= 1
+    }else{
+      x *= 0
+    }
+    a = a - Math.floor(a / (10 ** (na_length - 1))) * (10 ** (na_length - 1))
+    a = Math.floor( a / 10 )
+  }
+}
+console.log(x === 1 ? 'YES' : 'NO')
+
+</script>
+
+
+
+
+<!-- 
+输入年份与月份，给出该年该月的第一天是星期几。
+例如，输入2016年，11月，输出“星期2”
+为了简化复杂性，可以只考虑2000年以后的时间。做为参考，2000年的1月1日是星期六。 -->
+<script id="weekday" sample-input="2018 6" sample-output="5" comment="输入年份与月份，给出该年该月的第一天是星期几">
+
+var y = +prompt('年')
+var m = +prompt('月')
+var allY = 0
+var allM = 0
+for (var i = 2000; i < y; i ++) {
+  if (i % 4 === 0 && i % 100 !== 0 || i % 400 === 0) {
+    allY += 366
+  }else {
+    allY += 365
+  }
+}
+for (var j = 1; j < m; j ++) {
+  if(j === 2) {
+    allM += 28
+  }else if (j === 1 || j === 3 || j === 5 || j === 7 || j === 8 || j === 10 || j === 12) {
+    allM += 31
+  }else {
+    allM += 30
+  }
+}
+if (i % 4 === 0 && i % 100 !== 0 || i % 400 === 0) {
+  allM += 1
+}
+var w = (allY + allM + 6) % 7 
+console.log('星期' + w)
+
+</script>
+
+
+
+<!-- 完全数。如果一个数的所有小于它的约数之和等于它自己，则它是一个完全数，例如6（1，2，3都是它的约数，它们的和正好为6）。找出10000以内所有的完全数 -->
+<script id="complete-number" sample-input="6" sample-output="YES" comment="判断一个数是否为完全数">
+
+var n = +prompt('n')
+var sum = 0
+for (var i = 0; i < n; i ++) {
+  if (n % i === 0) {
+    sum += i
+  }
+}
+if (sum === n) {
+  console.log('YES')
+}else {
+  console.log('NO')
+}
+
+</script>
+
+
+
+
+<script id="complete-numbers" sample-input="" sample-output="" comment="输出10000以内所有的完全数">
+
+  var p = 0
+  for (var j = 1; j <= 10000 ; j ++) {
+    var sum = 0
+    for (var i = 0; i < j; i ++) {
+      if (j % i === 0) {
+        sum += i
+      }
+    }
+    if (sum === j) {
+      p = p + sum + ' '
+    }
+  }
+
+  console.log(p)
+
+</script>
+
+
+
+
+<script id="prime" sample-input="7" sample-output="YES" comment="判断一个数是否为素数">
+  
+  var x = 1
+  var n = +prompt('素数')
+  for (var i = 2; i < n; i ++) {
+    if (n % i === 0) {
+      x *= 0
+    }
+  }
+  if (n === 1) {
+    x = 1
+  }
+  console.log(x === 1 ? 'YES' : 'NO')
+
+</script>
+
+
+
+
+<script id="primes" sample-input="" sample-output="" comment="输出100以内所有的素数">
+
+  var p = ''
+  for (var j = 3; j < 100; j ++) {
+    var x = 1
+    for (var i = 2; i < j; i ++) {
+      if (j % i === 0) {
+        x *= 0
+      }
+    }
+    if (x === 1) {
+      p = p + j + ' ' 
+    }
+  }
+  console.log(1 + ' ' + p)
+
+</script>
+
+
+
+<!-- 把一个数字转换成字符串；当然不能使用String(123)了，也不能使用任意内置的方法比如：""+123 -->
+<script id="itob" sample-input="123" sample-output="123" comment="数字转换成字符串">
+
+  var n = +prompt('n')
+  var n_length = ('' + n).length
+  var p = ''
+  for (var i = 1; i <= n_length; i ++) {
+    for (var j = 1; j <= 9; j ++) {
+      if (n % 10 === j) {
+        p = j + p
+      }
+    }
+    n = Math.floor(n / 10)
+  }
+  console.log(p)
+
+</script>
+
+
+
+<!-- 给定两个数，求它们的最小公倍数和最大公约数。 -->
+<script id="lcf&lcm" sample-input="12 9" sample-output="36 3" comment="给定两个数，求它们的最小公倍数和最大公约数">
+
+var a = +prompt('a')
+var b = +prompt('b')
+var i = 0
+var j = 1
+if (a > b){
+  i = b
+} else {
+  i = a
+}
+var mul = 0
+var max = 0
+var min = 0
+while(true) {
+  if(a % i === b % i) {
+    max = i
+    break
+  }
+  i --
+  if (i == 0){
+    break
+  }
+}
+min = (a / max) * (b / max) * 3
+console.log(min + ' ' + max)
+
+</script>
+
+
+
+<!-- 敲7。输出1到100以内所有7的倍数以及数字中包含7的数，如7（7的倍数），37（不是倍数但数位中包含7）都需要输出，依次类推 -->
+<script id="7" sample-input="" sample-output="" comment="敲7">
+
+var p = ''
+for (var i = 1; i <= 100 ; i ++) {
+  if (i % 7 === 0) {
+    p += i + ' '
+  } else if ( i % 10  === 7) {
+    p += i + ' '
+  } else if (Math.floor(i / 10) === 7) {
+    p += i + ' '
+  }
+}
+console.log(p)
+
+</script>
+
+
+
+
+<script id="sqrt" sample-input="2" sample-output="1.414" comment="不使用Math.sqrt，求一个非负数的平方根，至少精确到小数点后3位">
+
+var a = +prompt('a')
+var i = 1;
+while(true) {
+  if (i * i > a) {
+    console.log(i.toFixed(3))
+    break
+  }
+  i += 0.0001
+}
+
+</script>
+
 
 
 
