@@ -34,6 +34,9 @@ var khufoo = function () {
       for (let j = 0; j < size; j++) {
         arr2[j] = array[k]
         k++
+        if (k === array.length){
+          break
+        }
       }
       arr[i] = arr2
     }
@@ -164,4 +167,4 @@ var khufoo = function () {
 }()
 
 debugger
-console.log(khufoo.difference([2, 1], [2, 3]))
+console.log(khufoo.chunk(['a', 'b', 'c', 'd'], 3))
