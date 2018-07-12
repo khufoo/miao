@@ -7,6 +7,7 @@ var khufoo = function () {
    * Creates an array of elements split into groups the length of `size`.
    * If `array` can't be split evenly, the final chunk will be the remaining
    * elements.
+   * 将数组（array）拆分成多个 size 长度的区块，并将这些区块组成一个新数组。 如果array 无法被分割成全部等长的区块，那么最后剩余的元素将组成一个区块。
    *
    * @static
    * @memberOf _
@@ -23,6 +24,7 @@ var khufoo = function () {
    *
    * _.chunk(['a', 'b', 'c', 'd'], 3);
    * // => [['a', 'b', 'c'], ['d']]
+   * 
    */
 
   function chunk(array, size) {
@@ -34,7 +36,7 @@ var khufoo = function () {
       for (let j = 0; j < size; j++) {
         arr2[j] = array[k]
         k++
-        if (k === array.length){
+        if (k === array.length) {
           break
         }
       }
@@ -43,9 +45,38 @@ var khufoo = function () {
     return arr
   }
 
+  /**
+   * Creates an array with all falsey values removed. The values `false`, `null`,
+   * 创建一个新数组，包含原数组中所有的非假值元素。例如false, null, 0, "", undefined, 和 NaN 都是被认为是“假值”。
+   * 
+   * `0`, `""`, `undefined`, and `NaN` are falsey.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Array
+   * @param {Array} array The array to compact.
+   * @returns {Array} Returns the new array of filtered values.
+   * @example
+   *
+   * _.compact([0, 1, false, 2, '', 3]);
+   * // => [1, 2, 3]
+   */
+
+  function compact(array) {
+    var arr = []
+    for(var i = 0; i < array.length; i ++) {
+      if(array[i]){
+        arr.push(array[i])
+      }
+    }
+    return arr
+  }
+
 
   /**
    * Creates a new array concatenating `array` with any additional arrays
+   * 将数组（array）拆分成多个 size 长度的区块，并将这些区块组成一个新数组。 如果array 无法被分割成全部等长的区块，那么最后剩余的元素将组成一个区块。
    * and/or values.
    *
    * @static
@@ -65,6 +96,9 @@ var khufoo = function () {
    *
    * console.log(array);
    * // => [1]
+   * 
+
+   * 
    */
 
   function concat(array, ...values) {
@@ -73,6 +107,7 @@ var khufoo = function () {
     }
     return array
   }
+
 
 
   /**
@@ -95,14 +130,37 @@ var khufoo = function () {
    *
    * _.difference([2, 1], [2, 3]);
    * // => [1]
+   
+   ------------------------------------------
+     输入：difference([2,1],[2,3]) 
+     输出/
+     期望：[1] 
+     -----------------------------------------
+     输入：difference([2,1],[2,3]) 
+     输出/
+     期望：[1] 
+     -----------------------------------------
+     输入：difference([1,2,3,4],[2,3,4,5]) 
+     输出/
+     期望：[1] 
+     -----------------------------------------
+     输入：difference([1,2,3,4],[1,3],[4]) 
+     输出：[2,4] 
+     期望：[2] 
+     -----------------------------------------
+     输入：difference([1,2,3,4,5,6,7,8],[1,3],[4,8],[6]) 
+     输出：[2,4,5,6,7,8] 
+     期望：[2,5,7]
    */
 
-  function difference(array, values) {
+
+  function difference(array, values, ...arrays) {
     let arr = []
+    let arrsum = concat(values, ...arrays)
     for (let i = 0; i < (array.length || 0); i++) {
       let juage = 1
-      for (let j = 0; j < (values.length || 0); j++) {
-        if (array[i] == values[j]) {
+      for (let j = 0; j < (arrsum.length || 0); j++) {
+        if (array[i] == arrsum[j]) {
           juage = 0
           break
         }
@@ -121,6 +179,7 @@ var khufoo = function () {
    * by which they're compared. The order and references of result values are
    * determined by the first array. The iteratee is invoked with one argument:
    * (value).
+   * 创建一个具有唯一array值的数组，每个值不包含在其他给定的数组中。（愚人码头注：即创建一个新数组，这个数组中的值，为第一个数字（array 参数）排除了给定数组中的值。）该方法使用 SameValueZero做相等比较。结果值的顺序是由第一个数组中的顺序确定。 
    *
    * **Note:** Unlike `_.pullAllBy`, this method returns a new array.
    *
@@ -140,6 +199,14 @@ var khufoo = function () {
    * // The `_.property` iteratee shorthand.
    * _.differenceBy([{ 'x': 2 }, { 'x': 1 }], [{ 'x': 1 }], 'x');
    * // => [{ 'x': 2 }]
+   * 
+    输入：differenceBy([2.1,1.2],[2.3,3.4],"function floor() { [native code] }") 
+    输出： 
+    期望：[1.2] 
+    =================
+    输入：differenceBy([{"x":2},{"x":1}],[{"x":1}],"x") 
+    输出： 
+    期望：[{"x":2}] 
    */
 
   function differenceBy(array, values, iteratee) {
@@ -158,13 +225,41 @@ var khufoo = function () {
 
 
 
+
+
+
+
+
+
+
+
   return {
     chunk: chunk,
+    compact: compact,
     concat: concat,
     difference: difference,
     differenceBy: differenceBy
   }
 }()
 
-debugger
-console.log(khufoo.chunk(['a', 'b', 'c', 'd'], 3))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
