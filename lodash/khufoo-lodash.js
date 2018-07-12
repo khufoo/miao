@@ -65,8 +65,8 @@ var khufoo = function () {
 
   function compact(array) {
     var arr = []
-    for(var i = 0; i < array.length; i ++) {
-      if(array[i]){
+    for (var i = 0; i < array.length; i++) {
+      if (array[i]) {
         arr.push(array[i])
       }
     }
@@ -210,10 +210,101 @@ var khufoo = function () {
    */
 
   function differenceBy(array, values, iteratee) {
-    if (arguments == 2) {
-      return difference(array, values)
+    let arr = []
+    for (let i = 0; i < array.length; i++) {
+      arr.push(iteratee(array[i]))
     }
+    let varr = []
+    for (let i = 0; i < values.length; i++) {
+      varr.push(iteratee(values[i]))
+    }
+    return difference(arr, varr)
   }
+
+
+
+
+  /**
+   * Creates a slice of `array` with `n` elements dropped from the beginning.
+   *创建一个切片数组，去除array前面的n个元素。（n默认值为1。）
+
+   * @static
+   * @memberOf _
+   * @since 0.5.0
+   * @category Array
+   * @param {Array} array The array to query.
+   * @param {number} [n=1] The number of elements to drop.
+   * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
+   * @returns {Array} Returns the slice of `array`.
+   * @example
+   *
+   * _.drop([1, 2, 3]);
+   * // => [2, 3]
+   *
+   * _.drop([1, 2, 3], 2);
+   * // => [3]
+   *
+   * _.drop([1, 2, 3], 5);
+   * // => []
+   *
+   * _.drop([1, 2, 3], 0);
+   * // => [1, 2, 3]
+   */
+
+
+  function drop(array, number) {
+    if (number !== 0) {
+      number = number || 1
+    }
+
+    for (var i = 0; i < number; i ++) {
+      array.shift()
+    }
+    return array
+
+  }
+
+
+
+    /**
+     * Creates a slice of `array` with `n` elements dropped from the end.
+     *创建一个切片数组，去除array尾部的n个元素。（n默认值为1。）
+     * @static
+     * @memberOf _
+     * @since 3.0.0
+     * @category Array
+     * @param {Array} array The array to query.
+     * @param {number} [n=1] The number of elements to drop.
+     * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
+     * @returns {Array} Returns the slice of `array`.
+     * @example
+     *
+     * _.dropRight([1, 2, 3]);
+     * // => [1, 2]
+     *
+     * _.dropRight([1, 2, 3], 2);
+     * // => [1]
+     *
+     * _.dropRight([1, 2, 3], 5);
+     * // => []
+     *
+     * _.dropRight([1, 2, 3], 0);
+     * // => [1, 2, 3]
+     */
+
+function dropRight(array,number) {
+  if (number !== 0) {
+    number = number || 1
+  }
+
+  for (var i = 0; i < number; i ++) {
+    array.pop()
+  }
+  return array
+}
+
+
+
 
 
 
@@ -238,7 +329,9 @@ var khufoo = function () {
     compact: compact,
     concat: concat,
     difference: difference,
-    differenceBy: differenceBy
+    differenceBy: differenceBy,
+    drop: drop,
+    dropRight: dropRight,
   }
 }()
 
