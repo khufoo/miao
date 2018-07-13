@@ -1,8 +1,5 @@
 var khufoo = function () {
 
-
-
-
   /**
    * Creates an array of elements split into groups the length of `size`.
    * If `array` can't be split evenly, the final chunk will be the remaining
@@ -257,7 +254,7 @@ var khufoo = function () {
       number = number || 1
     }
 
-    for (var i = 0; i < number; i ++) {
+    for (var i = 0; i < number; i++) {
       array.shift()
     }
     return array
@@ -266,62 +263,221 @@ var khufoo = function () {
 
 
 
-    /**
-     * Creates a slice of `array` with `n` elements dropped from the end.
-     *创建一个切片数组，去除array尾部的n个元素。（n默认值为1。）
+  /**
+   * Creates a slice of `array` with `n` elements dropped from the end.
+   *创建一个切片数组，去除array尾部的n个元素。（n默认值为1。）
+   * @static
+   * @memberOf _
+   * @since 3.0.0
+   * @category Array
+   * @param {Array} array The array to query.
+   * @param {number} [n=1] The number of elements to drop.
+   * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
+   * @returns {Array} Returns the slice of `array`.
+   * @example
+   *
+   * _.dropRight([1, 2, 3]);
+   * // => [1, 2]
+   *
+   * _.dropRight([1, 2, 3], 2);
+   * // => [1]
+   *
+   * _.dropRight([1, 2, 3], 5);
+   * // => []
+   *
+   * _.dropRight([1, 2, 3], 0);
+   * // => [1, 2, 3]
+   */
+
+  function dropRight(array, number) {
+    if (number !== 0) {
+      number = number || 1
+    }
+
+    for (var i = 0; i < number; i++) {
+      array.pop()
+    }
+    return array
+  }
+
+
+
+
+  /**
+   * Fills elements of `array` with `value` from `start` up to, but not
+   * including, `end`.
+   * 使用 value 值来填充（替换） array，从start位置开始, 到end位置结束（但不包含end位置）。
+
+Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
+   *
+   * **Note:** This method mutates `array`.
+   *
+   * @static
+   * @memberOf _
+   * @since 3.2.0
+   * @category Array
+   * @param {Array} array The array to fill.
+   * @param {*} value The value to fill `array` with.
+   * @param {number} [start=0] The start position.
+   * @param {number} [end=array.length] The end position.
+   * @returns {Array} Returns `array`.
+   * @example
+   *
+   * var array = [1, 2, 3];
+   *
+   * _.fill(array, 'a');
+   * console.log(array);
+   * // => ['a', 'a', 'a']
+   *
+   * _.fill(Array(3), 2);
+   * // => [2, 2, 2]
+   *
+   * _.fill([4, 6, 8, 10], '*', 1, 3);
+   * // => [4, '*', '*', 10]
+   */
+
+
+  function fill(array, value, start, end) {
+    start = start || 0
+
+    end !== 0 ? end = end || start.length : end
+    for (var i = start; i < end; i++) {
+      array[i] = value
+    }
+    return array
+  }
+
+
+
+
+  /**
+   * Gets the first element of `array`.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @alias first
+   * @category Array
+   * @param {Array} array The array to query.
+   * @returns {*} Returns the first element of `array`.
+   * @example
+   *
+   * _.head([1, 2, 3]);
+   * // => 1
+   *
+   * _.head([]);
+   * // => undefined
+   */
+
+  function head(array) {
+    return array[0]
+  }
+
+
+  /**
+   * Gets the index at which the first occurrence of `value` is found in `array`
+   * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+   * for equality comparisons. If `fromIndex` is negative, it's used as the
+   * offset from the end of `array`.
+   * 使用 SameValueZero 等值比较，返回首次 value 在数组array中被找到的 索引值， 如果 fromIndex 为负值，将从数组array尾端索引进行匹配。
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Array
+   * @param {Array} array The array to inspect.
+   * @param {*} value The value to search for.
+   * @param {number} [fromIndex=0] The index to search from.
+   * @returns {number} Returns the index of the matched value, else `-1`.
+   * @example
+   *
+   * _.indexOf([1, 2, 1, 2], 2);
+   * // => 1
+   *
+   * // Search from the `fromIndex`.
+   * _.indexOf([1, 2, 1, 2], 2, 2);
+   * // => 3
+   */
+
+  function indexOf(array, value, fromIndex) {
+    if (fromIndex < 0) {
+      fromIndex = array.length + fromIndex % array.length
+    } else {
+      fromIndex = fromIndex || 0
+    }
+    for (var i = 0; i < array.length; i++) {
+      if (fromIndex + i >= array.length) {
+        fromIndex = 0
+      }
+      if (array[i + fromIndex] === value) {
+        return i + fromIndex
+      }
+    }
+    return -1
+
+  }
+
+
+      /**
+     * Gets all but the last element of `array`.
+     * 去除数组array中的最后一个元素
+     *
      * @static
      * @memberOf _
-     * @since 3.0.0
+     * @since 0.1.0
      * @category Array
      * @param {Array} array The array to query.
-     * @param {number} [n=1] The number of elements to drop.
-     * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
      * @returns {Array} Returns the slice of `array`.
      * @example
      *
-     * _.dropRight([1, 2, 3]);
+     * _.initial([1, 2, 3]);
      * // => [1, 2]
-     *
-     * _.dropRight([1, 2, 3], 2);
-     * // => [1]
-     *
-     * _.dropRight([1, 2, 3], 5);
-     * // => []
-     *
-     * _.dropRight([1, 2, 3], 0);
-     * // => [1, 2, 3]
      */
 
-function dropRight(array,number) {
-  if (number !== 0) {
-    number = number || 1
-  }
+     function initial (array) {
+       array.pop()
+      return array
+     }
 
-  for (var i = 0; i < number; i ++) {
-    array.pop()
-  }
-  return array
-}
+    /**
+     * Creates an array of unique values that are included in all given arrays
+     * using [`SameValueZero`]
+     * 可以理解为给定数组的交集
+     * (http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+     * for equality comparisons. The order and references of result values are
+     * determined by the first array.
+     *
+     * @static
+     * @memberOf _
+     * @since 0.1.0
+     * @category Array
+     * @param {...Array} [arrays] The arrays to inspect.
+     * @returns {Array} Returns the new array of intersecting values.
+     * @example
+     *
+     * _.intersection([2, 1], [2, 3]);
+     * // => [2]
+     */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+     function intersection(...arrays) {
+      let arr = []
+      let brr = []
+      for (let i = 0;i < arrays.length;i ++){
+        arr = concat(arr, arrays[i])
+      }
+      for (let i = 0;i < arr.length; i ++) {
+        var juage = 0
+        for (let j = i + 1;j < arr.length; j ++) {
+          if (arr[i] === arr[j]) {
+            juage = 1
+          }
+        }
+        if (juage === 0){
+          arr.splice(i,1)
+        }
+      }
+      return arr
+     }
 
 
   return {
@@ -332,6 +488,11 @@ function dropRight(array,number) {
     differenceBy: differenceBy,
     drop: drop,
     dropRight: dropRight,
+    fill: fill,
+    head: head,
+    indexOf: indexOf,
+    initial: initial,
+    intersection: intersection,
   }
 }()
 
