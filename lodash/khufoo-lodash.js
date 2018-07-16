@@ -109,6 +109,9 @@ var khufoo = function () {
 
   /**
    * Creates an array of `array` values not included in the other given arrays
+   * 
+   * 创建一个具有唯一array值的数组，每个值不包含在其他给定的数组中。（愚人码头注：即创建一个新数组，这个数组中的值，为第一个数字（array 参数）排除了给定数组中的值。）该方法使用 SameValueZero做相等比较。结果值的顺序是由第一个数组中的顺序确定。 
+   * 
    * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
    * for equality comparisons. The order and references of result values are
    * determined by the first array.
@@ -207,19 +210,14 @@ var khufoo = function () {
    */
 
   function differenceBy(array, values, iteratee) {
-    let arr = []
-    for (let i = 0; i < array.length; i++) {
-      arr.push(iteratee(array[i]))
+    var iteratee = last(values);
+    if (isArrayLikeObject(iteratee)) {
+      iteratee = undefined;
     }
-    let varr = []
-    for (let i = 0; i < values.length; i++) {
-      varr.push(iteratee(values[i]))
-    }
-    return difference(arr, varr)
+    return isArrayLikeObject(array)
+      ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true), getIteratee(iteratee, 2))
+      : [];
   }
-
-
-
 
   /**
    * Creates a slice of `array` with `n` elements dropped from the beginning.
@@ -348,6 +346,35 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
   }
 
 
+ /* var users = [
+  *   { 'user': 'barney',  'active': false },
+  *   { 'user': 'fred',    'active': false },
+  *   { 'user': 'pebbles', 'active': true }
+  * ];
+  *
+  * _.findIndex(users, function(o) { return o.user == 'barney'; });
+  * // => 0
+  *
+  * // The `_.matches` iteratee shorthand.
+  * _.findIndex(users, { 'user': 'fred', 'active': false });
+  * // => 1
+  *
+  * // The `_.matchesProperty` iteratee shorthand.
+  * _.findIndex(users, ['active', false]);
+  * // => 0
+  *
+  * // The `_.property` iteratee shorthand.
+  * _.findIndex(users, 'active');
+  * // => 2
+  */
+function findIndex(array, predicate){
+  for (let i = 0;i < array.length; i ++) {
+    if( predicate(array[i]) ){
+      return i
+    }
+  }
+  return -1
+}
 
 
   /**
@@ -694,6 +721,7 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
     nth: nth,
     pull: pull,
     pullAll: pullAll,
+    findIndex: findIndex,
   }
 }()
 
