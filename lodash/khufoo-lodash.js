@@ -418,66 +418,261 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
   }
 
 
-      /**
-     * Gets all but the last element of `array`.
-     * 去除数组array中的最后一个元素
-     *
-     * @static
-     * @memberOf _
-     * @since 0.1.0
-     * @category Array
-     * @param {Array} array The array to query.
-     * @returns {Array} Returns the slice of `array`.
-     * @example
-     *
-     * _.initial([1, 2, 3]);
-     * // => [1, 2]
-     */
+  /**
+ * Gets all but the last element of `array`.
+ * 去除数组array中的最后一个元素
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Array
+ * @param {Array} array The array to query.
+ * @returns {Array} Returns the slice of `array`.
+ * @example
+ *
+ * _.initial([1, 2, 3]);
+ * // => [1, 2]
+ */
 
-     function initial (array) {
-       array.pop()
-      return array
-     }
+  function initial(array) {
+    array.pop()
+    return array
+  }
 
-    /**
-     * Creates an array of unique values that are included in all given arrays
-     * using [`SameValueZero`]
-     * 可以理解为给定数组的交集
-     * (http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
-     * for equality comparisons. The order and references of result values are
-     * determined by the first array.
-     *
-     * @static
-     * @memberOf _
-     * @since 0.1.0
-     * @category Array
-     * @param {...Array} [arrays] The arrays to inspect.
-     * @returns {Array} Returns the new array of intersecting values.
-     * @example
-     *
-     * _.intersection([2, 1], [2, 3]);
-     * // => [2]
-     */
+  /**
+   * Creates an array of unique values that are included in all given arrays
+   * using [`SameValueZero`]
+   * 可以理解为给定数组的交集
+   * (http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+   * for equality comparisons. The order and references of result values are
+   * determined by the first array.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Array
+   * @param {...Array} [arrays] The arrays to inspect.
+   * @returns {Array} Returns the new array of intersecting values.
+   * @example
+   *
+   * _.intersection([2, 1], [2, 3]);
+   * // => [2]
+   */
 
-     function intersection(...arrays) {
-      let arr = []
-      let brr = []
-      for (let i = 0;i < arrays.length;i ++){
-        arr = concat(arr, arrays[i])
-      }
-      for (let i = 0;i < arr.length; i ++) {
-        var juage = 0
-        for (let j = i + 1;j < arr.length; j ++) {
-          if (arr[i] === arr[j]) {
-            juage = 1
-          }
-        }
-        if (juage === 0){
-          arr.splice(i,1)
+  function intersection(...arrays) {
+    let arr = []
+    let brr = []
+    for (let i = 0; i < arrays.length; i++) {
+      arr = concat(arr, arrays[i])
+    }
+    for (let i = 0; i < arr.length; i++) {
+      var juage = 0
+      for (let j = i + 1; j < arr.length; j++) {
+        if (arr[i] === arr[j]) {
+          juage = 1
         }
       }
-      return arr
-     }
+      if (juage === 0) {
+        arr.splice(i, 1).intersectionBy([arrays], [iteratee = _.identity])
+      }
+    }
+    return arr
+  }
+
+
+
+  /**
+   * Converts all elements in `array` into a string separated by `separator`.
+   *将 array 中的所有元素转换为由 separator 分隔的字符串。
+   * @static
+   * @memberOf _
+   * @since 4.0.0
+   * @category Array
+   * @param {Array} array The array to convert.
+   * @param {string} [separator=','] The element separator.
+   * @returns {string} Returns the joined string.
+   * @example
+   *
+   * _.join(['a', 'b', 'c'], '~');
+   * // => 'a~b~c'
+   */
+
+  function join(array, separator) {
+    let str = '' + array[0]
+    for (let i = 1; i < array.length; i++) {
+      str = str + separator + '' + array[i]
+    }
+    return str
+  }
+
+
+
+  /**
+   * Gets the last element of `array`.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Array
+   * @param {Array} array The array to query.
+   * @returns {*} Returns the last element of `array`.
+   * @example
+   *
+   * _.last([1, 2, 3]);
+   * // => 3
+   */
+
+  function last(array) {
+    let l = array.length
+    return array[l - 1]
+  }
+
+
+
+
+  /**
+   * This method is like `_.indexOf` except that it iterates over elements of
+   * `array` from right to left.
+   *从右到左遍历array的元素
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Array
+   * @param {Array} array The array to inspect.
+   * @param {*} value The value to search for.
+   * @param {number} [fromIndex=array.length-1] The index to search from.
+   * @returns {number} Returns the index of the matched value, else `-1`.
+   * @example
+   *
+   * _.lastIndexOf([1, 2, 1, 2], 2);
+   * // => 3
+   *
+   * // Search from the `fromIndex`.
+   * _.lastIndexOf([1, 2, 1, 2], 2, 2);
+   * // => 1
+   */
+  function lastIndexOf(array, value, fromIndex) {
+    fromIndex = fromIndex || 0
+    for (let i = array.length - 1 - fromIndex; i >= 0; i--) {
+      if (array[i] === value) {
+        return i
+      }
+    }
+    return -1
+  }
+
+
+  /**
+   * Gets the element at index `n` of `array`. If `n` is negative, the nth
+   * element from the end is returned.
+   *获取array数组的第n个元素。如果n为负数，则返回从数组结尾开始的第n个元素。
+   * @static
+   * @memberOf _
+   * @since 4.11.0
+   * @category Array
+   * @param {Array} array The array to query.
+   * @param {number} [n=0] The index of the element to return.
+   * @returns {*} Returns the nth element of `array`.
+   * @example
+   *
+   * var array = ['a', 'b', 'c', 'd'];
+   *
+   * _.nth(array, 1);
+   * // => 'b'
+   *
+   * _.nth(array, -2);
+   * // => 'c';
+   */
+  function nth(array, n) {
+    if (n < 0) {
+      n = array.length + n
+    }
+    return array[n]
+  }
+
+
+  /**
+   * Removes all given values from `array` using
+   * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+   * for equality comparisons.
+   *
+   * **Note:** Unlike `_.without`, this method mutates `array`. Use `_.remove`
+   * to remove elements from an array by predicate.
+   *
+   * @static
+   * @memberOf _
+   * @since 2.0.0
+   * @category Array
+   * @param {Array} array The array to modify.
+   * @param {...*} [values] The values to remove.
+   * @returns {Array} Returns `array`.
+   * @example
+   *
+   * var array = ['a', 'b', 'c', 'a', 'b', 'c'];
+   *
+   * _.pull(array, 'a', 'c');
+   * console.log(array);
+   * // => ['b', 'b']
+   */
+  function pull(array, ...value) {
+    let arr = value
+    for (let j = 0; j < arr.length; j++) {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i] === arr[j]) {
+          array.splice(i, 1)
+          i--
+        }
+      }
+
+    }
+    return array
+  }
+
+
+  /**
+    * This method is like `_.pull` except that it accepts an array of values to remove.
+    *
+    * **Note:** Unlike `_.difference`, this method mutates `array`.
+    *
+    * @static
+    * @memberOf _
+    * @since 4.0.0
+    * @category Array
+    * @param {Array} array The array to modify.
+    * @param {Array} values The values to remove.
+    * @returns {Array} Returns `array`.
+    * @example
+    *
+    * var array = ['a', 'b', 'c', 'a', 'b', 'c'];
+    *
+    * _.pullAll(array, ['a', 'c']);
+    * console.log(array);
+    * // => ['b', 'b']
+    */
+
+  function pullAll(array, values) {
+    for (let i = 0; i < array.length; i++) {
+      for (let j = 0; j < values.length; j++) {
+        if (array[i] === values[j]){
+          array.splice(i, 1)
+          i --
+        }
+      }
+    }
+    return array
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   return {
@@ -493,6 +688,12 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
     indexOf: indexOf,
     initial: initial,
     intersection: intersection,
+    join: join,
+    last: last,
+    lastIndexOf: lastIndexOf,
+    nth: nth,
+    pull: pull,
+    pullAll: pullAll,
   }
 }()
 
