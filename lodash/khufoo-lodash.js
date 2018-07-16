@@ -338,7 +338,11 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
   function fill(array, value, start, end) {
     start = start || 0
 
-    end !== 0 ? end = end || start.length : end
+    if(!end){
+      if(end !== 0){
+        end = array.length
+      }
+    }
     for (var i = start; i < end; i++) {
       array[i] = value
     }
@@ -346,35 +350,35 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
   }
 
 
- /* var users = [
-  *   { 'user': 'barney',  'active': false },
-  *   { 'user': 'fred',    'active': false },
-  *   { 'user': 'pebbles', 'active': true }
-  * ];
-  *
-  * _.findIndex(users, function(o) { return o.user == 'barney'; });
-  * // => 0
-  *
-  * // The `_.matches` iteratee shorthand.
-  * _.findIndex(users, { 'user': 'fred', 'active': false });
-  * // => 1
-  *
-  * // The `_.matchesProperty` iteratee shorthand.
-  * _.findIndex(users, ['active', false]);
-  * // => 0
-  *
-  * // The `_.property` iteratee shorthand.
-  * _.findIndex(users, 'active');
-  * // => 2
-  */
-function findIndex(array, predicate){
-  for (let i = 0;i < array.length; i ++) {
-    if( predicate(array[i]) ){
-      return i
+  /* var users = [
+   *   { 'user': 'barney',  'active': false },
+   *   { 'user': 'fred',    'active': false },
+   *   { 'user': 'pebbles', 'active': true }
+   * ];
+   *
+   * _.findIndex(users, function(o) { return o.user == 'barney'; });
+   * // => 0
+   *
+   * // The `_.matches` iteratee shorthand.
+   * _.findIndex(users, { 'user': 'fred', 'active': false });
+   * // => 1
+   *
+   * // The `_.matchesProperty` iteratee shorthand.
+   * _.findIndex(users, ['active', false]);
+   * // => 0
+   *
+   * // The `_.property` iteratee shorthand.
+   * _.findIndex(users, 'active');
+   * // => 2
+   */
+  function findIndex(array, predicate) {
+    for (let i = 0; i < array.length; i++) {
+      if (predicate(array[i])) {
+        return i
+      }
     }
+    return -1
   }
-  return -1
-}
 
 
   /**
@@ -680,9 +684,9 @@ function findIndex(array, predicate){
   function pullAll(array, values) {
     for (let i = 0; i < array.length; i++) {
       for (let j = 0; j < values.length; j++) {
-        if (array[i] === values[j]){
+        if (array[i] === values[j]) {
           array.splice(i, 1)
-          i --
+          i--
         }
       }
     }
