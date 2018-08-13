@@ -1,25 +1,726 @@
-var khufoo = function () {
+let khufoo = function () {
+
+
+
+  /** `Object#toString` result references. */
+  let arrayTag = '[object Array]',
+    functionTag = "[object Function]",
+    objectTag = "[object Object]",
+    booleanTag = "[object Boolean]",
+    stringTag = "[object String]",
+    argumentsTag = "[object Arguments]"
+
+
+
+  /*---@category Lang-----------------------------------------*/
 
   /**
-   * Creates an array of elements split into groups the length of `size`.
-   * If `array` can't be split evenly, the final chunk will be the remaining
-   * elements.
-   * 将数组（array）拆分成多个 size 长度的区块，并将这些区块组成一个新数组。 如果array 无法被分割成全部等长的区块，那么最后剩余的元素将组成一个区块。
+   * 判断value是否像对象一样
+  * Checks if `value` is object-like. A value is object-like if it's not `null`
+  * and has a `typeof` result of "object".
+  *
+  * @static
+  * @memberOf _
+  * @since 4.0.0
+  * @category Lang
+  * @param {*} value The value to check.
+  * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+  * @example
+  *
+  * khufoo.isObjectLike({});
+  * // => true
+  *
+  * khufoo.isObjectLike([1, 2, 3]);
+  * // => true
+  *
+  * khufoo.isObjectLike(khufoo.noop);
+  * // => false
+  *
+  * khufoo.isObjectLike(null);
+  * // => false
+  */
+  function isObjectLike(value) {
+    return value !== null && typeof value === 'object'
+  }
+
+  /**
+   * The base基本 implementation实现 of `getTag` without没有 fallbacks回退 for针对 buggy错误 environments环境.
+   *
+   * @private
+   * @param {*} value The value to query.
+   * @returns {string} Returns the `toStringTag`.
+   */
+  function baseGetTag(value) {
+    let isOwn = Object.prototype.call(value, sumToStringTag)
+    let tag = value[symToStringTag]
+
+    try {
+      value[symToStringTag] = undefined
+      let unmasked = true
+    } catch (e) { }
+
+    let result = nativeObjectTostring.call(value)
+    if (unmasked) {
+      if (isOwn) {
+        value[symToStringTag] = tag
+      } else {
+        delete value[symToStringTag]
+      }
+    }
+    return result
+  }
+
+  /**
+   * Checks if `value` is classified as a `Number` primitive or object.
+   *
+   * **Note:** To exclude `Infinity`, `-Infinity`, and `NaN`, which are
+   * classified as numbers, use the `_.isFinite` method.
    *
    * @static
    * @memberOf _
-   * @since 3.0.0
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a number, else `false`.
+   * @example
+   *
+   * _.isNumber(3);
+   * // => true
+   *
+   * _.isNumber(Number.MIN_VALUE);
+   * // => true
+   *
+   * _.isNumber(Infinity);
+   * // => true
+   *
+   * _.isNumber('3');
+   * // => false
+   */
+  function isNumber(value) {
+    if (Object.prototype.toString.call(value) === "[object Number]") {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  /**
+ * Checks检查 if `value` is `NaN`.
+ *
+ * **Note:** This method is based on
+ * [`Number.isNaN`](https://mdn.io/Number/isNaN) and is not the same as
+ * global [`isNaN`](https://mdn.io/isNaN) which returns `true` for
+ * `undefined` and other non-number values.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is `NaN`, else `false`.
+ * @example
+ *
+ * khufoo.isNaN(NaN);
+ * // => true
+ *
+ * khufoo.isNaN(new Number(NaN));
+ * // => true
+ *
+ * isNaN(undefined);
+ * // => true
+ *
+ * khufoo.isNaN(undefined);
+ * // => false
+ */
+  function isNaN(value) {
+    return isNumber(value) && value != +value
+  }
+
+  /**
+   * Checks if `value` is `null`.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is `null`, else `false`.
+   * @example
+   *
+   * _.isNull(null);
+   * // => true
+   *
+   * _.isNull(void 0);
+   * // => false
+   */
+  function isNull(value) {
+    return value === null
+  }
+
+  /**
+   * Checks if `value` is `undefined`.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is `undefined`, else `false`.
+   * @example
+   *
+   * _.isUndefined(void 0);
+   * // => true
+   *
+   * _.isUndefined(null);
+   * // => false
+   */
+  function isUndefined(value) {
+    return value === undefined
+  }
+
+  /**
+   * Checks if `value` is classified as a `Function` object.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+   * @example
+   *
+   * khufoo.isFunction(_);
+   * // => true
+   *
+   * khufoo.isFunction(/abc/);
+   * // => false
+   */
+  function isFunction(value) {
+    return Object.prototype.toString.call(value) === functionTag
+  }
+
+  /**
+   * Checks if `value` is classified as a boolean primitive or object.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a boolean, else `false`.
+   * @example
+   *
+   * _.isBoolean(false);
+   * // => true
+   *
+   * _.isBoolean(null);
+   * // => false
+   */
+  function isBoolean(value) {
+    return Object.prototype.toString.call(value) === booleanTag
+  }
+
+  /**
+   * Checks if `value` is classified as a `String` primitive or object.
+   *
+   * @static
+   * @since 0.1.0
+   * @memberOf _
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a string, else `false`.
+   * @example
+   *
+   * _.isString('abc');
+   * // => true
+   *
+   * _.isString(1);
+   * // => false
+   */
+  function isString(value) {
+    return Object.prototype.toString.call(value) === stringTag
+  }
+
+  /**
+   * Checks if `value` is the
+   * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+   * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+   * @example
+   *
+   * _.isObject({});
+   * // => true
+   *
+   * _.isObject([1, 2, 3]);
+   * // => true
+   *
+   * _.isObject(_.noop);
+   * // => true
+   *
+   * _.isObject(null);
+   * // => false
+   */
+  function isObject(value) {
+    let type = typeof value
+    return value != null && (type === 'object' || type === 'function')
+  }
+
+  /**
+   * Checks if `value` is classified as a `Set` object.
+   *
+   * @static
+   * @memberOf _
+   * @since 4.3.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a set, else `false`.
+   * @example
+   *
+   * _.isSet(new Set);
+   * // => true
+   *
+   * _.isSet(new WeakSet);
+   * // => false
+   */
+  function isSet(value) {
+    return value instanceof Set
+  }
+
+  /**
+   * Checks检查 if `value` is classified归类 as为 a `WeakSet` object.
+   *
+   * @static
+   * @memberOf _
+   * @since 4.3.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a weak set, else `false`.
+   * @example
+   *
+   * _.isWeakSet(new WeakSet);
+   * // => true
+   *
+   * _.isWeakSet(new Set);
+   * // => false
+   */
+  function isWeakSet(value) {
+    return value instanceof WeakSet
+  }
+
+  /**
+   * The base基本 implementation实现 of `_.unary一元的` without support支持 for storing存储 metadata.
+   *
+   * @private
+   * @param {Function} func The function to cap arguments for.
+   * @returns {Function} Returns the new capped function.
+   */
+  function baseUnary(func) {
+    return function (value) {
+      return func(value);
+    };
+  }
+
+  /**
+   * Checks if `value` is classified as a `Map` object.
+   *
+   * @static
+   * @memberOf _
+   * @since 4.3.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a map, else `false`.
+   * @example
+   *
+   * _.isMap(new Map);
+   * // => true
+   *
+   * _.isMap(new WeakMap);
+   * // => false
+   */
+  function isMap(value) {
+    return value instanceof Map
+  }
+
+  /**
+ * Checks if `value` is classified as a `WeakSet` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.3.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a weak set, else `false`.
+ * @example
+ *
+ * _.isWeakSet(new WeakSet);
+ * // => true
+ *
+ * _.isWeakSet(new Set);
+ * // => false
+ */
+  function isWeakMap(value) {
+    return value instanceof WeakMap
+  }
+
+  /**
+ * Checks if `value` is `null` or `undefined`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is nullish, else `false`.
+ * @example
+ *
+ * _.isNil(null);
+ * // => true
+ *
+ * _.isNil(void 0);
+ * // => true
+ *
+ * _.isNil(NaN);
+ * // => false
+ */
+  function isNil(value) {
+    return value == null
+  }
+
+
+  /**
+   * Checks检查 if `value` is classified归类 as a `RegExp` object.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a regexp, else `false`.
+   * @example
+   *
+   * _.isRegExp(/abc/);
+   * // => true
+   *
+   * _.isRegExp('/abc/');
+   * // => false
+   */
+  function isRegExp(value) {
+    return value instanceof RegExp
+  }
+
+  /**
+   * Checks检查 if `value` is classified归类 as a `Symbol` primitive原始的 or object.
+   *
+   * @static
+   * @memberOf _
+   * @since 4.0.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+   * @example
+   *
+   * _.isSymbol(Symbol.iterator);
+   * // => true
+   *
+   * _.isSymbol('abc');
+   * // => false
+   */
+  function isSymbol(value) {
+    return typeof value === 'symbol'
+  }
+
+  /**
+   * Checks if `value` is likely an `arguments` object.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+   *  else `false`.
+   * @example
+   *
+   * _.isArguments(function() { return arguments; }());
+   * // => true
+   *
+   * _.isArguments([1, 2, 3]);
+   * // => false
+   */
+  function isArguments(value) {
+    return Object.prototype.toString.call(value) === argumentsTag
+  }
+
+  /**
+   * Checks if `value` is classified as an `Array` object.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+   * @example
+   *
+   * _.isArray([1, 2, 3]);
+   * // => true
+   *
+   * _.isArray(document.body.children);
+   * // => false
+   *
+   * _.isArray('abc');
+   * // => false
+   *
+   * _.isArray(_.noop);
+   * // => false
+   */
+  function isArray(value) {
+    return Object.prototype.toString.call(value) === arrayTag
+  }
+
+  /**
+   * Checks if `value` is classified as an `ArrayBuffer` object.
+   *
+   * @static
+   * @memberOf _
+   * @since 4.3.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is an array buffer, else `false`.
+   * @example
+   *
+   * _.isArrayBuffer(new ArrayBuffer(2));
+   * // => true
+   *
+   * _.isArrayBuffer(new Array(2));
+   * // => false
+   */
+  function isArrayBuffer(value) {
+    return value instanceof ArrayBuffer
+
+  }
+
+  /**
+   * Checks if `value` is classified as a `Date` object.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a date object, else `false`.
+   * @example
+   *
+   * _.isDate(new Date);
+   * // => true
+   *
+   * _.isDate('Mon April 23 2012');
+   * // => false
+   */
+  function isDate(value) {
+    return value instanceof Date
+  }
+
+  /**
+   * Checks检查 if `value` is array-like. A value is considered array-like if it's
+   * not a function and has a `value.length` that's an integer greater than or
+   * equal to `0` and less than小于 or equal等于 to `Number.MAX_SAFE_INTEGER`.
+   *
+   * @static
+   * @memberOf _
+   * @since 4.0.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
+   * @example
+   *
+   * _.isArrayLike([1, 2, 3]);
+   * // => true
+   *
+   * _.isArrayLike(document.body.children);
+   * // => true
+   *
+   * _.isArrayLike('abc');
+   * // => true
+   *
+   * _.isArrayLike(_.noop);
+   * // => false
+   */
+  function isArrayLike(value) {
+    if (value &&
+      typeof value === 'object' &&
+      isFinite(value.length) &&
+      value.length >= 0 &&
+      value.length < 2 ** 32 &&
+      value.length === Math.floor(value.length)
+    ) {
+      return true
+    }
+    return false
+  }
+
+  /**
+   * Checks检查 if如果 `value` is a plain普通的 object, that is, an object created创建 by the
+   * `Object` constructor构造 or one with a `[[Prototype]]` of `null`.
+   * 如果是字面量或者new Object创建的对象返回true
+   * @static
+   * @memberOf _
+   * @since 0.8.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
+   * @example
+   *
+   * function Foo() {
+   *   this.a = 1;
+   * }
+   *
+   * _.isPlainObject(new Foo);
+   * // => false
+   *
+   * _.isPlainObject([1, 2, 3]);
+   * // => false
+   *
+   * _.isPlainObject({ 'x': 0, 'y': 0 });
+   * // => true
+   *
+   * _.isPlainObject(Object.create(null));
+   * // => true
+   */
+  // function isPlainObject(obj) {
+  //   if (!obj || type(obj) !== 'object' || isWindow(obj) || obj.nodeType) {
+  //     return false;
+  //   }
+  //   var key;
+  //   for (key in obj) { }
+  //   return key === undefined || hasOwn.call(obj, key)
+  // }
+
+  /**
+   * Checks if `value` is likely a DOM element.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to check.
+   * @returns {boolean} Returns `true` if `value` is a DOM element, else `false`.
+   * @example
+   *
+   * _.isElement(document.body);
+   * // => true
+   *
+   * _.isElement('<body>');
+   * // => false
+   */
+  function isElement(value) {
+
+  }
+
+  /**
+   * Converts转换 `value` to a number.
+   *
+   * @static
+   * @memberOf _
+   * @since 4.0.0
+   * @category Lang
+   * @param {*} value The value to process.
+   * @returns {number} Returns the number.
+   * @example
+   *
+   * _.toNumber(3.2);
+   * // => 3.2
+   *
+   * _.toNumber(Number.MIN_VALUE);
+   * // => 5e-324
+   *
+   * _.toNumber(Infinity);
+   * // => Infinity
+   *
+   * _.toNumber('3.2');
+   * // => 3.2
+   */
+  function toNumber(value) {
+    if (isNumber(value)) {
+      return value
+    }
+    if (isSymbol(value)) {
+      return NaN
+    }
+    if (isObject(value)) {
+      var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
+      value = isObject(other) ? (other + '') : other;
+    }
+  }
+
+  /**
+   * Performs a deep comparison between two values to determine if they are
+   * equivalent.
+   *
+   * **Note:** This method supports comparing arrays, array buffers, booleans,
+   * date objects, error objects, maps, numbers, `Object` objects, regexes,
+   * sets, strings, symbols, and typed arrays. `Object` objects are compared
+   * by their own, not inherited, enumerable properties. Functions and DOM
+   * nodes are compared by strict equality, i.e. `===`.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Lang
+   * @param {*} value The value to compare.
+   * @param {*} other The other value to compare.
+   * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+   * @example
+   *
+   * var object = { 'a': 1 };
+   * var other = { 'a': 1 };
+   *
+   * _.isEqual(object, other);
+   * // => true
+   *
+   * object === other;
+   * // => false
+   */
+  function isEqual(value, other) {
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+  /*--Array------------------------------------------------------*/
+
+  /**
+   * Creates an array of elements split拆分 into成 groups组 the length of `size`.
+   * If `array` can't be split evenly, the final最后 chunk块 will将 be the remaining剩余
+   * elements.
+   * 创建一个数组 将数组拆分成新数组 新数组的长度为size
+   * 如果array 不能拆分成任何东西, 最后的块长度将会是剩余的元素
+   *
    * @category Array
-   * @param {Array} array The array to process.
-   * @param {number} [size=1] The length of each chunk
+   * @param {Array} array The array to process处理.
+   * @param {number} [size=1] The length of each每 chunk
    * @param- {Object} [guard] Enables use as an iteratee for methods like `_.map`.
    * @returns {Array} Returns the new array of chunks.
    * @example
    *
-   * _.chunk(['a', 'b', 'c', 'd'], 2);
+   * khufoo.chunk(['a', 'b', 'c', 'd'], 2);
    * // => [['a', 'b'], ['c', 'd']]
    *
-   * _.chunk(['a', 'b', 'c', 'd'], 3);
+   * khufoo.chunk(['a', 'b', 'c', 'd'], 3);
    * // => [['a', 'b', 'c'], ['d']]
    * 
    */
@@ -44,7 +745,8 @@ var khufoo = function () {
 
   /**
    * Creates an array with all falsey values removed. The values `false`, `null`,
-   * 创建一个新数组，包含原数组中所有的非假值元素。例如false, null, 0, "", undefined, 和 NaN 都是被认为是“假值”。
+   * 创建一个新数组 同时所有的falsey的属性都值移除 例如: value是false null 0 "" 
+   * undefined nan 都是falsey
    * 
    * `0`, `""`, `undefined`, and `NaN` are falsey.
    *
@@ -56,7 +758,7 @@ var khufoo = function () {
    * @returns {Array} Returns the new array of filtered values.
    * @example
    *
-   * _.compact([0, 1, false, 2, '', 3]);
+   * khufoo.compact([0, 1, false, 2, '', 3]);
    * // => [1, 2, 3]
    */
 
@@ -69,7 +771,6 @@ var khufoo = function () {
     }
     return arr
   }
-
 
   /**
    * Creates a new array concatenating `array` with any additional arrays
@@ -86,18 +787,14 @@ var khufoo = function () {
    * @example
    *
    * var array = [1];
-   * var other = _.concat(array, 2, [3], [[4]]);
+   * var other = khufoo.concat(array, 2, [3], [[4]]);
    *
    * console.log(other);
    * // => [1, 2, 3, [4]]
    *
    * console.log(array);
    * // => [1]
-   * 
-
-   * 
    */
-
   function concat(array, ...values) {
     for (let i = 0; i < values.length; i++) {
       array = array.concat(values[i])
@@ -105,12 +802,9 @@ var khufoo = function () {
     return array
   }
 
-
-
   /**
    * Creates an array of `array` values not included in the other given arrays
-   * 
-   * 创建一个具有唯一array值的数组，每个值不包含在其他给定的数组中。（愚人码头注：即创建一个新数组，这个数组中的值，为第一个数字（array 参数）排除了给定数组中的值。）该方法使用 SameValueZero做相等比较。结果值的顺序是由第一个数组中的顺序确定。 
+   * 创建一个数组 array 数组的值不能包括特定的数组
    * 
    * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
    * for equality comparisons. The order and references of result values are
@@ -125,10 +819,10 @@ var khufoo = function () {
    * @param {Array} array The array to inspect.
    * @param {...Array} [values] The values to exclude.
    * @returns {Array} Returns the new array of filtered values.
-   * @see _.without, _.xor
+   * @see khufoo.without, khufoo.xor
    * @example
    *
-   * _.difference([2, 1], [2, 3]);
+   * khufoo.difference([2, 1], [2, 3]);
    * // => [1]
    
    ------------------------------------------
@@ -152,8 +846,6 @@ var khufoo = function () {
      输出：[2,4,5,6,7,8] 
      期望：[2,5,7]
    */
-
-
   function difference(array, values, ...arrays) {
     let arr = []
     let arrsum = concat(values, ...arrays)
@@ -171,7 +863,6 @@ var khufoo = function () {
     }
     return arr
   }
-
 
   /**
    * This method is like `_.difference` except that it accepts `iteratee` which
@@ -193,11 +884,11 @@ var khufoo = function () {
    * @returns {Array} Returns the new array of filtered values.
    * @example
    *
-   * _.differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor);
+   * khufoo.differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor);
    * // => [1.2]
    *
    * // The `_.property` iteratee shorthand.
-   * _.differenceBy([{ 'x': 2 }, { 'x': 1 }], [{ 'x': 1 }], 'x');
+   * khufoo.differenceBy([{ 'x': 2 }, { 'x': 1 }], [{ 'x': 1 }], 'x');
    * // => [{ 'x': 2 }]
    * 
     输入：differenceBy([2.1,1.2],[2.3,3.4],"function floor() { [native code] }") 
@@ -208,15 +899,28 @@ var khufoo = function () {
     输出： 
     期望：[{"x":2}] 
    */
-
   function differenceBy(array, values, iteratee) {
-    var iteratee = last(values);
-    if (isArrayLikeObject(iteratee)) {
-      iteratee = undefined;
+    let arr = []
+    for (let i = 0; i < array.length; i++) {
+      let judge = 1
+      for (let j = 0; j < values.length; j++) {
+        if (isFunction(iteratee)) {
+          if (iteratee(array[i]) === iteratee(values[j])) {
+            judge = 0
+            break
+          }
+        } else {
+          if (array[i][iteratee] === values[j][iteratee]) {
+            judge = 0
+            break
+          }
+        }
+      }
+      if (judge === 1) {
+        arr.push(array[i])
+      }
     }
-    return isArrayLikeObject(array)
-      ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true), getIteratee(iteratee, 2))
-      : [];
+    return arr
   }
 
   /**
@@ -233,20 +937,18 @@ var khufoo = function () {
    * @returns {Array} Returns the slice of `array`.
    * @example
    *
-   * _.drop([1, 2, 3]);
+   * khufoo.drop([1, 2, 3]);
    * // => [2, 3]
    *
-   * _.drop([1, 2, 3], 2);
+   * khufoo.drop([1, 2, 3], 2);
    * // => [3]
    *
-   * _.drop([1, 2, 3], 5);
+   * khufoo.drop([1, 2, 3], 5);
    * // => []
    *
-   * _.drop([1, 2, 3], 0);
+   * khufoo.drop([1, 2, 3], 0);
    * // => [1, 2, 3]
    */
-
-
   function drop(array, number) {
     if (number !== 0) {
       number = number || 1
@@ -258,8 +960,6 @@ var khufoo = function () {
     return array
 
   }
-
-
 
   /**
    * Creates a slice of `array` with `n` elements dropped from the end.
@@ -274,19 +974,18 @@ var khufoo = function () {
    * @returns {Array} Returns the slice of `array`.
    * @example
    *
-   * _.dropRight([1, 2, 3]);
+   * khufoo.dropRight([1, 2, 3]);
    * // => [1, 2]
    *
-   * _.dropRight([1, 2, 3], 2);
+   * khufoo.dropRight([1, 2, 3], 2);
    * // => [1]
    *
-   * _.dropRight([1, 2, 3], 5);
+   * khufoo.dropRight([1, 2, 3], 5);
    * // => []
    *
-   * _.dropRight([1, 2, 3], 0);
+   * khufoo.dropRight([1, 2, 3], 0);
    * // => [1, 2, 3]
    */
-
   function dropRight(array, number) {
     if (number !== 0) {
       number = number || 1
@@ -298,8 +997,50 @@ var khufoo = function () {
     return array
   }
 
-
-
+  /**
+   * Creates a slice of `array` excluding elements dropped from the end.
+   * Elements are dropped until `predicate` returns falsey. The predicate is
+   * invoked with three arguments: (value, index, array).
+   *
+   * @static
+   * @memberOf _
+   * @since 3.0.0
+   * @category Array
+   * @param {Array} array The array to query.
+   * @param {Function} [predicate=_.identity] The function invoked per iteration.
+   * @returns {Array} Returns the slice of `array`.
+   * @example
+   *
+   * var users = [
+   *   { 'user': 'barney',  'active': true },
+   *   { 'user': 'fred',    'active': false },
+   *   { 'user': 'pebbles', 'active': false }
+   * ];
+   *
+   * _.dropRightWhile(users, function(o) { return !o.active; });
+   * // => objects for ['barney']
+   *
+   * // The `_.matches` iteratee shorthand.
+   * _.dropRightWhile(users, { 'user': 'pebbles', 'active': false });
+   * // => objects for ['barney', 'fred']
+   *
+   * // The `_.matchesProperty` iteratee shorthand.
+   * _.dropRightWhile(users, ['active', false]);
+   * // => objects for ['barney']
+   *
+   * // The `_.property` iteratee shorthand.
+   * _.dropRightWhile(users, 'active');
+   * // => objects for ['barney', 'fred', 'pebbles']
+   */
+  function dropRightWhile(array, predicate = identity) {
+    let arr = []
+    for (let i = array.length - 1; i >= 0; i--) {
+      if (predicate(array[i], index, ary)) {
+        arr.push(array[i].user)
+      }
+    }
+    return arr
+  }
 
   /**
    * Fills elements of `array` with `value` from `start` up to, but not
@@ -323,23 +1064,21 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
    *
    * var array = [1, 2, 3];
    *
-   * _.fill(array, 'a');
+   * khufoo.fill(array, 'a');
    * console.log(array);
    * // => ['a', 'a', 'a']
    *
-   * _.fill(Array(3), 2);
+   * khufoo.fill(Array(3), 2);
    * // => [2, 2, 2]
    *
-   * _.fill([4, 6, 8, 10], '*', 1, 3);
+   * khufoo.fill([4, 6, 8, 10], '*', 1, 3);
    * // => [4, '*', '*', 10]
    */
-
-
   function fill(array, value, start, end) {
     start = start || 0
 
-    if(!end){
-      if(end !== 0){
+    if (!end) {
+      if (end !== 0) {
         end = array.length
       }
     }
@@ -349,27 +1088,44 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
     return array
   }
 
-
   /* var users = [
    *   { 'user': 'barney',  'active': false },
    *   { 'user': 'fred',    'active': false },
    *   { 'user': 'pebbles', 'active': true }
    * ];
    *
-   * _.findIndex(users, function(o) { return o.user == 'barney'; });
+   * khufoo.findIndex(users, function(o) { return o.user == 'barney'; });
    * // => 0
    *
    * // The `_.matches` iteratee shorthand.
-   * _.findIndex(users, { 'user': 'fred', 'active': false });
+   * khufoo.findIndex(users, { 'user': 'fred', 'active': false });
    * // => 1
    *
    * // The `_.matchesProperty` iteratee shorthand.
-   * _.findIndex(users, ['active', false]);
+   * khufoo.findIndex(users, ['active', false]);
    * // => 0
    *
    * // The `_.property` iteratee shorthand.
-   * _.findIndex(users, 'active');
+   * khufoo.findIndex(users, 'active');
    * // => 2
+   * 
+    输入：findIndex([{"user":"barney","active":false},{"user":"fred","active":false},{"user":"pebbles","active":true}],"function(o)  { \n        return  o.user  ==  'barney'; \n      }")
+    输出/期望：0
+    =================
+    错误：TypeError: predicate is not a function
+    输入：findIndex([{"user":"barney","active":false},{"user":"fred","active":false},{"user":"pebbles","active":true}],{"user":"fred","active":false})
+    期望：1
+    =================
+    错误：TypeError: predicate is not a function
+    输入：findIndex([{"user":"barney","active":false},{"user":"fred","active":false},{"user":"pebbles","active":true}],["active",false])
+    期望：0
+    =================
+    错误：TypeError: predicate is not a function
+    输入：findIndex([{"user":"barney","active":false},{"user":"fred","active":false},{"user":"pebbles","active":true}],"active")
+    期望：2
+   * 
+   * 
+   * 
    */
   function findIndex(array, predicate) {
     for (let i = 0; i < array.length; i++) {
@@ -379,7 +1135,6 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
     }
     return -1
   }
-
 
   /**
    * Gets the first element of `array`.
@@ -393,17 +1148,15 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
    * @returns {*} Returns the first element of `array`.
    * @example
    *
-   * _.head([1, 2, 3]);
+   * khufoo.head([1, 2, 3]);
    * // => 1
    *
-   * _.head([]);
+   * khufoo.head([]);
    * // => undefined
    */
-
   function head(array) {
     return array[0]
   }
-
 
   /**
    * Gets the index at which the first occurrence of `value` is found in `array`
@@ -422,14 +1175,13 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
    * @returns {number} Returns the index of the matched value, else `-1`.
    * @example
    *
-   * _.indexOf([1, 2, 1, 2], 2);
+   * khufoo.indexOf([1, 2, 1, 2], 2);
    * // => 1
    *
    * // Search from the `fromIndex`.
-   * _.indexOf([1, 2, 1, 2], 2, 2);
+   * khufoo.indexOf([1, 2, 1, 2], 2, 2);
    * // => 3
    */
-
   function indexOf(array, value, fromIndex) {
     if (fromIndex < 0) {
       fromIndex = array.length + fromIndex % array.length
@@ -448,7 +1200,6 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
 
   }
 
-
   /**
  * Gets all but the last element of `array`.
  * 去除数组array中的最后一个元素
@@ -461,10 +1212,9 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
  * @returns {Array} Returns the slice of `array`.
  * @example
  *
- * _.initial([1, 2, 3]);
+ * khufoo.initial([1, 2, 3]);
  * // => [1, 2]
  */
-
   function initial(array) {
     array.pop()
     return array
@@ -486,10 +1236,9 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
    * @returns {Array} Returns the new array of intersecting values.
    * @example
    *
-   * _.intersection([2, 1], [2, 3]);
+   * khufoo.intersection([2, 1], [2, 3]);
    * // => [2]
    */
-
   function intersection(...arrays) {
     let arr = []
     let brr = []
@@ -504,13 +1253,11 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
         }
       }
       if (juage === 0) {
-        arr.splice(i, 1).intersectionBy([arrays], [iteratee = _.identity])
+        arr.splice(i, 1).intersectionBy([arrays], [iteratee = khufoo.identity])
       }
     }
     return arr
   }
-
-
 
   /**
    * Converts all elements in `array` into a string separated by `separator`.
@@ -524,10 +1271,9 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
    * @returns {string} Returns the joined string.
    * @example
    *
-   * _.join(['a', 'b', 'c'], '~');
+   * khufoo.join(['a', 'b', 'c'], '~');
    * // => 'a~b~c'
    */
-
   function join(array, separator) {
     let str = '' + array[0]
     for (let i = 1; i < array.length; i++) {
@@ -535,8 +1281,6 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
     }
     return str
   }
-
-
 
   /**
    * Gets the last element of `array`.
@@ -549,17 +1293,13 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
    * @returns {*} Returns the last element of `array`.
    * @example
    *
-   * _.last([1, 2, 3]);
+   * khufoo.last([1, 2, 3]);
    * // => 3
    */
-
   function last(array) {
     let l = array.length
     return array[l - 1]
   }
-
-
-
 
   /**
    * This method is like `_.indexOf` except that it iterates over elements of
@@ -575,11 +1315,11 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
    * @returns {number} Returns the index of the matched value, else `-1`.
    * @example
    *
-   * _.lastIndexOf([1, 2, 1, 2], 2);
+   * khufoo.lastIndexOf([1, 2, 1, 2], 2);
    * // => 3
    *
    * // Search from the `fromIndex`.
-   * _.lastIndexOf([1, 2, 1, 2], 2, 2);
+   * khufoo.lastIndexOf([1, 2, 1, 2], 2, 2);
    * // => 1
    */
   function lastIndexOf(array, value, fromIndex) {
@@ -591,7 +1331,6 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
     }
     return -1
   }
-
 
   /**
    * Gets the element at index `n` of `array`. If `n` is negative, the nth
@@ -608,10 +1347,10 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
    *
    * var array = ['a', 'b', 'c', 'd'];
    *
-   * _.nth(array, 1);
+   * khufoo.nth(array, 1);
    * // => 'b'
    *
-   * _.nth(array, -2);
+   * khufoo.nth(array, -2);
    * // => 'c';
    */
   function nth(array, n) {
@@ -620,7 +1359,6 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
     }
     return array[n]
   }
-
 
   /**
    * Removes all given values from `array` using
@@ -641,7 +1379,7 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
    *
    * var array = ['a', 'b', 'c', 'a', 'b', 'c'];
    *
-   * _.pull(array, 'a', 'c');
+   * khufoo.pull(array, 'a', 'c');
    * console.log(array);
    * // => ['b', 'b']
    */
@@ -659,7 +1397,6 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
     return array
   }
 
-
   /**
     * This method is like `_.pull` except that it accepts an array of values to remove.
     *
@@ -676,11 +1413,10 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
     *
     * var array = ['a', 'b', 'c', 'a', 'b', 'c'];
     *
-    * _.pullAll(array, ['a', 'c']);
+    * khufoo.pullAll(array, ['a', 'c']);
     * console.log(array);
     * // => ['b', 'b']
     */
-
   function pullAll(array, values) {
     for (let i = 0; i < array.length; i++) {
       for (let j = 0; j < values.length; j++) {
@@ -693,20 +1429,781 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
     return array
   }
 
+  /**
+    * Creates an array of values by running each element in `collection` thru
+    * `iteratee`. The iteratee is invoked with three arguments:
+    * (value, index|key, collection).
+    *传入一个数组
+    传入一个函数
+    返回新数组 每一项为数组每一项经过函数处理后的值
+    * Many lodash methods are guarded to work as iteratees for methods like
+    * `_.every`, `_.filter`, `_.map`, `_.mapValues`, `_.reject`, and `_.some`.
+    *
+    * The guarded methods are:
+    * `ary`, `chunk`, `curry`, `curryRight`, `drop`, `dropRight`, `every`,
+    * `fill`, `invert`, `parseInt`, `random`, `range`, `rangeRight`, `repeat`,
+    * `sampleSize`, `slice`, `some`, `sortBy`, `split`, `take`, `takeRight`,
+    * `template`, `trim`, `trimEnd`, `trimStart`, and `words`
+    *
+    * @static
+    * @memberOf _
+    * @since 0.1.0
+    * @category Collection
+    * @param {Array|Object} collection The collection to iterate over.
+    * @param {Function} [iteratee=_.identity] The function invoked per iteration.
+    * @returns {Array} Returns the new mapped array.
+    * @example
+    *
+    * function square(n) {
+    *   return n * n;
+    * }
+    *
+    * khufoo.map([4, 8], square);
+    * // => [16, 64]
+    *
+    * khufoo.map({ 'a': 4, 'b': 8 }, square);
+    * // => [16, 64] (iteration order is not guaranteed)
+    *
+    * var users = [
+    *   { 'user': 'barney' },
+    *   { 'user': 'fred' }
+    * ];
+    *
+    * // The `_.property` iteratee shorthand.
+    * khufoo.map(users, 'user');
+    * // => ['barney', 'fred']
+    * reduce实现map,filter,forEach,slice,fill,concat....
+
+    */
+  function map(collection, iteratee) {
+    return collection.reduce((result, item, index, ary) => {
+      result.push(iteratee(item, index, ary))
+      return result
+    }, [])
+  }
+
+  /**
+* Reduces `collection` to a value which is the accumulated result of running
+* each element in `collection` thru `iteratee`, where each successive
+* invocation is supplied the return value of the previous. If `accumulator`
+* is not given, the first element of `collection` is used as the initial
+* value. The iteratee is invoked with four arguments:
+* (accumulator, value, index|key, collection).
+*根据整个数组计算出一个值
+* Many lodash methods are guarded to work as iteratees for methods like
+* `_.reduce`, `_.reduceRight`, and `_.transform`.
+*
+* The guarded methods are:
+* `assign`, `defaults`, `defaultsDeep`, `includes`, `merge`, `orderBy`,
+* and `sortBy`
+*
+* @static
+* @memberOf _
+* @since 0.1.0
+* @category Collection
+* @param {Array|Object} collection The collection to iterate over.
+* @param {Function} [iteratee=_.identity] The function invoked per iteration.
+* @param {*} [accumulator] The initial value.
+* @returns {*} Returns the accumulated value.
+* @see khufoo.reduceRight
+* @example
+*
+* khufoo.reduce([1, 2], function(sum, n) {
+*   return sum + n;
+* }, 0);
+* // => 3
+*
+* khufoo.reduce({ 'a': 1, 'b': 2, 'c': 1 }, function(result, value, key) {
+*   (result[value] || (result[value] = [])).push(key);
+*   return result;
+* }, {});
+* // => { '1': ['a', 'c'], '2': ['b'] } (iteration order is not guaranteed)
+*/
+  function reduce(ary, reducer, initialValue) {
+    for (let i = 0; i < ary.length; i++) {
+      initialValue = reducer(initialValue, ary[i], i, ary)
+    }
+    return initialValue
+  }
+
+  /**
+   * Iterates over elements of `collection`, returning an array of all elements
+   * `predicate` returns truthy for. The predicate is invoked with three
+   * arguments: (value, index|key, collection).
+   *
+   * **Note:** Unlike `_.remove`, this method returns a new array.
+   *
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Collection
+   * @param {Array|Object} collection The collection to iterate over.
+   * @param {Function} [predicate=_.identity] The function invoked per iteration.
+   * @returns {Array} Returns the new filtered array.
+   * @see _.reject
+   * @example
+   *
+   * var users = [
+   *   { 'user': 'barney', 'age': 36, 'active': true },
+   *   { 'user': 'fred',   'age': 40, 'active': false }
+   * ];
+   *
+   * _.filter(users, function(o) { return !o.active; });
+   * // => objects for ['fred']
+   *
+   * // The `_.matches` iteratee shorthand.
+   * _.filter(users, { 'age': 36, 'active': true });
+   * // => objects for ['barney']
+   *
+   * // The `_.matchesProperty` iteratee shorthand.
+   * _.filter(users, ['active', false]);
+   * // => objects for ['fred']
+   *
+   * // The `_.property` iteratee shorthand.
+   * _.filter(users, 'active');
+   * // => objects for ['barney']
+   */
+  function filter(collection, predicate) {
+    return collection.reduce((acc, item, index, ary) => {
+      if (!predicate(item)) {
+        acc.push(item)
+      }
+      return acc
+    }, [])
+  }
+
+  // 判断一个属性名proName是否在一个对象obj里 返回属性值obj[propName]
+  function property(propName) {
+    return function (obj) {
+      return obj[propName]
+    }
+  }
+
+  // 返回传入的值 一般用于特殊情况的一个变量 传入函数体
+  function identity(v) {
+    return v
+  }
+
+  // 将符合iteratee函数的值 相加 返回和
+  function sumBy(array, iteratee) {
+    return array.reduce((result, item, index, ary) => {
+      return result + iteratee(item)
+    }, 0)
+    //   for (i = 0; i < array.length; i++) {
+    //     sum += iteratee(array[i])
+    //   }
+    //   return sum
+  }
+
+  // sumBy的特殊情况 无第二个参数
+  function sum(array) {
+    return sumBy(array, identity)
+  }
+
+  /**
+   * Creates a function that performs a partial deep comparison between a given
+   * object and `source`, returning `true` if the given object has equivalent
+   * property values, else `false`.
+   * 创建一个函数 实行局部深对比两者得到对象和source
+   * 返回 true 如果得到的对象相等的值
+   * 否者返回假
+   * **Note:** The created function is equivalent to `_.isMatch` with `source`
+   * partially applied.
+   *
+   * Partial comparisons will match empty array and empty object `source`
+   * values against any array or object value, respectively. See `_.isEqual`
+   * for a list of supported value comparisons.
+   *
+   * @static
+   * @memberOf _
+   * @since 3.0.0
+   * @category Util
+   * @param {Object} source The object of property values to match.
+   * @returns {Function} Returns the new spec function.
+   * @example
+   *
+   * var objects = [
+   *   { 'a': 1, 'b': 2, 'c': 3 },
+   *   { 'a': 4, 'b': 5, 'c': 6 }
+   * ];
+   *
+   * _.filter(objects, _.matches({ 'a': 4, 'c': 6 }));
+   * // => [{ 'a': 4, 'b': 5, 'c': 6 }]
+   */
+  function matches(source) {
+    return function (obj) {
+      for (key in obj) {
+        if (key != source[key]) {
+          return false
+        }
+      }
+      return true
+    }
+  }
+
+  /**
+   * Creates a function that performs a partial deep comparison between the
+   * value at `path` of a given object to `srcValue`, returning `true` if the
+   * object value is equivalent, else `false`.
+   * 创建一个函数 实行局部深对比两个的值 path 是否在 ovject里的srcValue
+   * 如果object value 是相等的返回true
+   * 否则返回false
+   * **Note:** Partial comparisons will match empty array and empty object
+   * `srcValue` values against any array or object value, respectively. See
+   * `_.isEqual` for a list of supported value comparisons.
+   *
+   * @category Util
+   * @param {Array|string} path The path of the property to get.
+   * @param {*} srcValue The value to match.
+   * @returns {Function} Returns the new spec function.
+   * @example
+   *
+   * var objects = [
+   *   { 'a': 1, 'b': 2, 'c': 3 },
+   *   { 'a': 4, 'b': 5, 'c': 6 }
+   * ];
+   *
+   * _.find(objects, _.matchesProperty('a', 4));
+   * // => { 'a': 4, 'b': 5, 'c': 6 }
+   */
+  function matchesProperty(path, srcValue) {
+    return function (a) {
+      return matches(fromPairs(a))
+    }
+  }
+
+  /**
+   * The inverse逆 of `_.toPairs`; this method returns an object composed
+   * from key-value `pairs`.
+   *将特定类型的数组转换成对象
+   * @category Array
+   * @param {Array} pairs The key-value pairs.
+   * @returns {Object} Returns the new object.
+   * @example
+   *
+   * _.fromPairs([['a', 1], ['b', 2]]);
+   * // => { 'a': 1, 'b': 2 }
+   */
+  //  function fromPairs(pairs){
+  //    let obj = {}
+  //   for (key of pairs) {
+  //     obj[key[0]] = key[1]
+  //   }
+  //  }
+
+  function fromPairs(pairs) {
+    let obj = {}
+    for (let i = 0; i < pairs.length; i += 1) {
+      obj[pairs[i][0]] = pairs[i][1]
+    }
+    return obj
+  }
+
+  /**
+   * Flattens `array` a single level deep.
+   * 展平数组 如果数组包含数组则只展平一层数组
+   * @static
+   * @memberOf _
+   * @since 0.1.0
+   * @category Array
+   * @param {Array} array The array to flatten.
+   * @returns {Array} Returns the new flattened array.
+   * @example
+   *
+   * _.flatten([1, [2, [3, [4]], 5]]);
+   * // => [1, 2, [3, [4]], 5]
+   */
+  function flatten(array) {
+    return array.reduce((result, item, index, ary) => {
+      if (Array.isArray(item)) {
+        result = [...result, ...item]
+      } else {
+        result.push(item)
+      }
+      return result
+    }, [])
+  }
+
+  /**
+   * Recursively flattens `array`.
+   * 将array递归为一维数组
+   * @static
+   * @memberOf _
+   * @since 3.0.0
+   * @category Array
+   * @param {Array} array The array to flatten.
+   * @returns {Array} Returns the new flattened array.
+   * @example
+   *
+   * _.flattenDeep([1, [2, [3, [4]], 5]]);
+   * // => [1, 2, 3, 4, 5]
+   */
+  function flattenDeep(array) {
+    return array.reduce((result, item, index, ary) => {
+      if (Array.isArray(item)) {
+        result = [...result, ...flattenDeep(item)]
+      } else {
+        result.push(item)
+      }
+      return result
+    }, [])
+  }
+
+  /**
+  * Recursively flatten `array` up to `depth` times.
+  * 展平数组 指定次数depth
+  * @static
+  * @memberOf _
+  * @since 4.4.0
+  * @category Array
+  * @param {Array} array The array to flatten.
+  * @param {number} [depth=1] The maximum recursion depth.
+  * @returns {Array} Returns the new flattened array.
+  * @example
+  *
+  * var array = [1, [2, [3, [4]], 5]];
+  *
+  * _.flattenDepth(array, 1);
+  * // => [1, 2, [3, [4]], 5]
+  *
+  * _.flattenDepth(array, 2);
+  * // => [1, 2, 3, [4], 5]
+  */
+  function flattenDepth(array, depth = 1) {
+    if (0 == depth) {
+      return array.slice()
+    }
+    return array.reduce((result, item, index, ary) => {
+      if (Array.isArray(item)) {
+        result = [...result, ...flattenDepth(item, depth--)]
+      } else {
+        result.push(item)
+      }
+      return result
+    }, [])
+  }
+
+  /**
+   * The inverse of `_.toPairs`; this method returns an object composed
+   * from key-value `pairs`.
+   *
+   * @static
+   * @category Array
+   * @param {Array} pairs The key-value pairs.
+   * @returns {Object} Returns the new object.
+   * @example
+   *
+   * _.fromPairs([['a', 1], ['b', 2]]);
+   * // => { 'a': 1, 'b': 2 }
+   */
+  function fromPairs(pairs) {
+    let obj = {}
+    for (let i = 0; i < pairs.length; i++) {
+      obj[pairs[i][0]] = pairs[i][1]
+    }
+    return obj
+  }
 
 
 
 
+  function parseJson(str) {
+    let i = -1
+    let obj = {}
+    if (i === str.length) {
+      return
+    }
+    let escape = ['b', 't', 'n', 'v', 'f', 'r', '"', "'", '\\']
+
+    return isOneValue()
+
+    function isOneValue() { // --------------------------------------------------
+      i++
+      if (str[i] === '\\') {
+        for (let i = 0; i < escape.length; i++) {
+          if (str[i + 1] === escape[i]) {
+            i++
+            break
+          }
+        }
+      }
+      if (/\d|\.|-/.test(str[i])) {
+        return isNumber()
+      } else if (str[i] === '[') {
+        return isArray()
+      } else if (str[i] === '{') {
+        return isObject()
+      } else if (str[i] === '"') {
+        return isString()
+      } else if (str[i] === 't') {
+        return isTrue()
+      } else if (str[i] === 'n') {
+        return isNull()
+      } else if (str[i] === 'f') {
+        return isFalse()
+      } else {
+        throw new Error('key error' + i)
+      }
+    }
+
+    function isTrue() { // --------------------------------------------------
+      let token = str.slice(i, i + 4)
+      if (token === 'true') {
+        i = i + 4
+        return true
+      } else {
+        throw new Error('no true', i)
+      }
+    }
+
+    function isFalse() {  // --------------------------------------------------
+      let token = str.slice(i, i + 5)
+      if (token === 'false') {
+        i = i + 5
+        return false
+      } else {
+        throw new Error('no false', i)
+      }
+    }
+
+    function isNull() { // --------------------------------------------------
+      let token = str.slice(i, i + 4)
+      if (token === 'null') {
+        i = i + 4
+        return null
+      } else {
+        throw new Error('no null', i)
+      }
+    }
+
+    function isNumber() { // --------------------------------------------------
+      let j = i
+      while (1) {
+        let num = str[j]
+        if (num >= 0 && num <= 9) {
+          j++
+        } else if (num === '-' || num === '+') {
+          j++
+        } else if (num === '.' || num === 'e' || num === 'E') {
+          j++
+        } else {
+          break
+        }
+      }
+      let rrr = str.slice(i, j)
+      i = j
+      return parseFloat(rrr)
+    }
+
+    function isString() { // --------------------------------------------------
+      i++
+      let j = i
+      while (1) {
+        if (str[j] === '"') {
+          break
+        }
+        j++
+      }
+      let aaa = str.slice(i, j)
+      i = j + 1
+      return aaa
+    }
+
+    function isArray() {  // --------------------------------------------------
+      let arr = []
+      if (str[i] === ']') {
+        i++
+        return arr
+      }
+      while (1) {
+        let value = isOneValue()
+        arr.push(value)
+        if (str[i] === ',') {
+          continue
+        } else if (str[i] === ']') {
+          i++
+          return arr
+        }
+
+      }
+    }
+
+    // {"213":"dgdfg","sdf":12312}
+    function isObject() { // --------------------------------------------------
+      let obj = {}
+      if (str[i] === '}') {
+        i++
+        return obj
+      }
+      while (1) {
+        let key = isOneValue()
+        let value = isOneValue()
+        obj[key] = value
+        if (str[i] === ',') {
+
+          continue
+        } else if (str[i] === '}') {
+          i++
+          return obj
+        }
+      }
+    }
+
+  }
 
 
 
 
-
-
-
+  
 
 
   return {
+    /*------@/category Lang------------------------------------*/
+
+    isObjectLike: isObjectLike,
+    isNumber: isNumber,
+    isNaN: isNaN, // <----------------
+    isNull: isNull,
+    isUndefined: isUndefined,
+    isNil: isNil,
+    //const常亮 xxxTag
+    //getTypeTag()
+    isFunction: isFunction,
+    isBoolean: isBoolean,
+    isString: isString,
+    isObject: isObject,  // <----------------
+    isRegExp: isRegExp,
+    isSet: isSet,
+    isWeakSet: isWeakSet,
+    isMap: isMap,
+    isWeakMap: isWeakMap,
+    isSymbol: isSymbol,
+    isDate: isDate,
+
+    isArguments: isArguments, // <----------------
+    isArray: isArray, // <----------------
+    isArrayBuffer: isArrayBuffer,
+    // isTypedArray: isTypedArray,
+    // isLength: isLength,
+    isArrayLike: isArrayLike, // <----------------
+    // isArrayLikeObject: isArrayLikeObject,
+    // isPlainObject: isPlainObject, // <----------------
+    // isObjectLike: isObjectLike,
+    isElement: isElement, // <----------------
+    toNumber: toNumber,
+    // toFinite: toFinite,  // <----------------
+    // isFinite: isFinite,
+    // isNegativeZero: isNegativeZero, //<------------- lodash源码中没有，我自己加的
+    // toInteger: toInteger,
+    // toSafeInteger: toSafeInteger,
+    // isInteger: isInteger,
+    // isSafeInteger: isSafeInteger,
+    // isEmpty: isEmpty,
+    // isError: isError,
+    // isNative: isNative, // <----------------
+
+    // //baseIsEqual
+    isEqual: isEqual, // <----------------
+    // isEqualWith: isEqualWith, // <----------------
+    // isMatch: isMatch, // <----------------
+    // isMatchWith: isMatchWith,
+
+    // toLength: toLength,
+    // toArray: toArray,
+    // toString: toString,
+
+
+    // toPath: toPath,
+
+    // castArray: castArray,
+
+    // clone: clone,
+    // cloneDeep: cloneDeep, // <----------------
+
+    // lt: lt,
+    // lte: lte,
+    // gt: gt,
+    // gte: gte,
+    // eq: eq,
+
+    // /*--------------------------------------@category Util------------------------------------*/
+
+    // noop: noop,
+    // identity: identity,
+    // iteratee: iteratee,
+    // nthArg: nthArg,
+    // uniqueId: uniqueId,
+    // times: times,
+    // mixin: mixin,
+    // constant: constant,
+    // matches: matches,
+    // conforms: conforms,
+    // conformsTo: conformsTo,
+    // defaultTo: defaultTo,
+    // flow: flow,
+    // flowRight: flowRight,
+
+    // /*--------------------------------------@category Math------------------------------------*/
+    // add: add,
+    // subtract: subtract,
+    // multiply: multiply,
+    // divide: divide,
+    // ceil: ceil,
+    // floor: floor,
+    // round: round,
+    // //baseMax
+    // max: max,
+    // maxBy: maxBy,
+    // //baseMin
+    // min: min,
+    // minBy: minBy,
+    // //baseSum
+    // sum: sum,
+    // sumBy: sumBy,
+    // //baseMean
+    // mean: mean,
+    // meanBy: meanBy,
+
+    // /*--------------------------------------@category Array------------------------------------*/
+
+    // chunk: chunk,
+
+    // compact: compact,
+
+    // fromPairs: fromPairs, //参考： toPairs, toPairsIn
+
+    // head: head,
+    // last: last,
+    // nth: nth,
+    // initial: initial,
+    // tail: tail,
+    // take: take,
+    // takeRight: takeRight,
+    // takeWhile: takeWhile,
+    // takeRightWhile: takeRightWhile,
+
+    // //baseFindIndex
+    // findIndex: findIndex,
+    // findLastIndex: findLastIndex,
+    // indexOf: indexOf,
+    // lastIndexOf: lastIndexOf,
+    // sortedIndexOf: sortedIndexOf, // <--- baseSortedIndexBy 
+    // sortedLastIndexOf: sortedLastIndexOf, // <--- baseSortedIndexBy 
+
+    // //baseSortedIndexBy
+    // sortedIndex: sortedIndex,
+    // sortedLastIndex: sortedLastIndex,
+    // sortedIndexBy: sortedIndexBy,
+    // sortedLastIndexBy: sortedLastIndexBy,
+
+    // //baseSortedUniq
+    // sortedUniq: sortedUniq,
+    // sortedUniqBy: sortedUniqBy,
+
+    // //baseUniq
+    // uniq: uniq,
+    // uniqBy: uniqBy,
+    // uniqWith: uniqWith,
+    // union: union,
+    // unionBy: unionBy,
+    // unionWith: unionWith,
+
+    // //baseIntersection
+    // intersection: intersection,
+    // intersectionBy: intersectionBy,
+    // intersectionWith: intersectionWith,
+
+    // //baseXor
+    // xor: xor,
+    // xorBy: xorBy,
+    // xorWith: xorWith,
+
+    // //baseDifference
+    // difference: difference,
+    // differenceBy: differenceBy,
+    // differenceWith: differenceWith,
+
+    // without: without,
+
+    // pull: pull,
+    // pullAll: pullAll,
+    // pullAllBy: pullAllBy,
+    // pullAllWith: pullAllWith,
+    // pullAt: pullAt,
+
+    // drop: drop,
+    // dropRight: dropRight,
+    // dropWhile: dropWhile,
+    // dropRightWhile: dropRightWhile,
+
+    // //baseFlatten
+    // flatten: flatten,
+    // flattenDepth: flattenDepth,
+    // flattenDeep: flattenDeep,
+
+    // //baseUnzip
+    // zip: zip,
+    // zipWith: zipWith,
+    // zipObject: zipObject,
+    // zipObjectDeep: zipObjectDeep,
+    // unzip: unzip,
+    // unzipWith: unzipWith,
+
+    // keyBy: keyBy,
+    // groupBy: groupBy,
+    // countBy: countBy,
+
+    // //baseOrderBy
+    // orderBy: orderBy,
+    // sortBy: sortBy,
+
+    // /*------------@category Object------------------------------------*/
+
+    // toPairs: toPairs, //参考： fromPairs
+    // toPairsIn: toPairsIn,
+    // keys: keys,
+    // keysIn: keysIn,
+    // //baseMap
+    // mapKeys: mapKeys,
+    // mapValues: mapValues,
+    // invert: invert,
+    // invertBy: invertBy,
+
+    // get: get,
+    // at: at,
+    // //baseHas
+    // has: has,
+    // hasIn: hasIn,
+    // invoke: invoke,
+
+    // create: create,
+    // assign: assign,
+    // assignIn: assignIn,
+    // merge: merge,
+    // mergeWith: mergeWith,
+    // defaults: defaults,
+    // defaultsDeep: defaultsDeep,
+    // //baseSet
+    // set: set,
+    // setWith: setWith,
+    // unset, unset,
+
+    // forIn: forIn,
+    // forInRight: forInRight,
+    // forOwn: forOwn,
+    // forOwnRight: forOwnRight,
+    // functions: functions,
+    // functionsIn: functionsIn,
+
+    // findKey: findKey,
+    // findLastKey: findLastKey,
+
+
+    /* ----一开始写的---------------------- */
+
+
+
+
     chunk: chunk,
     compact: compact,
     concat: concat,
@@ -726,6 +2223,20 @@ Note: 这个方法会改变 array（愚人码头注：不是创建新数组）
     pull: pull,
     pullAll: pullAll,
     findIndex: findIndex,
+    reduce: reduce,
+    map: map,
+    filter: filter,
+    property: property,
+    sumBy: sumBy,
+    identity: identity,
+    sum: sum,
+    dropRightWhile: dropRightWhile,
+    matches: matches,
+    fromPairs: fromPairs,
+    flatten: flatten,
+    flattenDeep: flattenDeep,
+    flattenDepth: flattenDepth,
+    parseJson: parseJson
   }
 }()
 
